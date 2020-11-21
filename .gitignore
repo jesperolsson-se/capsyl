@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+dependency-reduced-pom.xml
 *.war
 *.nar
 *.ear

@@ -1,0 +1,14 @@
+package se.jesperolsson;
+
+/**
+ * Hello world!
+ *
+ */
+public class App {
+    public static void main( String[] args ) {
+        Foo throughDeclaration = new Apa(new Apa(new Bepa(3), 2), 1);
+
+        Foo throughAssignment;
+        throughAssignment = new Apa(new Apa(new Bepa(3), 2), 1);
+    }
+}
