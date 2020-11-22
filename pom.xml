@@ -61,7 +61,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>se.jesperolsson.Main</mainClass>
+                <mainClass>se.jesperolsson.capsyl.Main</mainClass>
               </manifest>
             </archive>
           </configuration>

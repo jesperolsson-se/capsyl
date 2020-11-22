@@ -1,4 +1,4 @@
-package se.jesperolsson;
+package se.jesperolsson.capsyl;
 
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;

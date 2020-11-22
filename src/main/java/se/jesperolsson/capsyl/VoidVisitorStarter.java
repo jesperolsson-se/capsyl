@@ -1,4 +1,4 @@
-package se.jesperolsson;
+package se.jesperolsson.capsyl;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;

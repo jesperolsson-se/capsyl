@@ -1,4 +1,4 @@
-package se.jesperolsson;
+package se.jesperolsson.capsyl;
 
 import java.io.File;
 
@@ -10,7 +10,7 @@ public class Main {
                 new File(
                         args.length >= 1
                                 ? args[0]
-                                : "src/main/java/se/jesperolsson/App.txt"
+                                : "src/main/java/se/jesperolsson/capsyl/App.txt"
                 )
         ).print();
     }
