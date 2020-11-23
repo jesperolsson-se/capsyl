@@ -18,7 +18,7 @@ public class Main {
         ).asIterable();
 
         for(Encapsulation encapsulation : encapsulations) {
-            System.out.println(encapsulation.represent());
+            System.out.println(encapsulation.represent().print());
         }
     }
 }
