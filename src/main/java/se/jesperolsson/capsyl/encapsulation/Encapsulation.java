@@ -20,7 +20,7 @@ public class Encapsulation {
     }
 
     public Medium represent() {
-        return represent(new StringMedium());
+        return represent(new TreeMedium());
     }
 
     public Medium represent(Medium medium) {

@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class StringMediumTest {
+public class TreeMediumTest {
 
     /**
      * When the object is asked to represent a parameter,
@@ -20,8 +20,8 @@ public class StringMediumTest {
     public void representParameter() {
         Depth depth = new NullDepth();
         Encapsulatee encapsulatee = mock(Encapsulatee.class);
-        Medium actual = new StringMedium(depth, encapsulatee);
-        Medium sut = new StringMedium(depth).representParameter(encapsulatee);
+        Medium actual = new TreeMedium(depth, encapsulatee);
+        Medium sut = new TreeMedium(depth).representParameter(encapsulatee);
         assertEquals(actual, sut);
     }
 
@@ -32,8 +32,8 @@ public class StringMediumTest {
     @Test
     public void provideNextLevel() {
         Depth depth = new NullDepth();
-        Medium actual = new StringMedium(depth.next());
-        Medium sut = new StringMedium(depth).nextLevel();
+        Medium actual = new TreeMedium(depth.next());
+        Medium sut = new TreeMedium(depth).nextLevel();
         assertEquals(actual, sut);
     }
 
@@ -46,16 +46,20 @@ public class StringMediumTest {
         Depth depth = new NullDepth();
         Medium child = mock(Medium.class);
         List<Medium> children = Arrays.asList(child);
-        Medium actual = new StringMedium(depth, new NullEncapsulatee(), children);
-        Medium sut = new StringMedium(depth).representChild(child);
+        Medium actual = new TreeMedium(depth, new NullEncapsulatee(), children);
+        Medium sut = new TreeMedium(depth).representChild(child);
         assertEquals(actual, sut);
     }
 
+    /**
+     * When the object is asked to print itself,
+     * Then it should answer with its depth and its encapsulatee.
+     */
     @Test
     public void printItself() {
         Depth depth = new NullDepth();
-        NullEncapsulatee parameter = new NullEncapsulatee();
-        Medium sut = new StringMedium(depth, parameter);
-        assertEquals(depth.print() + "Param: " + parameter.name(), sut.print());
+        NullEncapsulatee encapsulatee = new NullEncapsulatee();
+        Medium sut = new TreeMedium(depth, encapsulatee);
+        assertEquals(depth.print() + encapsulatee.name(), sut.print());
     }
 }

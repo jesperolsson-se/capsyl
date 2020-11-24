@@ -26,12 +26,12 @@ Currently, Capsule is limited to visualize these as a simple hierarchy on
 stdout. The examples above will both yield the following output.
 
 ```
-Ctor: Apa
-  Ctor: Apa
-    Ctor: Bepa
-      Inner: 3
-    Inner: 2
-  Inner: 1
+Apa
+  Apa
+    Bepa
+      3
+    2
+  1
 ```
 
 Capsule accepts files that contain java source code. Simply build the
