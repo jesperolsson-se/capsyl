@@ -46,7 +46,7 @@ public class StringMediumTest {
         Depth depth = new NullDepth();
         Medium child = mock(Medium.class);
         List<Medium> children = Arrays.asList(child);
-        Medium actual = new StringMedium(depth, null, children);
+        Medium actual = new StringMedium(depth, new NullEncapsulatee(), children);
         Medium sut = new StringMedium(depth).representChild(child);
         assertEquals(actual, sut);
     }

@@ -19,7 +19,7 @@ public class StringMedium implements Medium {
     }
 
     public StringMedium(Depth depth) {
-        this(depth, null);
+        this(depth, new NullEncapsulatee());
     }
 
     public StringMedium(Depth depth, Encapsulatee contents) {
