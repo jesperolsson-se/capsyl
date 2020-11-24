@@ -1,6 +1,5 @@
 package se.jesperolsson.capsyl.encapsulation;
 
-import com.github.javaparser.ast.expr.Expression;
 import org.junit.Test;
 import se.jesperolsson.capsyl.Depth;
 import se.jesperolsson.capsyl.NullDepth;
@@ -10,7 +9,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class StringMediumTest {
 
@@ -20,10 +18,10 @@ public class StringMediumTest {
      */
     @Test
     public void representParameter() {
-        Depth depth = mock(Depth.class);
-        Expression parameter = mock(Expression.class);
-        Medium actual = new StringMedium(depth, parameter);
-        Medium sut = new StringMedium(depth).representParameter(parameter);
+        Depth depth = new NullDepth();
+        Encapsulatee encapsulatee = mock(Encapsulatee.class);
+        Medium actual = new StringMedium(depth, encapsulatee);
+        Medium sut = new StringMedium(depth).representParameter(encapsulatee);
         assertEquals(actual, sut);
     }
 
@@ -45,7 +43,7 @@ public class StringMediumTest {
      */
     @Test
     public void representChild() {
-        Depth depth = mock(Depth.class);
+        Depth depth = new NullDepth();
         Medium child = mock(Medium.class);
         List<Medium> children = Arrays.asList(child);
         Medium actual = new StringMedium(depth, null, children);
@@ -55,11 +53,9 @@ public class StringMediumTest {
 
     @Test
     public void printItself() {
-        String depthText = " ";
-        Depth depth = mock(Depth.class);
-        when(depth.print()).thenReturn(depthText);
-        FakeConstructor parameter = new FakeConstructor();
+        Depth depth = new NullDepth();
+        NullEncapsulatee parameter = new NullEncapsulatee();
         Medium sut = new StringMedium(depth, parameter);
-        assertEquals(depthText + "Ctor: " + parameter.getTypeAsString(), sut.print());
+        assertEquals(depth.print() + "Param: " + parameter.name(), sut.print());
     }
 }

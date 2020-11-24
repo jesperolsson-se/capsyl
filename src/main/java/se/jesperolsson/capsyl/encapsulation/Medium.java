@@ -1,7 +1,5 @@
 package se.jesperolsson.capsyl.encapsulation;
 
-import com.github.javaparser.ast.expr.Expression;
-
 /**
  * Abstracts the textual representation of an encapsulation.
  */
@@ -11,7 +9,7 @@ public interface Medium {
      * Asks the medium to add a parameter to its representation.
      * @return A copy of the medium, that also contains the parameter.
      */
-    Medium representParameter(Expression node);
+    Medium representParameter(Encapsulatee encapsulatee);
 
     /**
      * Asks the medium to provide a medium that can represent the next level

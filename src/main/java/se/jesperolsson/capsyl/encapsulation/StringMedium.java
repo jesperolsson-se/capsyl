@@ -1,7 +1,5 @@
 package se.jesperolsson.capsyl.encapsulation;
 
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import se.jesperolsson.capsyl.Depth;
 import se.jesperolsson.capsyl.SpaceIndentation;
 
@@ -12,23 +10,23 @@ import java.util.Objects;
 
 public class StringMedium implements Medium {
 
-    private Depth depth;
-    private Expression contents;
-    private List<Medium> arguments;
+    private final Depth depth;
+    private final Encapsulatee contents;
+    private final List<Medium> arguments;
 
     public StringMedium() {
         this(new SpaceIndentation());
     }
 
     public StringMedium(Depth depth) {
-        this(depth, null); // Should use null object, if possible
+        this(depth, null);
     }
 
-    public StringMedium(Depth depth, Expression contents) {
+    public StringMedium(Depth depth, Encapsulatee contents) {
         this(depth, contents, new ArrayList<>());
     }
 
-    public StringMedium(Depth depth, Expression contents, List<Medium> arguments) {
+    public StringMedium(Depth depth, Encapsulatee contents, List<Medium> arguments) {
         this.depth = depth;
         this.contents = contents;
         this.arguments = arguments;
@@ -42,8 +40,8 @@ public class StringMedium implements Medium {
      * {@inheritDoc}
      */
     @Override
-    public Medium representParameter(Expression node) {
-        return new StringMedium(depth, node, copyChildren());
+    public Medium representParameter(Encapsulatee encapsulatee) {
+        return new StringMedium(depth, encapsulatee, copyChildren());
     }
 
     /**
@@ -67,21 +65,18 @@ public class StringMedium implements Medium {
     @Override
     public String print() {
         String result = depth.print();
-        if (contents.isObjectCreationExpr()) {
-            result += "Ctor: " + contents.asObjectCreationExpr().getTypeAsString();
-        } else if (contents.isLiteralExpr()) {
-            result += "Lit: " + contents.toString();
-        }
+        result += "Param: " + contents.name();
         result += printChildren();
         return result;
     }
 
     private String printChildren() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Medium child : arguments) {
-            result += System.lineSeparator() + child.print();
+            result.append(System.lineSeparator())
+                    .append(child.print());
         }
-        return result;
+        return result.toString();
     }
 
     @Override
