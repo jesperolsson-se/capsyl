@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Represents all encapsulations contained in a snippet of Java source code.
@@ -36,6 +38,17 @@ public class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>> {
      */
     public Encapsulations(CompilationUnit syntaxTree) {
         this.syntaxTree = syntaxTree;
+    }
+
+    /**
+     * Asks the encapsulations to provide a textual represent of itself.
+     * @return The textual representation of the encapsulations.
+     */
+    public String asText() {
+        final List<String> parts = StreamSupport.stream(this.asIterable().spliterator(), false)
+            .map(encapsulation -> encapsulation.represent().print())
+            .collect(Collectors.toList());
+        return String.join(System.lineSeparator(), parts);
     }
 
     /**
