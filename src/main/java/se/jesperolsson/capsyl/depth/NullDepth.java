@@ -1,4 +1,4 @@
-package se.jesperolsson.capsyl;
+package se.jesperolsson.capsyl.depth;
 
 /**
  * Null object for depth representation.

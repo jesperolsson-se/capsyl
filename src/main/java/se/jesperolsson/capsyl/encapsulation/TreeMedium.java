@@ -1,7 +1,7 @@
 package se.jesperolsson.capsyl.encapsulation;
 
-import se.jesperolsson.capsyl.Depth;
-import se.jesperolsson.capsyl.SpaceIndentation;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.depth.SpaceIndentation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,8 +1,8 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import org.junit.Test;
-import se.jesperolsson.capsyl.Depth;
-import se.jesperolsson.capsyl.NullDepth;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.depth.NullDepth;
 
 import java.util.Arrays;
 import java.util.List;
