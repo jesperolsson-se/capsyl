@@ -34,14 +34,14 @@ public class Encapsulation {
                 Medium next = new Encapsulation(constructor).represent(nextLevel);
                 medium = medium.representChild(next);
             } else if (parameter.isLiteralExpr()) {
-                Medium next = nextLevel.representParameter(
+                Medium next = nextLevel.representEncapsulatee(
                         new JpLiteral(parameter.asLiteralExpr())
                 );
                 medium = medium.representChild(next);
             }
         }
 
-        medium = medium.representParameter(new JpConstructor(node));
+        medium = medium.representEncapsulatee(new JpConstructor(node));
 
         return medium;
     }

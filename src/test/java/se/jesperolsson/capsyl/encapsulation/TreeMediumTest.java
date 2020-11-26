@@ -21,7 +21,7 @@ public class TreeMediumTest {
         Depth depth = new NullDepth();
         Encapsulatee encapsulatee = mock(Encapsulatee.class);
         Medium actual = new TreeMedium(depth, encapsulatee);
-        Medium sut = new TreeMedium(depth).representParameter(encapsulatee);
+        Medium sut = new TreeMedium(depth).representEncapsulatee(encapsulatee);
         assertEquals(actual, sut);
     }
 

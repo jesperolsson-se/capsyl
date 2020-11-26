@@ -1,79 +1,98 @@
+/*
+ * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
+ */
 package se.jesperolsson.capsyl.encapsulation;
 
-import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.depth.SpaceIndentation;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.depth.SpaceIndentation;
 
 /**
  * Realizes the textual representation of an encapsulation as a simple tree.
+ *
+ * @since 0.1
  */
-public class TreeMedium implements Medium {
+public final class TreeMedium implements Medium {
 
+    /**
+     * The tree's location in the hierarchy.
+     */
     private final Depth depth;
+
+    /**
+     * The object that is encapsulated.
+     */
     private final Encapsulatee encapsulatee;
+
+    /**
+     * List of subtrees.
+     */
     private final List<Medium> children;
 
+    /**
+     * Constructs a default TreeMedium.
+     */
     public TreeMedium() {
         this(new SpaceIndentation());
     }
 
-    public TreeMedium(Depth depth) {
+    /**
+     * Constructs a TreeMedium at the specified depth.
+     * @param depth The tree's depth in the hierarchy.
+     */
+    public TreeMedium(final Depth depth) {
         this(depth, new NullEncapsulatee());
     }
 
-    public TreeMedium(Depth depth, Encapsulatee encapsulatee) {
-        this(depth, encapsulatee, new ArrayList<>());
+    /**
+     * Constructs a TreeMedium that can represent an encapsulation at the specified depth.
+     * @param depth The tree's depth in the hierarchy.
+     * @param encapsulatee The object that is encapsulated.
+     */
+    public TreeMedium(final Depth depth, final Encapsulatee encapsulatee) {
+        this(depth, encapsulatee, new LinkedList<>());
     }
 
-    public TreeMedium(Depth depth, Encapsulatee encapsulatee, List<Medium> children) {
+    /**
+     * Constructs a TreeMedium that can represent an encapsulation at the specified depth,
+     * as well as subtrees.
+     * @param depth The tree's depth in the hierarchy.
+     * @param encapsulatee The object that is encapsulated.
+     * @param children The subtrees.
+     */
+    public TreeMedium(
+        final Depth depth,
+        final Encapsulatee encapsulatee,
+        final List<Medium> children) {
         this.depth = depth;
         this.encapsulatee = encapsulatee;
         this.children = children;
     }
 
-    private List<Medium> copyChildren() {
-        return new LinkedList<>(children);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Medium representParameter(Encapsulatee encapsulatee) {
-        return new TreeMedium(depth, encapsulatee, copyChildren());
+    public Medium representEncapsulatee(final Encapsulatee subject) {
+        return new TreeMedium(this.depth, subject, this.copyChildren());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Medium nextLevel() {
-        return new TreeMedium(depth.next(), encapsulatee, copyChildren());
+        return new TreeMedium(this.depth.next(), this.encapsulatee, this.copyChildren());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Medium representChild(Medium medium) {
-        List<Medium> newChildren = copyChildren();
-        newChildren.add(medium);
-        return new TreeMedium(depth, encapsulatee, newChildren);
+    public Medium representChild(final Medium medium) {
+        final List<Medium> copies = this.copyChildren();
+        copies.add(medium);
+        return new TreeMedium(this.depth, this.encapsulatee, copies);
     }
 
-    /**
-     * {@inheritDoc}
-     * @return A simple tree representation of the encapsulated contents.
-     */
     @Override
     public String print() {
-        return depth.print()
-                + encapsulatee.name()
-                + printChildren();
+        return this.depth.print()
+            + this.encapsulatee.name()
+            + this.printChildren();
     }
 
     /**
@@ -81,24 +100,35 @@ public class TreeMedium implements Medium {
      * @return The textual representation of each child.
      */
     public String printChildren() {
-        StringBuilder result = new StringBuilder();
-        children.forEach(child -> result.append(System.lineSeparator())
-                .append(child.print()));
+        final StringBuilder result = new StringBuilder();
+        this.children.forEach(child -> result.append(System.lineSeparator()).append(child.print()));
         return result.toString();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TreeMedium that = (TreeMedium) o;
-        return Objects.equals(depth, that.depth) &&
-                Objects.equals(encapsulatee, that.encapsulatee) &&
-                Objects.equals(children, that.children);
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final TreeMedium that = (TreeMedium) obj;
+        return Objects.equals(this.depth, that.depth)
+            && Objects.equals(this.encapsulatee, that.encapsulatee)
+            && Objects.equals(this.children, that.children);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(depth, encapsulatee, children);
+        return Objects.hash(this.depth, this.encapsulatee, this.children);
+    }
+
+    /**
+     * Convenience method for creating a copy of the subtrees.
+     * @return A copy of the list of children.
+     */
+    private List<Medium> copyChildren() {
+        return new LinkedList<>(this.children);
     }
 }
