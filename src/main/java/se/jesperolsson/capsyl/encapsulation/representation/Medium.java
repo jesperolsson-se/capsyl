@@ -1,7 +1,9 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.representation;
+
+import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
 
 /**
  * Abstracts the textual representation of an encapsulation.

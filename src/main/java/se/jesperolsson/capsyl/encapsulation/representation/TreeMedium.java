@@ -1,13 +1,15 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.representation;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
+import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
 
 /**
  * Realizes the textual representation of an encapsulation as a simple tree.

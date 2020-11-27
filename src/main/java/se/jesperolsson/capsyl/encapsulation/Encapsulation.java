@@ -2,6 +2,8 @@ package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import se.jesperolsson.capsyl.encapsulation.representation.Medium;
+import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
  * Represents an object's encapsulation.

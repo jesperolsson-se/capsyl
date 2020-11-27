@@ -1,4 +1,4 @@
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.representation;
 
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
@@ -9,6 +9,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
 
 public class TreeMediumTest {
 
