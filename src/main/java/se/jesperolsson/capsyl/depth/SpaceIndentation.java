@@ -1,17 +1,31 @@
+/*
+ * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
+ */
 package se.jesperolsson.capsyl.depth;
 
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 /**
  * Realizes depth through use of space indentation.
+ *
+ * @since 0.1
  */
-public class SpaceIndentation implements Depth {
+public final class SpaceIndentation implements Depth {
 
+    /**
+     * The number of levels between this instance and the top level of the hierarchy.
+     */
     private final int depth;
+
+    /**
+     * The number of spaces to indent with, per level.
+     */
     private final int width;
 
     /**
-     * Constructs a space indentation starting at level zero.
+     * Constructs a space indentation starting at the top of the hierarchy.
      */
     public SpaceIndentation() {
         this(0);
@@ -21,7 +35,7 @@ public class SpaceIndentation implements Depth {
      * Constructs a space indentation starting at the specified level.
      * @param depth The level in the hierarchy to represent.
      */
-    public SpaceIndentation(int depth) {
+    public SpaceIndentation(final int depth) {
         this(depth, 2);
     }
 
@@ -30,45 +44,44 @@ public class SpaceIndentation implements Depth {
      * @param depth The level in the hierarchy to represent.
      * @param width The number of spaces used to different one level from the next.
      */
-    public SpaceIndentation(int depth, int width) {
+    public SpaceIndentation(final int depth, final int width) {
         this.depth = depth;
         this.width = width;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Depth next() {
-        return new SpaceIndentation(depth + 1, width);
+        return new SpaceIndentation(this.depth + 1, this.width);
     }
 
-    /**
-     * {@inheritDoc}
-     * @return A space indentation equal to depth * width.
-     */
     @Override
     public String print() {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < depth; i++) {
-            for (int j = 0; j < width; j++) {
-                result.append(" ");
-            }
-        }
+        final StringBuilder result = new StringBuilder();
+        final Optional<String> spaces = IntStream
+            .range(0, this.width)
+            .mapToObj(i -> " ")
+            .reduce(String::concat);
+        IntStream
+            .range(0, this.depth)
+            .mapToObj(i -> spaces.get()).forEach(s -> result.append(s));
         return result.toString();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpaceIndentation that = (SpaceIndentation) o;
-        return depth == that.depth &&
-                width == that.width;
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final SpaceIndentation that = (SpaceIndentation) obj;
+        return this.depth == that.depth
+            && this.width == that.width;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(depth, width);
+        return Objects.hash(this.depth, this.width);
     }
 }

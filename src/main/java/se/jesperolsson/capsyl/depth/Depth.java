@@ -1,7 +1,12 @@
+/*
+ * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
+ */
 package se.jesperolsson.capsyl.depth;
 
 /**
  * Abstracts a level in a hierarchy.
+ *
+ * @since 0.1
  */
 public interface Depth {
 
