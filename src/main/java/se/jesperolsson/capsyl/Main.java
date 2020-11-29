@@ -51,7 +51,8 @@ public final class Main {
      *  First item specifies the path to the Java code to visualize.
      * @throws Exception If the path is invalid.
      */
-    public static void main(final String[] args) throws Exception {
+    @SuppressWarnings("PMD.SystemPrintln")
+    public static void main(final String... args) throws Exception {
         String path = "src/main/java/se/jesperolsson/capsyl/App.txt";
         if (args.length >= 1) {
             path = args[0];
