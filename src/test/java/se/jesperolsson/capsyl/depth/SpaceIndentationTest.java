@@ -1,10 +1,16 @@
+/*
+ * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
+ */
 package se.jesperolsson.capsyl.depth;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
+/**
+ * Tests for {@link SpaceIndentation}.
+ *
+ * @since 0.1
+ */
 public class SpaceIndentationTest {
 
     /**
@@ -14,11 +20,12 @@ public class SpaceIndentationTest {
      */
     @Test
     public void interpretWidth() {
-        int depth = 1;
-        int width = 1;
-        assertNotEquals(
-                new SpaceIndentation(depth, width).print(),
-                new SpaceIndentation(depth, width + 1).print());
+        final int depth = 1;
+        final int width = 1;
+        Assert.assertNotEquals(
+            new SpaceIndentation(depth, width).print(),
+            new SpaceIndentation(depth, width + 1).print()
+        );
     }
 
     /**
@@ -28,11 +35,11 @@ public class SpaceIndentationTest {
      */
     @Test
     public void interpretDepth() {
-        int width = 1;
-        int depth = 1;
-        assertNotEquals(
-                new SpaceIndentation(depth, width).print(),
-                new SpaceIndentation(depth + 1, width).print()
+        final int width = 1;
+        final int depth = 1;
+        Assert.assertNotEquals(
+            new SpaceIndentation(depth, width).print(),
+            new SpaceIndentation(depth + 1, width).print()
         );
     }
 
@@ -42,11 +49,11 @@ public class SpaceIndentationTest {
      */
     @Test
     public void incrementDepth() {
-        int width = 1;
-        int depth = 1;
-        assertEquals(
-                new SpaceIndentation(depth + 1, width),
-                new SpaceIndentation(depth, width).next()
+        final int width = 1;
+        final int depth = 1;
+        Assert.assertEquals(
+            new SpaceIndentation(depth + 1, width),
+            new SpaceIndentation(depth, width).next()
         );
     }
 }
