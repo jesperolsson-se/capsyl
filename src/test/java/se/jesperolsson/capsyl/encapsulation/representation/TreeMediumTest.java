@@ -1,17 +1,22 @@
+/*
+ * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
+ */
 package se.jesperolsson.capsyl.encapsulation.representation;
-
-import org.junit.Test;
-import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.depth.NullDepth;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import org.junit.Assert;
+import org.junit.Test;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
 
+/**
+ * Tests for {@link TreeMedium}.
+ *
+ * @since 0.1
+ */
 public class TreeMediumTest {
 
     /**
@@ -20,23 +25,26 @@ public class TreeMediumTest {
      */
     @Test
     public void representParameter() {
-        Depth depth = new NullDepth();
-        Encapsulatee encapsulatee = mock(Encapsulatee.class);
-        Medium actual = new TreeMedium(depth, encapsulatee);
-        Medium sut = new TreeMedium(depth).representEncapsulatee(encapsulatee);
-        assertEquals(actual, sut);
+        final Depth depth = new NullDepth();
+        final Encapsulatee encapsulatee = new NullEncapsulatee();
+        Assert.assertEquals(
+            new TreeMedium(depth, encapsulatee),
+            new TreeMedium(depth).representEncapsulatee(encapsulatee)
+        );
     }
 
     /**
-     * When the object is asked for a representation of the next level in the encapsulation hierarchy,
+     * When the object is asked for a representation
+     * of the next level in the encapsulation hierarchy,
      * Then it should return a medium with the next depth level.
      */
     @Test
     public void provideNextLevel() {
-        Depth depth = new NullDepth();
-        Medium actual = new TreeMedium(depth.next());
-        Medium sut = new TreeMedium(depth).nextLevel();
-        assertEquals(actual, sut);
+        final Depth depth = new NullDepth();
+        Assert.assertEquals(
+            new TreeMedium(depth.next()),
+            new TreeMedium(depth).nextLevel()
+        );
     }
 
     /**
@@ -45,12 +53,13 @@ public class TreeMediumTest {
      */
     @Test
     public void representChild() {
-        Depth depth = new NullDepth();
-        Medium child = mock(Medium.class);
-        List<Medium> children = Arrays.asList(child);
-        Medium actual = new TreeMedium(depth, new NullEncapsulatee(), children);
-        Medium sut = new TreeMedium(depth).representChild(child);
-        assertEquals(actual, sut);
+        final Depth depth = new NullDepth();
+        final Medium child = new NullMedium();
+        final List<Medium> children = Arrays.asList(child);
+        Assert.assertEquals(
+            new TreeMedium(depth, new NullEncapsulatee(), children),
+            new TreeMedium(depth).representChild(child)
+        );
     }
 
     /**
@@ -59,9 +68,9 @@ public class TreeMediumTest {
      */
     @Test
     public void printItself() {
-        Depth depth = new NullDepth();
-        NullEncapsulatee encapsulatee = new NullEncapsulatee();
-        Medium sut = new TreeMedium(depth, encapsulatee);
-        assertEquals(depth.print() + encapsulatee.name(), sut.print());
+        final Depth depth = new NullDepth();
+        final NullEncapsulatee encapsulatee = new NullEncapsulatee();
+        final Medium sut = new TreeMedium(depth, encapsulatee);
+        Assert.assertEquals(depth.print() + encapsulatee.name(), sut.print());
     }
 }
