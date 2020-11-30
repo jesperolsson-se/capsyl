@@ -5,7 +5,6 @@ package se.jesperolsson.capsyl.encapsulation.representation;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
@@ -109,21 +108,19 @@ public final class TreeMedium implements Medium {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        final TreeMedium that = (TreeMedium) obj;
-        return Objects.equals(this.depth, that.depth)
-            && Objects.equals(this.encapsulatee, that.encapsulatee)
-            && Objects.equals(this.children, that.children);
+        return obj instanceof TreeMedium
+            && TreeMedium.class.cast(obj).depth.equals(this.depth)
+            && TreeMedium.class.cast(obj).encapsulatee.equals(this.encapsulatee)
+            && TreeMedium.class.cast(obj).children.equals(this.children);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.depth, this.encapsulatee, this.children);
+        final int prime = 11;
+        final int primetwo = 31;
+        return this.depth.hashCode()
+            + prime * this.encapsulatee.hashCode()
+            + primetwo * this.children.hashCode();
     }
 
     /**

@@ -3,6 +3,7 @@
  */
 package se.jesperolsson.capsyl.depth;
 
+import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -67,21 +68,19 @@ public final class SpaceIndentation implements Depth {
         return result.toString();
     }
 
+
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        final SpaceIndentation that = (SpaceIndentation) obj;
-        return this.depth == that.depth
-            && this.width == that.width;
+        return obj instanceof SpaceIndentation
+            && SpaceIndentation.class.cast(obj).depth == this.depth
+            && SpaceIndentation.class.cast(obj).width == this.width;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.depth, this.width);
+        final int prime = 11;
+        final int primetwo = 31;
+        return prime * this.depth
+            + primetwo * this.depth;
     }
 }
