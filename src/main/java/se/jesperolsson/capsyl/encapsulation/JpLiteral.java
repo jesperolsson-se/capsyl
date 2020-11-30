@@ -4,6 +4,8 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.LiteralExpr;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Encapsulatee adapter for a JavaParser literal expression.
@@ -28,5 +30,10 @@ public final class JpLiteral implements Encapsulatee {
     @Override
     public String name() {
         return this.literal.toString();
+    }
+
+    @Override
+    public List<Encapsulatee> children() {
+        return new LinkedList<>();
     }
 }

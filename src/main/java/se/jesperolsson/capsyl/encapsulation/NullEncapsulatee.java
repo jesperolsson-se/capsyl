@@ -3,6 +3,9 @@
  */
 package se.jesperolsson.capsyl.encapsulation;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Null object for an encapsulatee.
  *
@@ -13,6 +16,11 @@ public final class NullEncapsulatee implements Encapsulatee {
     @Override
     public String name() {
         return "";
+    }
+
+    @Override
+    public List<Encapsulatee> children() {
+        return new LinkedList<>();
     }
 
     @Override

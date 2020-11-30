@@ -3,7 +3,10 @@
  */
 package se.jesperolsson.capsyl.encapsulation;
 
+import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -28,5 +31,18 @@ public final class JpConstructor implements Encapsulatee {
     @Override
     public String name() {
         return this.constructor.getTypeAsString();
+    }
+
+    @Override
+    public List<Encapsulatee> children() {
+        final List<Encapsulatee> result = new LinkedList<>();
+        for (final Expression parameter : this.constructor.getArguments()) {
+            if (parameter.isObjectCreationExpr()) {
+                result.add(new JpConstructor(parameter.asObjectCreationExpr()));
+            } else if (parameter.isLiteralExpr()) {
+                result.add(new JpLiteral(parameter.asLiteralExpr()));
+            }
+        }
+        return result;
     }
 }
