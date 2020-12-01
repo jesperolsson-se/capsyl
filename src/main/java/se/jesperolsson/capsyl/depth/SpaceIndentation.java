@@ -3,8 +3,6 @@
  */
 package se.jesperolsson.capsyl.depth;
 
-import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -67,7 +65,6 @@ public final class SpaceIndentation implements Depth {
             .mapToObj(i -> spaces.get()).forEach(s -> result.append(s));
         return result.toString();
     }
-
 
     @Override
     public boolean equals(final Object obj) {

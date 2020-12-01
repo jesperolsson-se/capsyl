@@ -5,7 +5,8 @@ package se.jesperolsson.capsyl.encapsulation.representation;
 
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
@@ -27,9 +28,9 @@ public class TreeMediumTest {
     public void representParameter() {
         final Depth depth = new NullDepth();
         final Encapsulatee encapsulatee = new NullEncapsulatee();
-        Assert.assertEquals(
+        MatcherAssert.assertThat(
             new TreeMedium(depth, encapsulatee),
-            new TreeMedium(depth).representEncapsulatee(encapsulatee)
+            CoreMatchers.equalTo(new TreeMedium(depth).representEncapsulatee(encapsulatee))
         );
     }
 
@@ -41,9 +42,9 @@ public class TreeMediumTest {
     @Test
     public void provideNextLevel() {
         final Depth depth = new NullDepth();
-        Assert.assertEquals(
+        MatcherAssert.assertThat(
             new TreeMedium(depth.next()),
-            new TreeMedium(depth).nextLevel()
+            CoreMatchers.equalTo(new TreeMedium(depth).nextLevel())
         );
     }
 
@@ -56,9 +57,9 @@ public class TreeMediumTest {
         final Depth depth = new NullDepth();
         final Medium child = new NullMedium();
         final List<Medium> children = Arrays.asList(child);
-        Assert.assertEquals(
+        MatcherAssert.assertThat(
             new TreeMedium(depth, new NullEncapsulatee(), children),
-            new TreeMedium(depth).representChild(child)
+            CoreMatchers.equalTo(new TreeMedium(depth).representChild(child))
         );
     }
 
@@ -71,6 +72,9 @@ public class TreeMediumTest {
         final Depth depth = new NullDepth();
         final NullEncapsulatee encapsulatee = new NullEncapsulatee();
         final Medium sut = new TreeMedium(depth, encapsulatee);
-        Assert.assertEquals(depth.print() + encapsulatee.name(), sut.print());
+        MatcherAssert.assertThat(
+            depth.print() + encapsulatee.name(),
+            CoreMatchers.equalTo(sut.print())
+        );
     }
 }
