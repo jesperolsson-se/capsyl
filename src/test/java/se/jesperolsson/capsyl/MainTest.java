@@ -4,7 +4,8 @@
 package se.jesperolsson.capsyl;
 
 import java.io.FileNotFoundException;
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
@@ -23,7 +24,7 @@ public class MainTest {
     @Test
     public void outputSimpleTree() throws FileNotFoundException {
         final Main sut = new Main("src/main/java/se/jesperolsson/capsyl/App.txt");
-        Assert.assertEquals(
+        MatcherAssert.assertThat(
             new StringBuilder()
             .append("Apa")
             .append(System.lineSeparator())
@@ -37,19 +38,13 @@ public class MainTest {
             .append(System.lineSeparator())
             .append("  1")
             .append(System.lineSeparator())
-            .append("Apa")
+            .append("Cepa")
             .append(System.lineSeparator())
-            .append("  Apa")
+            .append("  Depa")
             .append(System.lineSeparator())
-            .append("    Bepa")
-            .append(System.lineSeparator())
-            .append("      3")
-            .append(System.lineSeparator())
-            .append("    2")
-            .append(System.lineSeparator())
-            .append("  1")
+            .append("  Epa")
             .toString(),
-            sut.execute()
+            CoreMatchers.equalTo(sut.execute())
         );
     }
 }
