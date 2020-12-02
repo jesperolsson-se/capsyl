@@ -9,6 +9,6 @@ public class App {
         Foo throughDeclaration = new Apa(new Apa(new Bepa(3), 2), 1);
 
         Foo throughAssignment;
-        throughAssignment = new Apa(new Apa(new Bepa(3), 2), 1);
+        throughAssignment = new Cepa(new Depa(), new Epa());
     }
 }

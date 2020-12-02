@@ -19,11 +19,11 @@ or
 
 ```
 Foo foo;
-foo = new Apa(new Apa(new Bepa(3), 2), 1);
+foo = new Cepa(new Depa(), new Epa());
 ```
 
-Currently, Capsule is limited to visualize these as a simple hierarchy on
-stdout. The examples above will both yield the following output.
+Currently, Capsyl is limited to visualize these as a simple hierarchy on
+stdout. The examples above will yield the following output, respectively.
 
 ```
 Apa
@@ -34,7 +34,13 @@ Apa
   1
 ```
 
-Capsule accepts files that contain java source code. Simply build the
+```
+Cepa
+  Depa
+  Epa
+```
+
+Capsyl accepts files that contain java source code. Simply build the
 program with `mvn package` and then execute the jar file with
 
 `java -jar target/capsyl-0.1-SNAPSHOT.jar`
