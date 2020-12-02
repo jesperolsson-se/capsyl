@@ -3,7 +3,8 @@
  */
 package se.jesperolsson.capsyl.depth;
 
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
@@ -22,9 +23,9 @@ public class SpaceIndentationTest {
     public void interpretWidth() {
         final int depth = 1;
         final int width = 1;
-        Assert.assertNotEquals(
+        MatcherAssert.assertThat(
             new SpaceIndentation(depth, width).print(),
-            new SpaceIndentation(depth, width + 1).print()
+            CoreMatchers.not(CoreMatchers.equalTo(new SpaceIndentation(depth, width + 1).print()))
         );
     }
 
@@ -37,9 +38,9 @@ public class SpaceIndentationTest {
     public void interpretDepth() {
         final int width = 1;
         final int depth = 1;
-        Assert.assertNotEquals(
+        MatcherAssert.assertThat(
             new SpaceIndentation(depth, width).print(),
-            new SpaceIndentation(depth + 1, width).print()
+            CoreMatchers.not(CoreMatchers.equalTo(new SpaceIndentation(depth + 1, width).print()))
         );
     }
 
@@ -51,9 +52,9 @@ public class SpaceIndentationTest {
     public void incrementDepth() {
         final int width = 1;
         final int depth = 1;
-        Assert.assertEquals(
+        MatcherAssert.assertThat(
             new SpaceIndentation(depth + 1, width),
-            new SpaceIndentation(depth, width).next()
+            CoreMatchers.equalTo(new SpaceIndentation(depth, width).next())
         );
     }
 }
