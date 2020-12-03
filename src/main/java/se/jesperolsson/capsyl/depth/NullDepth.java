@@ -3,11 +3,14 @@
  */
 package se.jesperolsson.capsyl.depth;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Null object for depth representation.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class NullDepth implements Depth {
 
     @Override
@@ -18,15 +21,5 @@ public final class NullDepth implements Depth {
     @Override
     public String print() {
         return "";
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof NullDepth;
-    }
-
-    @Override
-    public int hashCode() {
-        return 1;
     }
 }
