@@ -4,7 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.LiteralExpr;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +34,6 @@ public final class JpLiteral implements Encapsulatee {
 
     @Override
     public List<Encapsulatee> children() {
-        return new LinkedList<>();
+        return Collections.emptyList();
     }
 }
