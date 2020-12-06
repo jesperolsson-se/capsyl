@@ -3,14 +3,16 @@
  */
 package se.jesperolsson.capsyl.encapsulation;
 
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 
 /**
  * Null object for an encapsulatee.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class NullEncapsulatee implements Encapsulatee {
 
     @Override
@@ -20,16 +22,6 @@ public final class NullEncapsulatee implements Encapsulatee {
 
     @Override
     public List<Encapsulatee> children() {
-        return new LinkedList<>();
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof NullEncapsulatee;
-    }
-
-    @Override
-    public int hashCode() {
-        return 1;
+        return Collections.emptyList();
     }
 }
