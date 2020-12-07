@@ -3,6 +3,7 @@
  */
 package se.jesperolsson.capsyl.encapsulation.representation;
 
+import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
 
 /**
@@ -10,6 +11,7 @@ import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class NullMedium implements Medium {
 
     @Override
