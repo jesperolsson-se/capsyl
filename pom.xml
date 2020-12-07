@@ -95,9 +95,31 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
-        <groupId>com.qulice</groupId>
-        <artifactId>qulice-maven-plugin</artifactId>
-        <version>0.18.19</version>
+          <groupId>com.qulice</groupId>
+          <artifactId>qulice-maven-plugin</artifactId>
+          <version>0.18.19</version>
+        </plugin>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>1.5.2</version>
+          <configuration>
+            <mutationThreshold>100</mutationThreshold>
+            <coverageThreshold>100</coverageThreshold>
+            <excludedClasses>
+              <!--Rationale: Can't test main method.-->
+              <excludedClass>se.jesperolsson.capsyl.Main</excludedClass>
+              <!--Rationale: External library requires calls to superclass' methods,
+                  which can't be mocked.-->
+              <excludedClass>se.jesperolsson.capsyl.encapsulation.Encapsulations</excludedClass>
+            </excludedClasses>
+            <excludedMethods>
+              <!--Rationale: Lombok should be used for hash codes-->
+              <excludedMethod>*hashCode</excludedMethod>
+              <!--Rationale: Lombok should be used for equality-->
+              <excludedMethod>*equals</excludedMethod>
+            </excludedMethods>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -132,6 +154,8 @@
           <license>file:${basedir}/tldr-licence</license>
           <excludes>
             <exclude>pmd:/src/main/java/se/jesperolsson/capsyl/App\.txt</exclude>
+            <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/AssignmentExpression.txt</exclude>
+            <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/VariableDeclaration.txt</exclude>
           </excludes>
         </configuration>
         <executions>
@@ -143,6 +167,18 @@
           </execution>
         </executions>
       </plugin>-->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
