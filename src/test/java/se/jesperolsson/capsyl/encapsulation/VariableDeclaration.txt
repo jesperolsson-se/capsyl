@@ -1,0 +1,6 @@
+public class Example {
+
+  public void method() {
+    Foo a = new Foo(new Bar());
+  }
+}

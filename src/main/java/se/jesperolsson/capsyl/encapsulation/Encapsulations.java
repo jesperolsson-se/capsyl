@@ -69,7 +69,6 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
     }
 
     @Override
-    // Satisfies, e.g., Foo a = new Apa(new Bepa());
     public void visit(final VariableDeclarator declaration, final List<Encapsulation> encaps) {
         super.visit(declaration, encaps);
         final List<Node> children = declaration.getChildNodes();
@@ -83,10 +82,6 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
     }
 
     @Override
-    /* Satisfies, e.g.,
-        Foo foo;
-        foo = new Apa(new Bepa());
-     */
     public void visit(final AssignExpr assignment, final List<Encapsulation> encaps) {
         super.visit(assignment, encaps);
         final Expression value = assignment.getValue();

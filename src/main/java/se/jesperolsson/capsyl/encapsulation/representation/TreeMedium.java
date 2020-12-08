@@ -5,6 +5,7 @@ package se.jesperolsson.capsyl.encapsulation.representation;
 
 import java.util.LinkedList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
@@ -15,6 +16,7 @@ import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class TreeMedium implements Medium {
 
     /**
@@ -104,23 +106,6 @@ public final class TreeMedium implements Medium {
         final StringBuilder result = new StringBuilder();
         this.children.forEach(child -> result.append(System.lineSeparator()).append(child.print()));
         return result.toString();
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof TreeMedium
-            && TreeMedium.class.cast(obj).depth.equals(this.depth)
-            && TreeMedium.class.cast(obj).encapsulatee.equals(this.encapsulatee)
-            && TreeMedium.class.cast(obj).children.equals(this.children);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 11;
-        final int primetwo = 31;
-        return this.depth.hashCode()
-            + prime * this.encapsulatee.hashCode()
-            + primetwo * this.children.hashCode();
     }
 
     /**

@@ -5,12 +5,14 @@ package se.jesperolsson.capsyl.depth;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
+import lombok.EqualsAndHashCode;
 
 /**
  * Realizes depth through use of space indentation.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class SpaceIndentation implements Depth {
 
     /**
@@ -64,20 +66,5 @@ public final class SpaceIndentation implements Depth {
             .range(0, this.depth)
             .mapToObj(i -> spaces.get()).forEach(s -> result.append(s));
         return result.toString();
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        return obj instanceof SpaceIndentation
-            && SpaceIndentation.class.cast(obj).depth == this.depth
-            && SpaceIndentation.class.cast(obj).width == this.width;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 11;
-        final int primetwo = 31;
-        return prime * this.depth
-            + primetwo * this.depth;
     }
 }

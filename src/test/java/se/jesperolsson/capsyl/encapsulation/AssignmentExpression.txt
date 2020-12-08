@@ -1,0 +1,7 @@
+public class Example {
+
+  public void method() {
+    Foo foo;
+    foo = new Apa(new Bepa());
+  }
+}
