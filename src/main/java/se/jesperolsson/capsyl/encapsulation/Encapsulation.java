@@ -8,7 +8,7 @@ import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
- * Represents an object's encapsulation.
+ * Represents an encapsulation. That is, something that is being encapsulated plus metadata.
  *
  * @since 0.1
  */
@@ -23,6 +23,11 @@ public class Encapsulation {
      * The medium in which to represent myself.
      */
     private final Medium medium;
+
+    /**
+     * The name given to the encapsulation.
+     */
+    private final String name;
 
     /**
      * Constructs an encapsulation from a construction statement.
@@ -46,8 +51,19 @@ public class Encapsulation {
      * @param medium The medium to in which the encapsulation should represent itself.
      */
     public Encapsulation(final Encapsulatee encapsulatee, final Medium medium) {
+        this(encapsulatee, medium, "");
+    }
+
+    /**
+     * Constructs an encapsulation.
+     * @param encapsulatee An entity that can be encapsulated.
+     * @param medium The medium to in which the encapsulation should represent itself.
+     * @param name The name of the encapsulation.
+     */
+    public Encapsulation(final Encapsulatee encapsulatee, final Medium medium, final String name) {
         this.node = encapsulatee;
         this.medium = medium;
+        this.name = name;
     }
 
     /**
