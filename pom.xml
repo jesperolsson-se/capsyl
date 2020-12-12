@@ -41,6 +41,16 @@
       <artifactId>mockito-core</artifactId>
       <version>3.6.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.pholser</groupId>
+      <artifactId>junit-quickcheck-core</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.pholser</groupId>
+      <artifactId>junit-quickcheck-generators</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
   <build>
