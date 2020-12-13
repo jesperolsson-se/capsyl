@@ -4,7 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.representation;
 
 import lombok.EqualsAndHashCode;
-import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 
 /**
  * Null object for a medium.

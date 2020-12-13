@@ -10,8 +10,8 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
-import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
-import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
 /**
  * Tests for {@link TreeMedium}.

@@ -1,12 +1,14 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -26,6 +28,11 @@ public final class JpConstructor implements Encapsulatee {
      */
     public JpConstructor(final ObjectCreationExpr constructor) {
         this.constructor = constructor;
+    }
+
+    @Override
+    public Medium represent() {
+        return new NullMedium();
     }
 
     @Override

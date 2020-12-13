@@ -9,7 +9,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import se.jesperolsson.capsyl.encapsulation.JpLiteral;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpLiteral;
 
 /**
  * Tests for {@link JpLiteral}.

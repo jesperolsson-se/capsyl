@@ -4,6 +4,8 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpConstructor;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 

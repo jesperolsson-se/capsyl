@@ -1,11 +1,13 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import com.github.javaparser.ast.expr.LiteralExpr;
 import java.util.Collections;
 import java.util.List;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser literal expression.
@@ -25,6 +27,11 @@ public final class JpLiteral implements Encapsulatee {
      */
     public JpLiteral(final LiteralExpr literal) {
         this.literal = literal;
+    }
+
+    @Override
+    public Medium represent() {
+        return new NullMedium();
     }
 
     @Override

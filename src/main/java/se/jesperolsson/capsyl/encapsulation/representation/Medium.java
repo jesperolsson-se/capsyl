@@ -3,7 +3,7 @@
  */
 package se.jesperolsson.capsyl.encapsulation.representation;
 
-import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 
 /**
  * Abstracts the textual representation of an encapsulation.

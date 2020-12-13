@@ -6,7 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.representation;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
 /**
  * Tests for {@link NullMedium}.

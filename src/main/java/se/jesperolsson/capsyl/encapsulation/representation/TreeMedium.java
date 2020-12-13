@@ -8,8 +8,8 @@ import java.util.List;
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
-import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
-import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
 /**
  * Realizes the textual representation of an encapsulation as a simple tree.
