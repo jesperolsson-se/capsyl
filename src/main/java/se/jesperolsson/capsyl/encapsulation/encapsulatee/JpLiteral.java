@@ -7,7 +7,7 @@ import com.github.javaparser.ast.expr.LiteralExpr;
 import java.util.Collections;
 import java.util.List;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser literal expression.
@@ -31,7 +31,7 @@ public final class JpLiteral implements Encapsulatee {
 
     @Override
     public Medium represent() {
-        return new NullMedium();
+        return new TreeMedium(name());
     }
 
     @Override

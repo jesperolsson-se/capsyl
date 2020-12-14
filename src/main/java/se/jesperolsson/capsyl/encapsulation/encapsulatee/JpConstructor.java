@@ -8,7 +8,7 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -32,7 +32,7 @@ public final class JpConstructor implements Encapsulatee {
 
     @Override
     public Medium represent() {
-        return new NullMedium();
+        return new TreeMedium(name());
     }
 
     @Override
