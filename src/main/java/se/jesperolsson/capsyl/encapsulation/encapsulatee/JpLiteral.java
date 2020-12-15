@@ -31,12 +31,7 @@ public final class JpLiteral implements Encapsulatee {
 
     @Override
     public Medium represent() {
-        return new TreeMedium(name());
-    }
-
-    @Override
-    public String name() {
-        return this.literal.toString();
+        return new TreeMedium(this.literal.toString());
     }
 
     @Override

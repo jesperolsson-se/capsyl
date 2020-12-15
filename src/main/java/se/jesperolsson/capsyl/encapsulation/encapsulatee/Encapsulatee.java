@@ -16,12 +16,6 @@ public interface Encapsulatee {
     Medium represent();
 
     /**
-     * Asks the entity what its name is.
-     * @return The encapsulated entity's preferred name.
-     */
-    String name();
-
-    /**
      * Asks the entity what children it has.
      * @return Encapsulatable children to this entity.
      */

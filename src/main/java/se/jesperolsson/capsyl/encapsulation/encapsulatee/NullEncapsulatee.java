@@ -23,11 +23,6 @@ public final class NullEncapsulatee implements Encapsulatee {
     }
 
     @Override
-    public String name() {
-        return "";
-    }
-
-    @Override
     public List<Encapsulatee> children() {
         return Collections.emptyList();
     }

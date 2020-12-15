@@ -73,7 +73,7 @@ public class TreeMediumTest {
         final NullEncapsulatee encapsulatee = new NullEncapsulatee();
         final Medium sut = new TreeMedium(depth, encapsulatee);
         MatcherAssert.assertThat(
-            depth.print() + encapsulatee.name(),
+            depth.print() + encapsulatee.represent().print(),
             CoreMatchers.equalTo(sut.print())
         );
     }

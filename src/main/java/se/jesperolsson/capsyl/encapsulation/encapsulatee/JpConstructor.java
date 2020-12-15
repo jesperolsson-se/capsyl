@@ -32,12 +32,7 @@ public final class JpConstructor implements Encapsulatee {
 
     @Override
     public Medium represent() {
-        return new TreeMedium(name());
-    }
-
-    @Override
-    public String name() {
-        return this.constructor.getTypeAsString();
+        return new TreeMedium(this.constructor.getTypeAsString());
     }
 
     @Override

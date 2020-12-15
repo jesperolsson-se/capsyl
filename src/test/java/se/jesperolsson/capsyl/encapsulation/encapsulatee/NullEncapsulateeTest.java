@@ -16,18 +16,6 @@ import org.junit.Test;
 public class NullEncapsulateeTest {
 
     /**
-     * When the object is asked for its name,
-     * Then the result should be the empty string.
-     */
-    @Test
-    public void displayNoName() {
-        MatcherAssert.assertThat(
-            "",
-            CoreMatchers.equalTo(new NullEncapsulatee().name())
-        );
-    }
-
-    /**
      * When the object is asked for its children,
      * Then it should return an empty list.
      */
