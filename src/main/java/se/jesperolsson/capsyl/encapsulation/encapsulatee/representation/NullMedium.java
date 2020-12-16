@@ -4,6 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.depth.Depth;
 
 /**
  * Null object for a medium.
@@ -12,6 +13,11 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public final class NullMedium implements Medium {
+
+    @Override
+    public Medium withDepth(final Depth depth) {
+        return new NullMedium();
+    }
 
     @Override
     public Medium representName(final String name) {

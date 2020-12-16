@@ -3,12 +3,21 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
+import se.jesperolsson.capsyl.depth.Depth;
+
 /**
  * Abstracts the textual representation of an encapsulatee.
  *
  * @since 0.1
  */
 public interface Medium {
+
+    /**
+     * Asks the medium to add a depth to its representation.
+     * @param depth The depth to represent.
+     * @return A copy of the medium, that also contains the depth.
+     */
+    Medium withDepth(Depth depth);
 
     /**
      * Asks the medium to add a name to its representation.

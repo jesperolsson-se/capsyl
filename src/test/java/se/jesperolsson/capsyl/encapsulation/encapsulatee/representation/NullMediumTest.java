@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.depth.NullDepth;
 
 public class NullMediumTest {
 
@@ -19,6 +20,20 @@ public class NullMediumTest {
             new NullMedium(),
             CoreMatchers.equalTo(
                 new NullMedium().representName("")
+            )
+        );
+    }
+
+    /**
+     * When the object is asked to represent a depth,
+     * Then it should respond with an unchanged copy of itself.
+     */
+    @Test
+    public void disregardDepth() {
+        MatcherAssert.assertThat(
+            new NullMedium(),
+            CoreMatchers.equalTo(
+                new NullMedium().withDepth(new NullDepth())
             )
         );
     }
