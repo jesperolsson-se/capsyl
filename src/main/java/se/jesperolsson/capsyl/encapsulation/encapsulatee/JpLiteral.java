@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 import com.github.javaparser.ast.expr.LiteralExpr;
 import java.util.Collections;
 import java.util.List;
+import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
@@ -30,8 +31,8 @@ public final class JpLiteral implements Encapsulatee {
     }
 
     @Override
-    public Medium represent() {
-        return new TreeMedium(this.literal.toString());
+    public Medium represent(Depth depth) {
+        return new TreeMedium(this.literal.toString(), depth);
     }
 
     @Override

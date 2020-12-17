@@ -7,6 +7,7 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
+import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
@@ -31,8 +32,8 @@ public final class JpConstructor implements Encapsulatee {
     }
 
     @Override
-    public Medium represent() {
-        return new TreeMedium(this.constructor.getTypeAsString());
+    public Medium represent(Depth depth) {
+        return new TreeMedium(this.constructor.getTypeAsString()).withDepth(depth);
     }
 
     @Override

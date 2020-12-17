@@ -93,7 +93,7 @@ public final class TreeMedium implements Medium {
 
     @Override
     public String print() {
-        return this.encapsulatee.represent().withDepth(depth).print()
+        return this.encapsulatee.represent(depth).print()
             + this.printChildren();
     }
 

@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 import java.util.Collections;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
@@ -18,7 +19,7 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedi
 public final class NullEncapsulatee implements Encapsulatee {
 
     @Override
-    public Medium represent() {
+    public Medium represent(Depth depth) {
         return new NullMedium();
     }
 

@@ -4,6 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import java.util.List;
+import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**
@@ -13,7 +14,12 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
  */
 public interface Encapsulatee {
 
-    Medium represent();
+    /**
+     * Asks the entity to represent itself.
+     * @param depth The depth at which the representation should occur.
+     * @return A medium containing  a representation of the entity.
+     */
+    Medium represent(Depth depth);
 
     /**
      * Asks the entity what children it has.
