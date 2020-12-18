@@ -3,9 +3,13 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
+import java.util.Arrays;
+import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.depth.NullDepth;
 
 public class TreeMediumTest {
 
@@ -22,6 +26,22 @@ public class TreeMediumTest {
             CoreMatchers.equalTo(
                 new TreeMedium().representName(name)
             )
+        );
+    }
+
+    /**
+     * When the object is asked to represent a child,
+     * Then it should return a copy of itself that contains that child.
+     */
+    @Test
+    public void representChild() {
+        final String name = "";
+        final Depth depth = new NullDepth();
+        final Medium child = new NullMedium();
+        final List<Medium> children = Arrays.asList(child);
+        MatcherAssert.assertThat(
+            new TreeMedium(name, depth, children),
+            CoreMatchers.equalTo(new TreeMedium(name, depth).representChild(child))
         );
     }
 }

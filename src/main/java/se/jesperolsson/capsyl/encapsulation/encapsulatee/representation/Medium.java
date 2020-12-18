@@ -20,6 +20,13 @@ public interface Medium {
     Medium withDepth(Depth depth);
 
     /**
+     * Asks the medium to add a child to its representation.
+     * @param medium A child encapsulation.
+     * @return A copy of the medium, that also contains the child.
+     */
+    Medium representChild(Medium medium);
+
+    /**
      * Asks the medium to add a name to its representation.
      * @param name The name.
      * @return A copy of the medium, that also contains the name.
