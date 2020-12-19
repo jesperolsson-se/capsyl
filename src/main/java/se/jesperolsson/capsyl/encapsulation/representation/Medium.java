@@ -27,13 +27,6 @@ public interface Medium {
     Medium nextLevel();
 
     /**
-     * Asks the medium to add a child to its representation.
-     * @param medium A child encapsulation.
-     * @return A copy of the medium, that also contains the child.
-     */
-    Medium representChild(Medium medium);
-
-    /**
      * Asks the medium to provide its representation as text.
      * @return A textual representation of an encapsulation.
      */

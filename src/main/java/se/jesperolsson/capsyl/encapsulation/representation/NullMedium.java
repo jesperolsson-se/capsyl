@@ -25,11 +25,6 @@ public final class NullMedium implements Medium {
     }
 
     @Override
-    public Medium representChild(final Medium medium) {
-        return new NullMedium();
-    }
-
-    @Override
     public String print() {
         return "";
     }

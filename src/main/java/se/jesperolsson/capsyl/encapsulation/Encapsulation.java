@@ -73,10 +73,6 @@ public class Encapsulation {
      * @return A medium containing a representation of this object.
      */
     public Medium represent() {
-        final Medium childless = this.medium.representEncapsulatee(this.node);
-        return this.node.children()
-            .stream()
-            .map(expression -> new Encapsulation(expression, this.medium.nextLevel()).represent())
-            .reduce(childless, (next, child) -> next.representChild(child));
+        return this.medium.representEncapsulatee(this.node);
     }
 }

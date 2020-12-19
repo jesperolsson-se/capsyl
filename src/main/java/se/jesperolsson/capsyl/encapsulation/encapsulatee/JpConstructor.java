@@ -33,7 +33,13 @@ public final class JpConstructor implements Encapsulatee {
 
     @Override
     public Medium represent(Depth depth) {
-        return new TreeMedium(this.constructor.getTypeAsString()).withDepth(depth);
+        Medium result = new TreeMedium(this.constructor.getTypeAsString()).withDepth(depth);
+        if (!this.children().isEmpty()) {
+            for (final Encapsulatee child : this.children()) {
+                result = result.representChild(child.represent(depth.next()));
+            }
+        }
+        return result;
     }
 
     @Override

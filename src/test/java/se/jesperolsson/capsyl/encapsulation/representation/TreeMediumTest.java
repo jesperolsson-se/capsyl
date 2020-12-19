@@ -3,8 +3,6 @@
  */
 package se.jesperolsson.capsyl.encapsulation.representation;
 
-import java.util.Arrays;
-import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -45,21 +43,6 @@ public class TreeMediumTest {
         MatcherAssert.assertThat(
             new TreeMedium(depth.next()),
             CoreMatchers.equalTo(new TreeMedium(depth).nextLevel())
-        );
-    }
-
-    /**
-     * When the object is asked to represent a child,
-     * Then it should return a copy of itself that contains that child.
-     */
-    @Test
-    public void representChild() {
-        final Depth depth = new NullDepth();
-        final Medium child = new NullMedium();
-        final List<Medium> children = Arrays.asList(child);
-        MatcherAssert.assertThat(
-            new TreeMedium(depth, new NullEncapsulatee(), children),
-            CoreMatchers.equalTo(new TreeMedium(depth).representChild(child))
         );
     }
 

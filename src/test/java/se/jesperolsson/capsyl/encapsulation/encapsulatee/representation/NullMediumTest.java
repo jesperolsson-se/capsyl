@@ -53,6 +53,20 @@ public class NullMediumTest {
     }
 
     /**
+     * When the object is asked to represent a child,
+     * Then it should respond with an unchanged copy of itself.
+     */
+    @Test
+    public void disregardChild() {
+        MatcherAssert.assertThat(
+            new NullMedium(),
+            CoreMatchers.equalTo(
+                new NullMedium().representChild(new NullMedium())
+            )
+        );
+    }
+
+    /**
      * When the object is asked if it's equal to another NullMedium
      * Then the result should affirmative.
      */
