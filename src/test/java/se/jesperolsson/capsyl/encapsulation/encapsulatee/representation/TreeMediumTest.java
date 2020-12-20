@@ -44,4 +44,19 @@ public class TreeMediumTest {
             CoreMatchers.equalTo(new TreeMedium(name, depth).representChild(child))
         );
     }
+
+    /**
+     * When the object is asked for a representation
+     * of the next level in the encapsulation hierarchy,
+     * Then it should return a medium with the next depth level.
+     */
+    @Test
+    public void provideNextLevel() {
+        final String name = "";
+        final Depth depth = new NullDepth();
+        MatcherAssert.assertThat(
+            new TreeMedium(name, depth.next()),
+            CoreMatchers.equalTo(new TreeMedium(name, depth).nextLevel())
+        );
+    }
 }

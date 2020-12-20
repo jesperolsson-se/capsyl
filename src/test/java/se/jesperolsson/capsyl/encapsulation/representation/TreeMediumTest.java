@@ -10,6 +10,7 @@ import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
 /**
  * Tests for {@link TreeMedium}.
@@ -33,20 +34,6 @@ public class TreeMediumTest {
     }
 
     /**
-     * When the object is asked for a representation
-     * of the next level in the encapsulation hierarchy,
-     * Then it should return a medium with the next depth level.
-     */
-    @Test
-    public void provideNextLevel() {
-        final Depth depth = new NullDepth();
-        MatcherAssert.assertThat(
-            new TreeMedium(depth.next()),
-            CoreMatchers.equalTo(new TreeMedium(depth).nextLevel())
-        );
-    }
-
-    /**
      * When the object is asked to print itself,
      * Then it should answer with its depth and its encapsulatee.
      */
@@ -56,7 +43,7 @@ public class TreeMediumTest {
         final NullEncapsulatee encapsulatee = new NullEncapsulatee();
         final Medium sut = new TreeMedium(depth, encapsulatee);
         MatcherAssert.assertThat(
-            depth.print() + encapsulatee.represent(depth).print(),
+            depth.print() + encapsulatee.represent(new NullMedium()).print(),
             CoreMatchers.equalTo(sut.print())
         );
     }

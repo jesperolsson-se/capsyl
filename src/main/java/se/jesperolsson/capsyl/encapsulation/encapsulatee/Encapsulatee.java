@@ -15,11 +15,11 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 public interface Encapsulatee {
 
     /**
-     * Asks the entity to represent itself.
-     * @param depth The depth at which the representation should occur.
-     * @return A medium containing  a representation of the entity.
+     * Asks the entity to represent itself in the given medium.
+     * @param medium The medium in which to represent the entity.
+     * @return A copy of the medium, also containing a representation of the entity.
      */
-    Medium represent(Depth depth);
+    Medium represent(Medium medium);
 
     /**
      * Asks the entity what children it has.

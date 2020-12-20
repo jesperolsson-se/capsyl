@@ -31,8 +31,8 @@ public final class JpLiteral implements Encapsulatee {
     }
 
     @Override
-    public Medium represent(Depth depth) {
-        return new TreeMedium(this.literal.toString(), depth);
+    public Medium represent(final Medium medium) {
+        return medium.representName(this.literal.toString());
     }
 
     @Override

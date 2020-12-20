@@ -67,6 +67,20 @@ public class NullMediumTest {
     }
 
     /**
+     * When the object is asked to represent the next level,
+     * Then it should respond with an unchanged copy of itself.
+     */
+    @Test
+    public void disregardLevel() {
+        MatcherAssert.assertThat(
+            new NullMedium(),
+            CoreMatchers.equalTo(
+                new NullMedium().nextLevel()
+            )
+        );
+    }
+
+    /**
      * When the object is asked if it's equal to another NullMedium
      * Then the result should affirmative.
      */

@@ -19,7 +19,7 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedi
 public final class NullEncapsulatee implements Encapsulatee {
 
     @Override
-    public Medium represent(Depth depth) {
+    public Medium represent(final Medium medium) {
         return new NullMedium();
     }
 

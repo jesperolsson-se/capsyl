@@ -30,6 +30,11 @@ public final class NullMedium implements Medium {
     }
 
     @Override
+    public Medium nextLevel() {
+        return new NullMedium();
+    }
+
+    @Override
     public String print() {
         return "";
     }

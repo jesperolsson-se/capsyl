@@ -34,6 +34,13 @@ public interface Medium {
     Medium representName(String name);
 
     /**
+     * Asks the medium to provide a medium that can represent the next level
+     * in the encapsulation hierarchy.
+     * @return A medium, that represents a new encapsulation level.
+     */
+    Medium nextLevel();
+
+    /**
      * Asks the medium to provide its representation as text.
      * @return A textual representation of an encapsulation.
      */

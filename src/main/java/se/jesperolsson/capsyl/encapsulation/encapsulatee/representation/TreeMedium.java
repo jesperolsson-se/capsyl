@@ -85,6 +85,11 @@ public final class TreeMedium implements Medium {
     public Medium representName(final String preference) {
         return new TreeMedium(preference, this.depth, this.copyChildren());
     }
+    
+    @Override
+    public Medium nextLevel() {
+        return new TreeMedium("", this.depth.next());
+    }
 
     @Override
     public String print() {

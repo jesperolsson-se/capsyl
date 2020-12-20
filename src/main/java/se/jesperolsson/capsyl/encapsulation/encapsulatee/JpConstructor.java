@@ -32,11 +32,11 @@ public final class JpConstructor implements Encapsulatee {
     }
 
     @Override
-    public Medium represent(Depth depth) {
-        Medium result = new TreeMedium(this.constructor.getTypeAsString()).withDepth(depth);
+    public Medium represent(final Medium medium) {
+        Medium result = medium.representName(this.constructor.getTypeAsString());
         if (!this.children().isEmpty()) {
             for (final Encapsulatee child : this.children()) {
-                result = result.representChild(child.represent(depth.next()));
+                result = result.representChild(child.represent(result.nextLevel()));
             }
         }
         return result;

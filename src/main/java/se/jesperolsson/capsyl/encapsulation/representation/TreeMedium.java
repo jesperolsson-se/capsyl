@@ -61,12 +61,10 @@ public final class TreeMedium implements Medium {
     }
 
     @Override
-    public Medium nextLevel() {
-        return new TreeMedium(this.depth.next(), this.encapsulatee);
-    }
-
-    @Override
     public String print() {
-        return this.encapsulatee.represent(depth).print();
+        return this.encapsulatee.represent(
+            new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium()
+            .withDepth(depth))
+            .print();
     }
 }
