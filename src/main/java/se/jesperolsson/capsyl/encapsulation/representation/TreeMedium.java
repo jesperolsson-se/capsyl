@@ -61,6 +61,11 @@ public final class TreeMedium implements Medium {
     }
 
     @Override
+    public Medium representName(final String name) {
+        return new TreeMedium(this.depth, this.encapsulatee); // Trees exclude names.
+    }
+
+    @Override
     public String print() {
         return this.encapsulatee.represent(
             new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium()

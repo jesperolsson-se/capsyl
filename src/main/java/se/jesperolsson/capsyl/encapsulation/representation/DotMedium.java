@@ -8,8 +8,6 @@ import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
-import se.jesperolsson.capsyl.identification.Identity;
-import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
  * Realizes the textual representation of an encapsulation in DOT language.
@@ -33,7 +31,7 @@ public final class DotMedium implements Medium {
      * Flag that indicates if this medium is the root node.
      */
     private final boolean root;
-    private final Identity id;
+    private final String name;
 
     /**
      * Constructs a default DotMedium.
@@ -69,7 +67,7 @@ public final class DotMedium implements Medium {
         final Depth depth,
         final Encapsulatee encapsulatee,
         final boolean root) {
-        this(depth, encapsulatee, root, new Uuid());
+        this(depth, encapsulatee, root, "Var");
     }
 
     /**
@@ -77,22 +75,27 @@ public final class DotMedium implements Medium {
      * @param depth The medium's depth in the hierarchy.
      * @param encapsulatee The object that is encapsulated.
      * @param root Flag indicating whether this is the root medium.
-     * @param id The name of the medium.
+     * @param name The name of the medium.
      */
     private DotMedium(
         final Depth depth,
         final Encapsulatee encapsulatee,
         final boolean root,
-        final Identity id) {
+        final String name) {
         this.depth = depth;
         this.encapsulatee = encapsulatee;
         this.root = root;
-        this.id = id;
+        this.name = name;
     }
 
     @Override
     public Medium representEncapsulatee(final Encapsulatee subject) {
-        return new DotMedium(this.depth, subject, this.root, this.id);
+        return new DotMedium(this.depth, subject, this.root, this.name);
+    }
+
+    @Override
+    public Medium representName(final String name) {
+        return new DotMedium(this.depth, this.encapsulatee, this.root, name);
     }
 
     @Override
@@ -103,7 +106,9 @@ public final class DotMedium implements Medium {
             .append("graph {")
             .append(System.lineSeparator());
         result.append(this.depth.next().print())
-            .append("label=\"Var\"") // label should actually be type/name.
+            .append("label=\"")
+            .append(this.name)
+            .append("\"")
             .append(System.lineSeparator());
         result.append(this.encapsulatee.represent(
             new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium()

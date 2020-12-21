@@ -20,6 +20,11 @@ public final class NullMedium implements Medium {
     }
 
     @Override
+    public Medium representName(final String name) {
+        return new NullMedium();
+    }
+
+    @Override
     public String print() {
         return "";
     }

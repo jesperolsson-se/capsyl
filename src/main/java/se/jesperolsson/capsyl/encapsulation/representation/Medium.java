@@ -20,6 +20,13 @@ public interface Medium {
     Medium representEncapsulatee(Encapsulatee encapsulatee);
 
     /**
+     * Asks the medium to add a name to its representation.
+     * @param name The name to refer to the encapsulation by.
+     * @return A copy of the medium, that also contains the name.
+     */
+    Medium representName(String name);
+
+    /**
      * Asks the medium to provide its representation as text.
      * @return A textual representation of an encapsulation.
      */
