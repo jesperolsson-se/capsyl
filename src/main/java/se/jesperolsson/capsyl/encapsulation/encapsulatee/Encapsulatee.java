@@ -20,10 +20,4 @@ public interface Encapsulatee {
      * @return A copy of the medium, also containing a representation of the entity.
      */
     Medium represent(Medium medium);
-
-    /**
-     * Asks the entity what children it has.
-     * @return Encapsulatable children to this entity.
-     */
-    List<Encapsulatee> children();
 }

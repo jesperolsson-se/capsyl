@@ -42,7 +42,10 @@ public final class JpConstructor implements Encapsulatee {
         return result;
     }
 
-    @Override
+    /**
+     * Asks the object to parse its sub-encapsulatees, if any.
+     * @return A list of all the constructor's child encapsulatees.
+     */
     public List<Encapsulatee> children() {
         final List<Encapsulatee> result = new LinkedList<>();
         for (final Expression parameter : this.constructor.getArguments()) {

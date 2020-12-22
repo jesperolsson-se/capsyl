@@ -16,18 +16,6 @@ import org.junit.Test;
 public class NullEncapsulateeTest {
 
     /**
-     * When the object is asked for its children,
-     * Then it should return an empty list.
-     */
-    @Test
-    public void reportAbsenceOfChildren() {
-        MatcherAssert.assertThat(
-            new LinkedList<>(),
-            CoreMatchers.equalTo(new NullEncapsulatee().children())
-        );
-    }
-
-    /**
      * When the object is asked if it's equal to another NullEncapsulatee,
      * Then the result should affirmative.
      */
