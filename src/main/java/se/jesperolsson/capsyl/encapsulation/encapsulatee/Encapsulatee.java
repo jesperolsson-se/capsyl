@@ -3,8 +3,6 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
-import java.util.List;
-import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**

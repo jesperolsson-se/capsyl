@@ -10,8 +10,15 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
-public class TreeMediumTest {
+/**
+ * Tests for {@link EncapsulateeTreeMedium}.
+ *
+ * @since 0.1
+ */
+public class EncapsulateeTreeMediumTest {
 
     /**
      * Given a name,
@@ -22,9 +29,9 @@ public class TreeMediumTest {
     public void disregardName() {
         final String name = "Foo";
         MatcherAssert.assertThat(
-            new TreeMedium(name),
+            new EncapsulateeTreeMedium(name),
             CoreMatchers.equalTo(
-                new TreeMedium().representName(name)
+                new EncapsulateeTreeMedium().representName(name)
             )
         );
     }
@@ -37,26 +44,11 @@ public class TreeMediumTest {
     public void representChild() {
         final String name = "";
         final Depth depth = new NullDepth();
-        final Medium child = new NullMedium();
-        final List<Medium> children = Arrays.asList(child);
+        final Encapsulatee child = new NullEncapsulatee();
+        final List<Encapsulatee> children = Arrays.asList(child);
         MatcherAssert.assertThat(
-            new TreeMedium(name, depth, children),
-            CoreMatchers.equalTo(new TreeMedium(name, depth).representChild(child))
-        );
-    }
-
-    /**
-     * When the object is asked for a representation
-     * of the next level in the encapsulation hierarchy,
-     * Then it should return a medium with the next depth level.
-     */
-    @Test
-    public void provideNextLevel() {
-        final String name = "";
-        final Depth depth = new NullDepth();
-        MatcherAssert.assertThat(
-            new TreeMedium(name, depth.next()),
-            CoreMatchers.equalTo(new TreeMedium(name, depth).nextLevel())
+            new EncapsulateeTreeMedium(name, depth, children),
+            CoreMatchers.equalTo(new EncapsulateeTreeMedium(name, depth).representChild(child))
         );
     }
 }

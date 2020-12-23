@@ -3,7 +3,6 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
-import java.util.LinkedList;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;

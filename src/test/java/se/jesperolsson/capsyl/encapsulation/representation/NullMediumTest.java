@@ -16,6 +16,20 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 public class NullMediumTest {
 
     /**
+     * When the object is asked to represent a name,
+     * Then it should respond with an unchanged copy of itself.
+     */
+    @Test
+    public void disregardName() {
+        MatcherAssert.assertThat(
+            new NullMedium(),
+            CoreMatchers.equalTo(
+                new NullMedium().representName("Foo")
+            )
+        );
+    }
+
+    /**
      * When the object is asked to represent an encapsulatee,
      * Then it should respond with an unchanged copy of itself.
      */

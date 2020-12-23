@@ -53,7 +53,7 @@ public class Encapsulation {
      * @param medium The medium to in which the encapsulation should represent itself.
      */
     public Encapsulation(final Encapsulatee encapsulatee, final Medium medium) {
-        this(encapsulatee, medium, "");
+        this(encapsulatee, medium, "Var");
     }
 
     /**
@@ -73,6 +73,6 @@ public class Encapsulation {
      * @return A medium containing a representation of this object.
      */
     public Medium represent() {
-        return this.medium.representEncapsulatee(this.node);
+        return this.medium.representEncapsulatee(this.node).representName(this.name);
     }
 }

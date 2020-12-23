@@ -5,9 +5,9 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import java.util.LinkedList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.depth.SpaceIndentation;
-import se.jesperolsson.capsyl.identification.Identity;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
@@ -15,6 +15,7 @@ import se.jesperolsson.capsyl.identification.Uuid;
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class DotMedium implements Medium {
 
     /**
@@ -23,19 +24,9 @@ public final class DotMedium implements Medium {
     private final String name;
 
     /**
-     * The depth to represent.
-     */
-    private final Depth depth;
-
-    /**
      * The submedia to represent.
      */
-    private final List<Medium> children;
-
-    /**
-     * An identifier for the (sub-)graph.
-     */
-    private final Identity id;
+    private final List<Encapsulatee> children;
 
     /**
      * Constructs a default DotMedium.
@@ -46,93 +37,89 @@ public final class DotMedium implements Medium {
 
     /**
      * Constructs a DotMedium that can represent a name.
+     *
      * @param name The preferred name of the encapsulatee.
      */
     public DotMedium(final String name) {
-        this(name, new SpaceIndentation());
+        this(name, new LinkedList<>());
     }
 
     /**
      * Constructs a DotMedium that can represent a name at the specified depth.
+     *
      * @param name The preferred name of the encapsulatee.
-     * @param depth The medium's depth in the hierarchy.
-     */
-    public DotMedium(final String name, final Depth depth) {
-        this(name, depth, new LinkedList<>());
-    }
-
-    /**
-     * Constructs a DotMedium that can represent a name at the specified depth.
-     * @param name The preferred name of the encapsulatee.
-     * @param depth The medium's depth in the hierarchy.
      * @param children The medium's submedia.
      */
-    public DotMedium(final String name, final Depth depth, final List<Medium> children) {
-        this(name, depth, children, new Uuid());
-    }
-
-    /**
-     * Constructs a DotMedium that can represent a name at the specified depth.
-     * @param name The preferred name of the encapsulatee.
-     * @param depth The medium's depth in the hierarchy.
-     * @param children The medium's submedia.
-     * @param id The (sub-)graph's identifier.
-     */
-    public DotMedium(final String name, final Depth depth, final List<Medium> children, final Identity id) {
+    public DotMedium(final String name, final List<Encapsulatee> children) {
         this.name = name;
-        this.depth = depth;
         this.children = children;
-        this.id = id;
     }
 
     @Override
     public Medium withDepth(final Depth depth) {
-        return new DotMedium(this.name, depth, this.copyChildren());
+        return this;
     }
 
     @Override
-    public Medium representChild(final Medium medium) {
-        final List<Medium> copies = this.copyChildren();
-        copies.add(medium);
-        return new DotMedium(this.name, this.depth, copies);
+    public Medium representChild(final Encapsulatee encapsulatee) {
+        final List<Encapsulatee> copies = this.copyChildren();
+        copies.add(encapsulatee);
+        return new DotMedium(this.name, copies);
     }
 
     @Override
-    public Medium representName(final String name) {
-        return new DotMedium(name, this.depth, this.copyChildren());
-    }
-
-    @Override
-    public Medium nextLevel() {
-        return new DotMedium("", this.depth.next());
+    public Medium representName(final String preference) {
+        return new DotMedium(preference, this.copyChildren());
     }
 
     @Override
     public String print() {
-        final StringBuilder result = new StringBuilder();
-        if (!children.isEmpty()) {
-            result.append(this.depth.print())
-                .append("subgraph \"cluster " + this.id.print() + "\" {");
-            result.append(System.lineSeparator())
-                .append(this.depth.next().print())
-                .append("label=\"")
-                .append(this.name)
-                .append("\"");
-            this.children.forEach(child -> result.append(System.lineSeparator()).append(child.print()));
-            result.append(System.lineSeparator());
-            result.append(this.depth.print() + "}");
+        final String result;
+        if (this.children.isEmpty()) {
+            result = this.name;
         } else {
-            result.append(this.depth.print())
-                .append(this.name);
+            result = this.printCluster();
         }
-        return result.toString();
+        return result;
+    }
+
+    /**
+     * Asks the medium to print itself as a subgraph (cluster).
+     * @return A cluster representation of the DOT medium.
+     */
+    private String printCluster() {
+        return new StringBuilder()
+            .append("subgraph \"cluster ")
+            .append(new Uuid().print())
+            .append("\" { ")
+            .append(this.printFamily())
+            .append(" ")
+            .append("}")
+            .toString();
+    }
+
+    /**
+     * Asks the medium to print itself and its children.
+     * @return A string containing the medium and its children.
+     */
+    private String printFamily() {
+        final StringBuilder family = new StringBuilder();
+        family.append("label=\"")
+            .append(this.name)
+            .append('\"');
+        this.children.forEach(
+            child -> family
+                .append(' ')
+                .append(child.represent(new DotMedium("")).print())
+        );
+        return family.toString();
     }
 
     /**
      * Convenience method for creating a copy of the subtrees.
      * @return A copy of the list of children.
      */
-    private List<Medium> copyChildren() {
+    private List<Encapsulatee> copyChildren() {
         return new LinkedList<>(this.children);
     }
 }

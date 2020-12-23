@@ -4,9 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import com.github.javaparser.ast.expr.LiteralExpr;
-import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser literal expression.

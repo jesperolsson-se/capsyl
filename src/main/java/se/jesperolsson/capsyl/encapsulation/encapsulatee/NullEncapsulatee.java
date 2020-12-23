@@ -4,7 +4,6 @@
 package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import lombok.EqualsAndHashCode;
-import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 

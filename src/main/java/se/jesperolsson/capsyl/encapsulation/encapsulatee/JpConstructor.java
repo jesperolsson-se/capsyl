@@ -7,9 +7,7 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
-import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.TreeMedium;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -36,7 +34,7 @@ public final class JpConstructor implements Encapsulatee {
         Medium result = medium.representName(this.constructor.getTypeAsString());
         if (!this.children().isEmpty()) {
             for (final Encapsulatee child : this.children()) {
-                result = result.representChild(child.represent(result.nextLevel()));
+                result = result.representChild(child);
             }
         }
         return result;

@@ -7,7 +7,13 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.NullDepth;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
+/**
+ * Tests for {@link NullMedium}.
+ *
+ * @since 0.1
+ */
 public class NullMediumTest {
 
     /**
@@ -61,21 +67,7 @@ public class NullMediumTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representChild(new NullMedium())
-            )
-        );
-    }
-
-    /**
-     * When the object is asked to represent the next level,
-     * Then it should respond with an unchanged copy of itself.
-     */
-    @Test
-    public void disregardLevel() {
-        MatcherAssert.assertThat(
-            new NullMedium(),
-            CoreMatchers.equalTo(
-                new NullMedium().nextLevel()
+                new NullMedium().representChild(new NullEncapsulatee())
             )
         );
     }
