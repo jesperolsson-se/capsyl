@@ -6,6 +6,8 @@ package se.jesperolsson.capsyl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import se.jesperolsson.capsyl.encapsulation.Encapsulations;
+import se.jesperolsson.capsyl.encapsulation.representation.DescriptionMediumFactory;
+import se.jesperolsson.capsyl.encapsulation.representation.MediumFactory;
 
 /**
  * Main entry point to Capsyl. Exemplifies usage.
@@ -22,19 +24,21 @@ public final class Main {
     /**
      * Constructs a Capsyl program for the specified file.
      * @param path A path to a file containing Java source code.
+     * @param description The description of the preferred output format.
      * @throws FileNotFoundException If the path is invalid.
      */
-    public Main(final String path) throws FileNotFoundException {
-        this(new File(path));
+    public Main(final String path, final String description) throws FileNotFoundException {
+        this(new File(path), new DescriptionMediumFactory(description));
     }
 
     /**
      * Constructs a Capsyl program for the specified file.
      * @param file A file containing Java source code.
+     * @param factory The factory to create media from.
      * @throws FileNotFoundException If the file cannot be accessed.
      */
-    public Main(final File file) throws FileNotFoundException {
-        this(new Encapsulations(file));
+    public Main(final File file, final MediumFactory factory) throws FileNotFoundException {
+        this(new Encapsulations(file, factory));
     }
 
     /**
@@ -57,7 +61,11 @@ public final class Main {
         if (args.length >= 1) {
             path = args[0];
         }
-        System.out.println(new Main(path).execute());
+        String outformat = "dot";
+        if (args.length >= 2) {
+            outformat = args[1];
+        }
+        System.out.println(new Main(path, outformat).execute());
     }
 
     /**

@@ -22,23 +22,8 @@ Foo foo;
 foo = new Cepa(new Depa(), new Epa());
 ```
 
-Currently, Capsyl is limited to visualize these as a simple hierarchy on
-stdout. The examples above will yield the following output, respectively.
-
-```
-Apa
-  Apa
-    Bepa
-      3
-    2
-  1
-```
-
-```
-Cepa
-  Depa
-  Epa
-```
+Currently, Capsyl can visualize these on stdout, either as a [DOT](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29)
+graphs or a simple hierarchy. 
 
 Capsyl accepts files that contain java source code. Simply build the
 program with `mvn package` and then execute the jar file with
@@ -47,4 +32,6 @@ program with `mvn package` and then execute the jar file with
 
 or
 
-`java -jar target/capsyl-0.1-SNAPSHOT.jar path/to/javafile`
+`java -jar target/capsyl-0.1-SNAPSHOT.jar path/to/javafile FORMAT`
+
+where `FORMAT`=`dot`|`tree`.

@@ -34,17 +34,10 @@ public class Encapsulation {
     /**
      * Constructs an encapsulation from a construction statement.
      * @param node An AST node for object creation.
+     * @param medium The medium to in which the statement should represent itself.
      */
-    public Encapsulation(final ObjectCreationExpr node) {
-        this(new JpConstructor(node));
-    }
-
-    /**
-     * Constructs an encapsulation containing an encapsulatee.
-     * @param encapsulatee An entity that can be encapsulated.
-     */
-    public Encapsulation(final Encapsulatee encapsulatee) {
-        this(encapsulatee, new TreeMedium());
+    public Encapsulation(final ObjectCreationExpr node, final Medium medium) {
+        this(new JpConstructor(node), medium);
     }
 
     /**

@@ -17,6 +17,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import se.jesperolsson.capsyl.encapsulation.representation.DescriptionMediumFactory;
+import se.jesperolsson.capsyl.encapsulation.representation.MediumFactory;
 
 /**
  * Represents all encapsulations contained in a snippet of Java source code.
@@ -31,20 +33,38 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
     private final CompilationUnit code;
 
     /**
+     * The factory for creating media.
+     */
+    private final MediumFactory factory;
+
+    /**
      * Constructs encapsulations from source code stored in a file.
      * @param source A file containing Java source code.
      * @throws FileNotFoundException If the file is inaccessible.
      */
     public Encapsulations(final File source) throws FileNotFoundException {
-        this(StaticJavaParser.parse(source));
+        this(StaticJavaParser.parse(source), new DescriptionMediumFactory());
+    }
+
+    /**
+     * Constructs encapsulations from source code stored in a file.
+     * @param source A file containing Java source code.
+     * @param factory The factory to use when creating media.
+     * @throws FileNotFoundException If the file is inaccessible.
+     */
+    public Encapsulations(final File source, final MediumFactory factory)
+        throws FileNotFoundException {
+        this(StaticJavaParser.parse(source), factory);
     }
 
     /**
      * Constructs encapsulations from a Java abstract syntax tree (AST).
      * @param code The AST of a piece of Java code.
+     * @param factory The factory to use when creating media.
      */
-    public Encapsulations(final CompilationUnit code) {
+    public Encapsulations(final CompilationUnit code, final MediumFactory factory) {
         this.code = code;
+        this.factory = factory;
     }
 
     /**
@@ -75,7 +95,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
         for (final Node child: children) {
             if (child instanceof ObjectCreationExpr) {
                 final ObjectCreationExpr constructor = (ObjectCreationExpr) child;
-                final Encapsulation encap = new Encapsulation(constructor);
+                final Encapsulation encap = new Encapsulation(constructor, this.factory.create());
                 encaps.add(encap);
             }
         }
@@ -87,7 +107,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
         final Expression value = assignment.getValue();
         if (value.isObjectCreationExpr()) {
             final ObjectCreationExpr constructor = value.asObjectCreationExpr();
-            final Encapsulation encap = new Encapsulation(constructor);
+            final Encapsulation encap = new Encapsulation(constructor, this.factory.create());
             encaps.add(encap);
         }
     }
