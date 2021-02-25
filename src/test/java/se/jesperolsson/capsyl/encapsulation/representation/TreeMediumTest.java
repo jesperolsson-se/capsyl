@@ -3,15 +3,14 @@
  */
 package se.jesperolsson.capsyl.encapsulation.representation;
 
-import java.util.Arrays;
-import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
-import se.jesperolsson.capsyl.encapsulation.Encapsulatee;
-import se.jesperolsson.capsyl.encapsulation.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
 /**
  * Tests for {@link TreeMedium}.
@@ -35,35 +34,6 @@ public class TreeMediumTest {
     }
 
     /**
-     * When the object is asked for a representation
-     * of the next level in the encapsulation hierarchy,
-     * Then it should return a medium with the next depth level.
-     */
-    @Test
-    public void provideNextLevel() {
-        final Depth depth = new NullDepth();
-        MatcherAssert.assertThat(
-            new TreeMedium(depth.next()),
-            CoreMatchers.equalTo(new TreeMedium(depth).nextLevel())
-        );
-    }
-
-    /**
-     * When the object is asked to represent a child,
-     * Then it should return a copy of itself that contains that child.
-     */
-    @Test
-    public void representChild() {
-        final Depth depth = new NullDepth();
-        final Medium child = new NullMedium();
-        final List<Medium> children = Arrays.asList(child);
-        MatcherAssert.assertThat(
-            new TreeMedium(depth, new NullEncapsulatee(), children),
-            CoreMatchers.equalTo(new TreeMedium(depth).representChild(child))
-        );
-    }
-
-    /**
      * When the object is asked to print itself,
      * Then it should answer with its depth and its encapsulatee.
      */
@@ -73,7 +43,7 @@ public class TreeMediumTest {
         final NullEncapsulatee encapsulatee = new NullEncapsulatee();
         final Medium sut = new TreeMedium(depth, encapsulatee);
         MatcherAssert.assertThat(
-            depth.print() + encapsulatee.name(),
+            depth.print() + encapsulatee.represent(new NullMedium()).print(),
             CoreMatchers.equalTo(sut.print())
         );
     }

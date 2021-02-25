@@ -16,14 +16,14 @@ import org.junit.Test;
 public class MainTest {
 
     /**
-     * Given that Capsyl is constructed with the example file,
+     * Given that Capsyl is constructed with the example file and a tree configuration,
      * When the program is asked to execute,
      * Then it should output the encapsulations as a simple tree.
      * @throws FileNotFoundException Should never occur.
      */
     @Test
     public void outputSimpleTree() throws FileNotFoundException {
-        final Main sut = new Main("src/main/java/se/jesperolsson/capsyl/App.txt");
+        final Main sut = new Main("src/main/java/se/jesperolsson/capsyl/App.txt", "tree");
         MatcherAssert.assertThat(
             new StringBuilder()
             .append("Apa")

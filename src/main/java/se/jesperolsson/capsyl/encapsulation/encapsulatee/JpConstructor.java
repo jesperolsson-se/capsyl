@@ -1,12 +1,13 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation;
+package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -29,11 +30,20 @@ public final class JpConstructor implements Encapsulatee {
     }
 
     @Override
-    public String name() {
-        return this.constructor.getTypeAsString();
+    public Medium represent(final Medium medium) {
+        Medium result = medium.representName(this.constructor.getTypeAsString());
+        if (!this.children().isEmpty()) {
+            for (final Encapsulatee child : this.children()) {
+                result = result.representChild(child);
+            }
+        }
+        return result;
     }
 
-    @Override
+    /**
+     * Asks the object to parse its sub-encapsulatees, if any.
+     * @return A list of all the constructor's child encapsulatees.
+     */
     public List<Encapsulatee> children() {
         final List<Encapsulatee> result = new LinkedList<>();
         for (final Expression parameter : this.constructor.getArguments()) {

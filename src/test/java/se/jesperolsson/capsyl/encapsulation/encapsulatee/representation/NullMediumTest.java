@@ -1,11 +1,12 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation.representation;
+package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
 /**
@@ -24,21 +25,21 @@ public class NullMediumTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representName("Foo")
+                new NullMedium().representName("")
             )
         );
     }
 
     /**
-     * When the object is asked to represent an encapsulatee,
+     * When the object is asked to represent a depth,
      * Then it should respond with an unchanged copy of itself.
      */
     @Test
-    public void disregardEncapsulatee() {
+    public void disregardDepth() {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representEncapsulatee(new NullEncapsulatee())
+                new NullMedium().withDepth(new NullDepth())
             )
         );
     }
@@ -53,6 +54,20 @@ public class NullMediumTest {
             "",
             CoreMatchers.equalTo(
                 new NullMedium().print()
+            )
+        );
+    }
+
+    /**
+     * When the object is asked to represent a child,
+     * Then it should respond with an unchanged copy of itself.
+     */
+    @Test
+    public void disregardChild() {
+        MatcherAssert.assertThat(
+            new NullMedium(),
+            CoreMatchers.equalTo(
+                new NullMedium().representChild(new NullEncapsulatee())
             )
         );
     }

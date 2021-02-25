@@ -4,11 +4,13 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpConstructor;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
- * Represents an object's encapsulation.
+ * Represents an encapsulation. That is, something that is being encapsulated plus metadata.
  *
  * @since 0.1
  */
@@ -25,19 +27,17 @@ public class Encapsulation {
     private final Medium medium;
 
     /**
-     * Constructs an encapsulation from a construction statement.
-     * @param node An AST node for object creation.
+     * The name given to the encapsulation.
      */
-    public Encapsulation(final ObjectCreationExpr node) {
-        this(new JpConstructor(node));
-    }
+    private final String name;
 
     /**
-     * Constructs an encapsulation containing an encapsulatee.
-     * @param encapsulatee An entity that can be encapsulated.
+     * Constructs an encapsulation from a construction statement.
+     * @param node An AST node for object creation.
+     * @param medium The medium to in which the statement should represent itself.
      */
-    public Encapsulation(final Encapsulatee encapsulatee) {
-        this(encapsulatee, new TreeMedium());
+    public Encapsulation(final ObjectCreationExpr node, final Medium medium) {
+        this(new JpConstructor(node), medium);
     }
 
     /**
@@ -46,8 +46,19 @@ public class Encapsulation {
      * @param medium The medium to in which the encapsulation should represent itself.
      */
     public Encapsulation(final Encapsulatee encapsulatee, final Medium medium) {
+        this(encapsulatee, medium, "Var");
+    }
+
+    /**
+     * Constructs an encapsulation.
+     * @param encapsulatee An entity that can be encapsulated.
+     * @param medium The medium to in which the encapsulation should represent itself.
+     * @param name The name of the encapsulation.
+     */
+    public Encapsulation(final Encapsulatee encapsulatee, final Medium medium, final String name) {
         this.node = encapsulatee;
         this.medium = medium;
+        this.name = name;
     }
 
     /**
@@ -55,10 +66,6 @@ public class Encapsulation {
      * @return A medium containing a representation of this object.
      */
     public Medium represent() {
-        final Medium childless = this.medium.representEncapsulatee(this.node);
-        return this.node.children()
-            .stream()
-            .map(expression -> new Encapsulation(expression, this.medium.nextLevel()).represent())
-            .reduce(childless, (next, child) -> next.representChild(child));
+        return this.medium.representEncapsulatee(this.node).representName(this.name);
     }
 }
