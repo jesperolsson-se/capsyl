@@ -7,6 +7,7 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**
@@ -14,6 +15,7 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class JpConstructor implements Encapsulatee {
 
     /**

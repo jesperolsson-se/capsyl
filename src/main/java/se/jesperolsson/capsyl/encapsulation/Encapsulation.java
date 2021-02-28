@@ -4,17 +4,18 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
+import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpConstructor;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
  * Represents an encapsulation. That is, something that is being encapsulated plus metadata.
  *
  * @since 0.1
  */
-public class Encapsulation {
+@EqualsAndHashCode
+public final class Encapsulation {
 
     /**
      * The syntax tree node representing a constructor expression.
@@ -37,16 +38,17 @@ public class Encapsulation {
      * @param medium The medium to in which the statement should represent itself.
      */
     public Encapsulation(final ObjectCreationExpr node, final Medium medium) {
-        this(new JpConstructor(node), medium);
+        this(node, medium, "Var");
     }
 
     /**
      * Constructs an encapsulation.
-     * @param encapsulatee An entity that can be encapsulated.
+     * @param node An AST node for object creation.
      * @param medium The medium to in which the encapsulation should represent itself.
+     * @param name The name of the encapsulation.
      */
-    public Encapsulation(final Encapsulatee encapsulatee, final Medium medium) {
-        this(encapsulatee, medium, "Var");
+    public Encapsulation(final ObjectCreationExpr node, final Medium medium, final String name) {
+        this(new JpConstructor(node), medium, name);
     }
 
     /**

@@ -8,9 +8,6 @@ import java.io.FileNotFoundException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.encapsulation.representation.DescriptionMediumFactory;
-import se.jesperolsson.capsyl.encapsulation.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.representation.MediumFactory;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
