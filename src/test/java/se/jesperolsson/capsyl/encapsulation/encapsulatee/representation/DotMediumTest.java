@@ -81,7 +81,8 @@ public class DotMediumTest {
     }
 
     /**
-     * When the object doesn't have children and is asked to print itself,
+     * Given the absence of children,
+     * When the object is asked to print itself,
      * Then the result should equal its name.
      */
     @Test
@@ -96,8 +97,9 @@ public class DotMediumTest {
     }
 
     /**
-     * When the object doesn't have children and is asked to print itself,
-     * Then the result should equal its name.
+     * Given the presence of one or more children,
+     * When the object is asked to print itself,
+     * Then the result should match the subgraph regex.
      */
     @Test
     public void familyPrint() {
