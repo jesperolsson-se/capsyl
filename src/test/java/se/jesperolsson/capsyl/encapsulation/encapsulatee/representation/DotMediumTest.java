@@ -115,8 +115,13 @@ public class DotMediumTest {
     private String subgraphRegex() {
         return new StringBuilder()
             .append("subgraph \"cluster ")
-            .append("[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}\"")
+            .append(this.identifierRegex())
+            .append('\"')
             .append(" \\{ label=\"Apa\" Bepa }")
             .toString();
+    }
+
+    private String identifierRegex() {
+        return "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}";
     }
 }
