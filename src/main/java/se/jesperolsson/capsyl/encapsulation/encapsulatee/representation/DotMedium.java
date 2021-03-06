@@ -76,7 +76,14 @@ public final class DotMedium implements Medium {
     public String print() {
         final String result;
         if (this.children.isEmpty()) {
-            result = this.name;
+            result = new StringBuilder()
+                .append('"')
+                .append(new Uuid().print())
+                .append('"')
+                .append("[label=\"")
+                .append(this.name)
+                .append("\"]")
+                .toString();
         } else {
             result = this.printCluster();
         }
@@ -104,7 +111,8 @@ public final class DotMedium implements Medium {
      */
     private String printFamily() {
         final StringBuilder family = new StringBuilder();
-        family.append("label=\"")
+        family
+            .append("label=\"")
             .append(this.name)
             .append('\"');
         this.children.forEach(
