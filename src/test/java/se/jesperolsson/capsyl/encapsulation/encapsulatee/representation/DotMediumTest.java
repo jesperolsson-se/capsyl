@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import org.mockito.Mockito;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 
@@ -81,42 +80,106 @@ public class DotMediumTest {
     }
 
     /**
-     * When the object doesn't have children and is asked to print itself,
+     * Given the absence of children,
+     * When the object is asked to print itself,
      * Then the result should equal its name.
      */
     @Test
     public void childlessPrint() {
         final String name = "Bar";
         MatcherAssert.assertThat(
-            name,
-            CoreMatchers.equalTo(
-                new DotMedium(name).print()
-            )
-        );
-    }
-
-    /**
-     * When the object doesn't have children and is asked to print itself,
-     * Then the result should equal its name.
-     */
-    @Test
-    public void familyPrint() {
-        final Encapsulatee child = Mockito.mock(Encapsulatee.class);
-        final Medium medium = Mockito.mock(Medium.class);
-        Mockito.when(medium.print()).thenReturn("Bepa");
-        Mockito.when(child.represent(Mockito.any(Medium.class))).thenReturn(medium);
-        MatcherAssert.assertThat(
-            new DotMedium("Apa", Arrays.asList(child)).print()
-            .matches(this.subgraphRegex()),
+            new DotMedium(name).print()
+            .matches(this.identifierRegex(name)),
             CoreMatchers.is(true)
         );
     }
 
-    private String subgraphRegex() {
+    /**
+     * Given the presence of one or more children,
+     * When the object is asked to print itself,
+     * Then the result should match the subgraph regex.
+     */
+    @Test
+    public void familyPrint() {
+        final String parent = "Apa";
+        final String child = "Bepa";
+        MatcherAssert.assertThat(
+            new DotMedium(
+                parent,
+                Arrays.asList(
+                    medium -> medium.representName(child)
+                )
+            ).print()
+            .matches(
+                this.subgraphRegex(
+                    parent,
+                    new StringBuilder()
+                        .append(this.identifierRegex(child))
+                        .toString()
+                )
+            ),
+            CoreMatchers.is(true)
+        );
+    }
+
+    /**
+     * Given the presence of two children with the same name,
+     * When the object is asked to print itself,
+     * Then the result should make the children unique.
+     */
+    @Test
+    public void differentiateTwins() {
+        final String parent = "Parent";
+        final String twin = "Twin";
+        MatcherAssert.assertThat(
+            new DotMedium(
+                parent,
+                Arrays.asList(
+                    medium -> medium.representName(twin),
+                    medium -> medium.representName(twin)
+                )
+            ).print()
+                .matches(
+                    this.subgraphRegex(
+                        parent,
+                        new StringBuilder()
+                        .append(this.identifierRegex(twin))
+                        .append(' ')
+                        .append(this.identifierRegex(twin))
+                        .toString()
+                    )
+                ),
+            CoreMatchers.is(true)
+        );
+    }
+
+    private String subgraphRegex(final String name, final String contents) {
         return new StringBuilder()
             .append("subgraph \"cluster ")
-            .append("[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}\"")
-            .append(" \\{ label=\"Apa\" Bepa }")
+            .append(this.identifierRegex())
+            .append('\"')
+            .append(" \\{ ")
+            .append("label=\"")
+            .append(name)
+            .append('\"')
+            .append(' ')
+            .append(contents)
+            .append(" }")
             .toString();
+    }
+
+    private String identifierRegex(final String name) {
+        return new StringBuilder()
+            .append('"')
+            .append(this.identifierRegex())
+            .append('"')
+            .append("\\[label=\"")
+            .append(name)
+            .append("\"\\]")
+            .toString();
+    }
+
+    private String identifierRegex() {
+        return "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}";
     }
 }
