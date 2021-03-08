@@ -8,12 +8,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lombok.EqualsAndHashCode;
 
 /**
  * Represents a encapsulatees collective.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class Encapsulatees {
 
     /**

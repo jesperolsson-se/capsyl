@@ -8,7 +8,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 
 /**
  * Tests for {@link DotMedium}.
@@ -50,16 +50,15 @@ public class DotMediumTest {
      */
     @Test
     public void representChild() {
-        final Encapsulatee encapsulatee = new Encapsulatee() {
-            @Override
-            public Medium represent(final Medium medium) {
-                return null;
-            }
-        };
+        final Encapsulatees children = new Encapsulatees(
+            Arrays.asList(
+                medium -> null
+            )
+        );
         MatcherAssert.assertThat(
-            new DotMedium("", Arrays.asList(encapsulatee)),
+            new DotMedium("", children),
             CoreMatchers.equalTo(
-                new DotMedium().representChild(encapsulatee)
+                new DotMedium().representChildren(children)
             )
         );
     }
@@ -106,8 +105,10 @@ public class DotMediumTest {
         MatcherAssert.assertThat(
             new DotMedium(
                 parent,
-                Arrays.asList(
-                    medium -> medium.representName(child)
+                new Encapsulatees(
+                    Arrays.asList(
+                        medium -> medium.representName(child)
+                    )
                 )
             ).print()
             .matches(
@@ -134,9 +135,11 @@ public class DotMediumTest {
         MatcherAssert.assertThat(
             new DotMedium(
                 parent,
-                Arrays.asList(
-                    medium -> medium.representName(twin),
-                    medium -> medium.representName(twin)
+                new Encapsulatees(
+                    Arrays.asList(
+                        medium -> medium.representName(twin),
+                        medium -> medium.representName(twin)
+                    )
                 )
             ).print()
                 .matches(
