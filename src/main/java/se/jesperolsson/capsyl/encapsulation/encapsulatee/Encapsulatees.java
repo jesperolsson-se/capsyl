@@ -7,8 +7,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateeTreeMedium;
 
 /**
  * Represents a encapsulatees collective.
@@ -53,12 +55,39 @@ public final class Encapsulatees {
     }
 
     /**
-     * A stream of the members of the collective.
-     * @return The members of the collective.
-     * @deprecated Ideally, this will be a temporary seam.
+     * Asks the collective whether or not it has any members.
+     * @return True if there are no members in the collective; false otherwise.
      */
-    @Deprecated
-    public Stream<Encapsulatee> stream() {
-        return this.members.stream();
+    public boolean isEmpty() {
+        return this.members.isEmpty();
+    }
+
+    /**
+     * Asks the collective to print themselves in DOT format.
+     * @return A DOT representation of all members in the collective.
+     */
+    public String dotPrint() {
+        final StringBuilder result = new StringBuilder();
+        this.members.stream().forEach(
+            member -> result
+                .append(' ')
+                .append(member.represent(new DotMedium("")).print())
+        );
+        return result.toString();
+    }
+
+    /**
+     * Asks the collective to print themselves in tree format.
+     * @param level The depth at which the collective should be represented.
+     * @return A tree representation of all members in the collective.
+     */
+    public String treePrint(final Depth level) {
+        final StringBuilder result = new StringBuilder();
+        this.members.stream().forEach(
+            member -> result
+                .append(System.lineSeparator())
+                .append(member.represent(new EncapsulateeTreeMedium("", level.next())).print())
+        );
+        return result.toString();
     }
 }

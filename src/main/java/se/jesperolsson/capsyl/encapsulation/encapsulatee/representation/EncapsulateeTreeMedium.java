@@ -88,29 +88,6 @@ public final class EncapsulateeTreeMedium implements Medium {
 
     @Override
     public String print() {
-        return this.depth.print() + this.name + this.printChildren();
-    }
-
-    /**
-     * Asks each child to print themselves.
-     * @return The textual representation of each child.
-     */
-    public String printChildren() {
-        final StringBuilder result = new StringBuilder();
-        this.children.stream().forEach(
-            child -> result.append(System.lineSeparator())
-                .append(child.represent(this.nextLevel())
-                    .print()
-                )
-        );
-        return result.toString();
-    }
-
-    /**
-     * Creates a medium on the next level in the hierarchy.
-     * @return A new medium with an incremented depth.
-     */
-    private Medium nextLevel() {
-        return new EncapsulateeTreeMedium("", this.depth.next());
+        return this.depth.print() + this.name + this.children.treePrint(this.depth);
     }
 }

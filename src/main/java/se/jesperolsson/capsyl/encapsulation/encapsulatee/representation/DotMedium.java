@@ -71,7 +71,7 @@ public final class DotMedium implements Medium {
     @Override
     public String print() {
         final String result;
-        if (this.children.stream().count() == 0) {
+        if (this.children.isEmpty()) {
             result = new StringBuilder()
                 .append('"')
                 .append(new Uuid().print())
@@ -110,12 +110,8 @@ public final class DotMedium implements Medium {
         family
             .append("label=\"")
             .append(this.name)
-            .append('\"');
-        this.children.stream().forEach(
-            child -> family
-                .append(' ')
-                .append(child.represent(new DotMedium("")).print())
-        );
+            .append('\"')
+            .append(this.children.dotPrint());
         return family.toString();
     }
 }
