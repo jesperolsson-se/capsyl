@@ -50,6 +50,6 @@ public final class JpConstructor implements Encapsulatee {
                 result.add(new JpLiteral(parameter.asLiteralExpr()));
             }
         }
-        return new Encapsulatees(result);
+        return new SimpleEncapsulatees(result);
     }
 }

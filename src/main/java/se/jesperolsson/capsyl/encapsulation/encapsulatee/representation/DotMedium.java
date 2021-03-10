@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
@@ -39,7 +40,7 @@ public final class DotMedium implements Medium {
      * @param name The preferred name of the encapsulatee.
      */
     public DotMedium(final String name) {
-        this(name, new Encapsulatees());
+        this(name, new SimpleEncapsulatees());
     }
 
     /**
@@ -111,7 +112,7 @@ public final class DotMedium implements Medium {
             .append("label=\"")
             .append(this.name)
             .append('\"')
-            .append(this.children.dotPrint());
+            .append(this.children.represent(new DotEncapsulatees()).print());
         return family.toString();
     }
 }

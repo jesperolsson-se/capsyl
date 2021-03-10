@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 
 /**
  * Realizes the textual representation of an encapsulatee as a simple tree.
@@ -52,7 +53,7 @@ public final class EncapsulateeTreeMedium implements Medium {
      * @param depth The tree's depth in the hierarchy.
      */
     public EncapsulateeTreeMedium(final String name, final Depth depth) {
-        this(name, depth, new Encapsulatees());
+        this(name, depth, new SimpleEncapsulatees());
     }
 
     /**
@@ -88,6 +89,7 @@ public final class EncapsulateeTreeMedium implements Medium {
 
     @Override
     public String print() {
-        return this.depth.print() + this.name + this.children.treePrint(this.depth);
+        return this.depth.print() + this.name
+            + this.children.represent(new TreeEncapsulatees(this.depth)).print();
     }
 }

@@ -9,6 +9,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 
 /**
  * Tests for {@link DotMedium}.
@@ -50,7 +51,7 @@ public class DotMediumTest {
      */
     @Test
     public void representChild() {
-        final Encapsulatees children = new Encapsulatees(
+        final Encapsulatees children = new SimpleEncapsulatees(
             Arrays.asList(
                 medium -> null
             )
@@ -105,7 +106,7 @@ public class DotMediumTest {
         MatcherAssert.assertThat(
             new DotMedium(
                 parent,
-                new Encapsulatees(
+                new SimpleEncapsulatees(
                     Arrays.asList(
                         medium -> medium.representName(child)
                     )
@@ -135,7 +136,7 @@ public class DotMediumTest {
         MatcherAssert.assertThat(
             new DotMedium(
                 parent,
-                new Encapsulatees(
+                new SimpleEncapsulatees(
                     Arrays.asList(
                         medium -> medium.representName(twin),
                         medium -> medium.representName(twin)
