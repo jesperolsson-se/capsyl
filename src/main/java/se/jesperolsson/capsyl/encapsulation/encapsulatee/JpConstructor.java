@@ -33,20 +33,15 @@ public final class JpConstructor implements Encapsulatee {
 
     @Override
     public Medium represent(final Medium medium) {
-        Medium result = medium.representName(this.constructor.getTypeAsString());
-        if (!this.children().isEmpty()) {
-            for (final Encapsulatee child : this.children()) {
-                result = result.representChild(child);
-            }
-        }
-        return result;
+        return medium.representName(this.constructor.getTypeAsString())
+            .representChildren(this.children());
     }
 
     /**
      * Asks the object to parse its sub-encapsulatees, if any.
-     * @return A list of all the constructor's child encapsulatees.
+     * @return The constructor's child encapsulatees.
      */
-    public List<Encapsulatee> children() {
+    public Encapsulatees children() {
         final List<Encapsulatee> result = new LinkedList<>();
         for (final Expression parameter : this.constructor.getArguments()) {
             if (parameter.isObjectCreationExpr()) {
@@ -55,6 +50,6 @@ public final class JpConstructor implements Encapsulatee {
                 result.add(new JpLiteral(parameter.asLiteralExpr()));
             }
         }
-        return result;
+        return new SimpleEncapsulatees(result);
     }
 }

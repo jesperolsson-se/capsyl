@@ -3,11 +3,10 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
-import java.util.LinkedList;
-import java.util.List;
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
@@ -24,9 +23,9 @@ public final class DotMedium implements Medium {
     private final String name;
 
     /**
-     * The submedia to represent.
+     * The subobjects to represent.
      */
-    private final List<Encapsulatee> children;
+    private final Encapsulatees children;
 
     /**
      * Constructs a default DotMedium.
@@ -41,16 +40,16 @@ public final class DotMedium implements Medium {
      * @param name The preferred name of the encapsulatee.
      */
     public DotMedium(final String name) {
-        this(name, new LinkedList<>());
+        this(name, new SimpleEncapsulatees());
     }
 
     /**
      * Constructs a DotMedium that can represent a name at the specified depth.
      *
      * @param name The preferred name of the encapsulatee.
-     * @param children The medium's submedia.
+     * @param children The objects that are encapsulated.
      */
-    public DotMedium(final String name, final List<Encapsulatee> children) {
+    public DotMedium(final String name, final Encapsulatees children) {
         this.name = name;
         this.children = children;
     }
@@ -61,15 +60,13 @@ public final class DotMedium implements Medium {
     }
 
     @Override
-    public Medium representChild(final Encapsulatee encapsulatee) {
-        final List<Encapsulatee> copies = this.copyChildren();
-        copies.add(encapsulatee);
-        return new DotMedium(this.name, copies);
+    public Medium representChildren(final Encapsulatees encapsulatees) {
+        return new DotMedium(this.name, encapsulatees);
     }
 
     @Override
     public Medium representName(final String preference) {
-        return new DotMedium(preference, this.copyChildren());
+        return new DotMedium(preference, this.children);
     }
 
     @Override
@@ -114,20 +111,8 @@ public final class DotMedium implements Medium {
         family
             .append("label=\"")
             .append(this.name)
-            .append('\"');
-        this.children.forEach(
-            child -> family
-                .append(' ')
-                .append(child.represent(new DotMedium("")).print())
-        );
+            .append('\"')
+            .append(this.children.represent(new DotEncapsulatees()).print());
         return family.toString();
-    }
-
-    /**
-     * Convenience method for creating a copy of the subtrees.
-     * @return A copy of the list of children.
-     */
-    private List<Encapsulatee> copyChildren() {
-        return new LinkedList<>(this.children);
     }
 }

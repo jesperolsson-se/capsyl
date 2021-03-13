@@ -8,6 +8,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 
 /**
  * Tests for {@link NullMedium}.
@@ -67,7 +68,11 @@ public class NullMediumTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representChild(new NullEncapsulatee())
+                new NullMedium().representChildren(
+                    new SimpleEncapsulatees(
+                        new NullEncapsulatee()
+                    )
+                )
             )
         );
     }

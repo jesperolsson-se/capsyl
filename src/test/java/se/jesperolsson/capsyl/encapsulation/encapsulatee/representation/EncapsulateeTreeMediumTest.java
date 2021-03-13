@@ -3,15 +3,14 @@
  */
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
-import java.util.Arrays;
-import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 
 /**
  * Tests for {@link EncapsulateeTreeMedium}.
@@ -44,11 +43,17 @@ public class EncapsulateeTreeMediumTest {
     public void representChild() {
         final String name = "";
         final Depth depth = new NullDepth();
-        final Encapsulatee child = new NullEncapsulatee();
-        final List<Encapsulatee> children = Arrays.asList(child);
+        final Encapsulatees children = new SimpleEncapsulatees(
+            new NullEncapsulatee()
+        );
         MatcherAssert.assertThat(
             new EncapsulateeTreeMedium(name, depth, children),
-            CoreMatchers.equalTo(new EncapsulateeTreeMedium(name, depth).representChild(child))
+            CoreMatchers.equalTo(
+                new EncapsulateeTreeMedium(
+                    name,
+                    depth
+                ).representChildren(children)
+            )
         );
     }
 }

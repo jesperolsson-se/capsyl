@@ -4,7 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 
 /**
  * Abstracts the textual representation of an encapsulatee.
@@ -21,11 +21,11 @@ public interface Medium {
     Medium withDepth(Depth depth);
 
     /**
-     * Asks the medium to add a child to its representation.
-     * @param encapsulatee A child encapsulation.
-     * @return A copy of the medium, that also contains the child.
+     * Asks the medium to add children to its representation.
+     * @param encapsulatees The children to represent.
+     * @return A copy of the medium, that also contains the children.
      */
-    Medium representChild(Encapsulatee encapsulatee);
+    Medium representChildren(Encapsulatees encapsulatees);
 
     /**
      * Asks the medium to add a name to its representation.
