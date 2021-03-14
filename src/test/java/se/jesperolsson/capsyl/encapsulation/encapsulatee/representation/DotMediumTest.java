@@ -9,7 +9,10 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.identification.Identity;
+import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
  * Tests for {@link DotMedium}.
@@ -24,10 +27,11 @@ public class DotMediumTest {
      */
     @Test
     public void ignoreDepthRepresentation() {
+        final Identity id = new Uuid();
         MatcherAssert.assertThat(
-            new DotMedium(),
+            new DotMedium("", new NullEncapsulatees(), id),
             CoreMatchers.equalTo(
-                new DotMedium().withDepth(
+                new DotMedium("", new NullEncapsulatees(), id).withDepth(
                     new Depth() {
 
                         @Override
@@ -51,15 +55,16 @@ public class DotMediumTest {
      */
     @Test
     public void representChild() {
+        final Identity id = new Uuid();
         final Encapsulatees children = new SimpleEncapsulatees(
             Arrays.asList(
                 medium -> null
             )
         );
         MatcherAssert.assertThat(
-            new DotMedium("", children),
+            new DotMedium("", children, id),
             CoreMatchers.equalTo(
-                new DotMedium().representChildren(children)
+                new DotMedium("", new NullEncapsulatees(), id).representChildren(children)
             )
         );
     }
@@ -71,10 +76,11 @@ public class DotMediumTest {
     @Test
     public void representName() {
         final String name = "Foo";
+        final Identity id = new Uuid();
         MatcherAssert.assertThat(
-            new DotMedium(name),
+            new DotMedium(name, new NullEncapsulatees(), id),
             CoreMatchers.equalTo(
-                new DotMedium().representName(name)
+                new DotMedium("", new NullEncapsulatees(), id).representName(name)
             )
         );
     }
