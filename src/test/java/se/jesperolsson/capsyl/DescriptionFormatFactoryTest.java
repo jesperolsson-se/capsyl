@@ -1,18 +1,21 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation.representation;
+package se.jesperolsson.capsyl;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.encapsulation.representation.DotMedium;
+import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
+import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
- * Tests for {@link DescriptionMediumFactory}.
+ * Tests for {@link DescriptionFormatFactory}.
  *
  * @since 0.1
  */
-public class DescriptionMediumFactoryTest {
+public class DescriptionFormatFactoryTest {
 
     /**
      * When the object is given a specification of DOT,
@@ -23,7 +26,7 @@ public class DescriptionMediumFactoryTest {
         MatcherAssert.assertThat(
             new DotMedium(),
             CoreMatchers.equalTo(
-                new DescriptionMediumFactory().create()
+                new DescriptionFormatFactory().create()
             )
         );
     }
@@ -37,7 +40,7 @@ public class DescriptionMediumFactoryTest {
         MatcherAssert.assertThat(
             new TreeMedium(),
             CoreMatchers.equalTo(
-                new DescriptionMediumFactory("tree").create()
+                new DescriptionFormatFactory("tree").create()
             )
         );
     }
@@ -51,7 +54,7 @@ public class DescriptionMediumFactoryTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new DescriptionMediumFactory("gibberish").create()
+                new DescriptionFormatFactory("gibberish").create()
             )
         );
     }

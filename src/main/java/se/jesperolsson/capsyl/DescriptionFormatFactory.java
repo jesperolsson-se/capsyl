@@ -1,16 +1,20 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation.representation;
+package se.jesperolsson.capsyl;
 
 import java.util.Locale;
+import se.jesperolsson.capsyl.encapsulation.representation.DotMedium;
+import se.jesperolsson.capsyl.encapsulation.representation.Medium;
+import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
+import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
  * Realizes a factory that will determine the media based on the provided description.
  *
  * @since 0.1
  */
-public final class DescriptionMediumFactory implements MediumFactory {
+public final class DescriptionFormatFactory implements FormatFactory {
 
     /**
      * A string representing a description of an output format.
@@ -20,7 +24,7 @@ public final class DescriptionMediumFactory implements MediumFactory {
     /**
      * Constructs a factory with a default description.
      */
-    public DescriptionMediumFactory() {
+    public DescriptionFormatFactory() {
         this("DOT");
     }
 
@@ -28,7 +32,7 @@ public final class DescriptionMediumFactory implements MediumFactory {
      * Constructs a factory with a particular description.
      * @param description A specification of the preferred output format.
      */
-    public DescriptionMediumFactory(final String description) {
+    public DescriptionFormatFactory(final String description) {
         this.description = description;
     }
 
