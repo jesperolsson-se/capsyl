@@ -3,19 +3,19 @@
  */
 package se.jesperolsson.capsyl;
 
-import se.jesperolsson.capsyl.encapsulation.representation.Medium;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 
 /**
- * Abstracts the creational decision of media.
+ * Abstracts the creational decision of output format.
  *
  * @since 0.1
  */
 public interface FormatFactory {
 
     /**
-     * Asks the object to create a medium.
+     * Asks the object to create a media factory.
      *
-     * @return An instance of a medium.
+     * @return An instance of a media factory.
      */
-    Medium create();
+    MediaFactory create();
 }

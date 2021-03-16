@@ -4,10 +4,10 @@
 package se.jesperolsson.capsyl;
 
 import java.util.Locale;
-import se.jesperolsson.capsyl.encapsulation.representation.DotMedium;
-import se.jesperolsson.capsyl.encapsulation.representation.Medium;
-import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
-import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
+import se.jesperolsson.capsyl.encapsulation.DotFactory;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
+import se.jesperolsson.capsyl.encapsulation.NullFactory;
+import se.jesperolsson.capsyl.encapsulation.TreeFactory;
 
 /**
  * Realizes a factory that will determine the media based on the provided description.
@@ -37,17 +37,17 @@ public final class DescriptionFormatFactory implements FormatFactory {
     }
 
     @Override
-    public Medium create() {
-        final Medium result;
+    public MediaFactory create() {
+        final MediaFactory result;
         switch (this.description.toLowerCase(Locale.ROOT)) {
             case "dot":
-                result = new DotMedium();
+                result = new DotFactory();
                 break;
             case "tree":
-                result = new TreeMedium();
+                result = new TreeFactory();
                 break;
             default:
-                result = new NullMedium();
+                result = new NullFactory();
                 break;
         }
         return result;
