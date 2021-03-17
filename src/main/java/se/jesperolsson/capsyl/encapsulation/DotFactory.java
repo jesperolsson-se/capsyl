@@ -19,4 +19,9 @@ public final class DotFactory implements MediaFactory {
     public Medium encapsulation() {
         return new DotMedium();
     }
+
+    @Override
+    public se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee() {
+        return new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium();
+    }
 }

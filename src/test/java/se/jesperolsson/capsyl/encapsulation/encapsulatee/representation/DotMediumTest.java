@@ -56,11 +56,17 @@ public class DotMediumTest {
     @Test
     public void representChild() {
         final Identity id = new Uuid();
-        final Encapsulatees children = new SimpleEncapsulatees(
-            Arrays.asList(
-                medium -> null
-            )
-        );
+        final Encapsulatees children = new Encapsulatees() {
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public EncapsulateesMedium represent(final EncapsulateesMedium medium) {
+                return new NullEncapsulationsMedium();
+            }
+        };
         MatcherAssert.assertThat(
             new DotMedium("", children, id),
             CoreMatchers.equalTo(
@@ -114,7 +120,7 @@ public class DotMediumTest {
                 parent,
                 new SimpleEncapsulatees(
                     Arrays.asList(
-                        medium -> medium.representName(child)
+                        () -> new DotMedium().representName(child)
                     )
                 )
             ).print()
@@ -144,8 +150,8 @@ public class DotMediumTest {
                 parent,
                 new SimpleEncapsulatees(
                     Arrays.asList(
-                        medium -> medium.representName(twin),
-                        medium -> medium.representName(twin)
+                        () -> new DotMedium().representName(twin),
+                        () -> new DotMedium().representName(twin)
                     )
                 )
             ).print()

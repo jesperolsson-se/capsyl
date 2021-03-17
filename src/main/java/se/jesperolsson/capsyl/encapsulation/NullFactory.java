@@ -19,4 +19,9 @@ public final class NullFactory implements MediaFactory {
     public Medium encapsulation() {
         return new NullMedium();
     }
+
+    @Override
+    public se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee() {
+        return new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium();
+    }
 }

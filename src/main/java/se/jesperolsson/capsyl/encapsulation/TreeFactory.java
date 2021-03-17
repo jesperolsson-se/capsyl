@@ -4,6 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateeTreeMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
@@ -18,5 +19,10 @@ public final class TreeFactory implements MediaFactory {
     @Override
     public Medium encapsulation() {
         return new TreeMedium();
+    }
+
+    @Override
+    public se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee() {
+        return new EncapsulateeTreeMedium();
     }
 }

@@ -81,7 +81,7 @@ public final class TreeEncapsulatees implements EncapsulateesMedium {
         this.members.stream().forEach(
             member -> result
                 .append(System.lineSeparator())
-                .append(member.represent(new EncapsulateeTreeMedium("", this.level.next())).print())
+                .append(member.represent().print())
         );
         return result.toString();
     }

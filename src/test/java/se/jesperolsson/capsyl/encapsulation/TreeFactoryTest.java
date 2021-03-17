@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateeTreeMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
@@ -24,6 +25,18 @@ public class TreeFactoryTest {
         MatcherAssert.assertThat(
             new TreeMedium(),
             CoreMatchers.equalTo(new TreeFactory().encapsulation())
+        );
+    }
+
+    /**
+     * When the factory is asked to create an encapsulatee medium,
+     * Then it should return a Tree encapsulatee medium.
+     */
+    @Test
+    public void provideEncapsulateeMedium() {
+        MatcherAssert.assertThat(
+            new EncapsulateeTreeMedium(),
+            CoreMatchers.equalTo(new TreeFactory().encapsulatee())
         );
     }
 }

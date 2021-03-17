@@ -8,6 +8,8 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**
@@ -24,17 +26,36 @@ public final class JpConstructor implements Encapsulatee {
     private final ObjectCreationExpr constructor;
 
     /**
-     * Constructs a constructor representation from a JavaParser concept.
-     * @param constructor A JavaParser representation of a constructor.
+     * The factory for creating media.
      */
-    public JpConstructor(final ObjectCreationExpr constructor) {
+    private final MediaFactory factory;
+
+    /**
+     * The object's depth in the encapsulation.
+     */
+    private final Depth depth;
+
+    /**
+     * Constructs a constructor representation from a JavaParser concept.
+     * @param constructor A JavaParser representation of a constructor
+     * @param factory The factory to use when creating media.
+     * @param depth The object's depth in the encapsulation.
+     */
+    public JpConstructor(
+        final ObjectCreationExpr constructor,
+        final MediaFactory factory,
+        final Depth depth) {
         this.constructor = constructor;
+        this.factory = factory;
+        this.depth = depth;
     }
 
     @Override
-    public Medium represent(final Medium medium) {
-        return medium.representName(this.constructor.getTypeAsString())
-            .representChildren(this.children());
+    public Medium represent() {
+        return this.factory.encapsulatee()
+            .representName(this.constructor.getTypeAsString())
+            .representChildren(this.children())
+            .withDepth(this.depth);
     }
 
     /**
@@ -45,9 +66,21 @@ public final class JpConstructor implements Encapsulatee {
         final List<Encapsulatee> result = new LinkedList<>();
         for (final Expression parameter : this.constructor.getArguments()) {
             if (parameter.isObjectCreationExpr()) {
-                result.add(new JpConstructor(parameter.asObjectCreationExpr()));
+                result.add(
+                    new JpConstructor(
+                        parameter.asObjectCreationExpr(),
+                        this.factory,
+                        this.depth.next()
+                    )
+                );
             } else if (parameter.isLiteralExpr()) {
-                result.add(new JpLiteral(parameter.asLiteralExpr()));
+                result.add(
+                    new JpLiteral(
+                        parameter.asLiteralExpr(),
+                        this.factory,
+                        this.depth.next()
+                    )
+                );
             }
         }
         return new SimpleEncapsulatees(result);

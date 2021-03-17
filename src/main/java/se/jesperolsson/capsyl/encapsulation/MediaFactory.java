@@ -18,4 +18,11 @@ public interface MediaFactory {
      * @return A medium in which an encapsulation can represent itself.
      */
     Medium encapsulation();
+
+    /**
+     * Asks the object to create a medium for an encapsulatee.
+     *
+     * @return A medium in which an encapsulatee can represent itself.
+     */
+    se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee();
 }

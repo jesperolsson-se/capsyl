@@ -5,6 +5,7 @@ package se.jesperolsson.capsyl.encapsulation;
 
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpConstructor;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
@@ -23,9 +24,9 @@ public final class Encapsulation {
     private final Encapsulatee node;
 
     /**
-     * The medium in which to represent myself.
+     * The factory for creating media.
      */
-    private final Medium medium;
+    private final MediaFactory factory;
 
     /**
      * The name given to the encapsulation.
@@ -35,31 +36,37 @@ public final class Encapsulation {
     /**
      * Constructs an encapsulation from a construction statement.
      * @param node An AST node for object creation.
-     * @param medium The medium to in which the statement should represent itself.
+     * @param factory The factory to use when creating media.
      */
-    public Encapsulation(final ObjectCreationExpr node, final Medium medium) {
-        this(node, medium, "Var");
+    public Encapsulation(final ObjectCreationExpr node, final MediaFactory factory) {
+        this(node, factory, "Var");
     }
 
     /**
      * Constructs an encapsulation.
      * @param node An AST node for object creation.
-     * @param medium The medium to in which the encapsulation should represent itself.
+     * @param factory The factory to use when creating media.
      * @param name The name of the encapsulation.
      */
-    public Encapsulation(final ObjectCreationExpr node, final Medium medium, final String name) {
-        this(new JpConstructor(node), medium, name);
+    public Encapsulation(
+        final ObjectCreationExpr node,
+        final MediaFactory factory,
+        final String name) {
+        this(new JpConstructor(node, factory, new SpaceIndentation()), factory, name);
     }
 
     /**
      * Constructs an encapsulation.
      * @param encapsulatee An entity that can be encapsulated.
-     * @param medium The medium to in which the encapsulation should represent itself.
+     * @param factory The factory to use when creating media.
      * @param name The name of the encapsulation.
      */
-    public Encapsulation(final Encapsulatee encapsulatee, final Medium medium, final String name) {
+    public Encapsulation(
+        final Encapsulatee encapsulatee,
+        final MediaFactory factory,
+        final String name) {
         this.node = encapsulatee;
-        this.medium = medium;
+        this.factory = factory;
         this.name = name;
     }
 
@@ -68,6 +75,8 @@ public final class Encapsulation {
      * @return A medium containing a representation of this object.
      */
     public Medium represent() {
-        return this.medium.representEncapsulatee(this.node).representName(this.name);
+        return this.factory.encapsulation()
+            .representEncapsulatee(this.node)
+            .representName(this.name);
     }
 }

@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import org.mockito.internal.matchers.Null;
 import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
 
 /**
@@ -24,6 +25,18 @@ public class NullFactoryTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(new NullFactory().encapsulation())
+        );
+    }
+
+    /**
+     * When the factory is asked to create an encapsulatee medium,
+     * Then it should return a Null encapsulatee medium.
+     */
+    @Test
+    public void provideEncapsulateeMedium() {
+        MatcherAssert.assertThat(
+            new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium(),
+            CoreMatchers.equalTo(new NullFactory().encapsulatee())
         );
     }
 }

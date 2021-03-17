@@ -8,7 +8,6 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
 
 /**
  * Tests for {@link DotMedium}.
@@ -52,12 +51,7 @@ public class DotMediumTest {
      */
     @Test
     public void representEncapsulatee() {
-        final Encapsulatee encapsulatee = new Encapsulatee() {
-            @Override
-            public Medium represent(final Medium medium) {
-                return null;
-            }
-        };
+        final Encapsulatee encapsulatee = new NullEncapsulatee();
         MatcherAssert.assertThat(
             new DotMedium(encapsulatee),
             CoreMatchers.equalTo(

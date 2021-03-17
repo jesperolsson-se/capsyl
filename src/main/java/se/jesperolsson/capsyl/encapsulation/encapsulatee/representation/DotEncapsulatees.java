@@ -69,7 +69,7 @@ public final class DotEncapsulatees implements EncapsulateesMedium {
         this.members.stream().forEach(
             member -> result
                 .append(' ')
-                .append(member.represent(new DotMedium("")).print())
+                .append(member.represent().print())
         );
         return result.toString();
     }

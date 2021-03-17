@@ -26,4 +26,16 @@ public class DotFactoryTest {
             CoreMatchers.equalTo(new DotFactory().encapsulation())
         );
     }
+
+    /**
+     * When the factory is asked to create an encapsulatee medium,
+     * Then it should return a Dot encapsulatee medium.
+     */
+    @Test
+    public void provideEncapsulateeMedium() {
+        MatcherAssert.assertThat(
+            new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium(),
+            CoreMatchers.instanceOf(new DotFactory().encapsulatee().getClass())
+        );
+    }
 }

@@ -95,7 +95,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
                 final ObjectCreationExpr constructor = (ObjectCreationExpr) child;
                 final Encapsulation encap = new Encapsulation(
                     constructor,
-                    this.factory.encapsulation(),
+                    this.factory,
                     declaration.getName().asString()
                 );
                 encaps.add(encap);
@@ -111,7 +111,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
             final ObjectCreationExpr constructor = value.asObjectCreationExpr();
             final Encapsulation encap = new Encapsulation(
                 constructor,
-                this.factory.encapsulation(),
+                this.factory,
                 assignment.getTarget().asNameExpr().getName().asString()
             );
             encaps.add(encap);
