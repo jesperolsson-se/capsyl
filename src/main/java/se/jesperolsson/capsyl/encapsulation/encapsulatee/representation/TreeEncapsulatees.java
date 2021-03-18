@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
-import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 
 /**
@@ -29,28 +28,19 @@ public final class TreeEncapsulatees implements EncapsulateesMedium {
     private final Collection<Encapsulatee> members;
 
     /**
-     * The depth at which the collective should be represented.
-     */
-    private final Depth level;
-
-    /**
      * Constructs an empty collective.
-     *
-     * @param level The depth at which the collective should be represented.
      */
-    public TreeEncapsulatees(final Depth level) {
-        this(level, Collections.EMPTY_LIST);
+    public TreeEncapsulatees() {
+        this(Collections.EMPTY_LIST);
     }
 
     /**
      * Constructs a collective from the given encapsulatees.
      *
-     * @param level The depth at which the collective should be represented.
      * @param members Objects that want to form a collective.
      */
-    public TreeEncapsulatees(final Depth level, final Encapsulatee... members) {
+    public TreeEncapsulatees(final Encapsulatee... members) {
         this(
-            level,
             Arrays.stream(
                 members
             ).collect(
@@ -62,17 +52,15 @@ public final class TreeEncapsulatees implements EncapsulateesMedium {
     /**
      * Constructs a collective from the given group.
      *
-     * @param level The depth at which the collective should be represented.
      * @param members A group of objects that want to form a collective.
      */
-    public TreeEncapsulatees(final Depth level, final Collection<Encapsulatee> members) {
-        this.level = level;
+    public TreeEncapsulatees(final Collection<Encapsulatee> members) {
         this.members = members;
     }
 
     @Override
     public EncapsulateesMedium withMembers(final Collection<Encapsulatee> collective) {
-        return new TreeEncapsulatees(this.level, collective);
+        return new TreeEncapsulatees(collective);
     }
 
     @Override

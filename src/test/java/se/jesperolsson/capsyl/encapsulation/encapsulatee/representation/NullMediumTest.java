@@ -7,6 +7,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.NullDepth;
+import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 
@@ -70,6 +71,7 @@ public class NullMediumTest {
             CoreMatchers.equalTo(
                 new NullMedium().representChildren(
                     new SimpleEncapsulatees(
+                        new NullFactory(),
                         new NullEncapsulatee()
                     )
                 )

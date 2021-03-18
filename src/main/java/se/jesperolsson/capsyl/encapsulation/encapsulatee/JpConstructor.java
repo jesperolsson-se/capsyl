@@ -83,6 +83,6 @@ public final class JpConstructor implements Encapsulatee {
                 );
             }
         }
-        return new SimpleEncapsulatees(result);
+        return new SimpleEncapsulatees(this.factory, result);
     }
 }

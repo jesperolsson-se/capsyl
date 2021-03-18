@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotEncapsulatees;
 import se.jesperolsson.capsyl.encapsulation.representation.DotMedium;
 
 /**
@@ -36,6 +37,18 @@ public class DotFactoryTest {
         MatcherAssert.assertThat(
             new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium(),
             CoreMatchers.instanceOf(new DotFactory().encapsulatee().getClass())
+        );
+    }
+
+    /**
+     * When the factory is asked to create an encapsulatees medium,
+     * Then it should return a Dot encapsulatees medium.
+     */
+    @Test
+    public void provideEncapsulateesMedium() {
+        MatcherAssert.assertThat(
+            new DotEncapsulatees(),
+            CoreMatchers.equalTo(new DotFactory().encapsulatees())
         );
     }
 }

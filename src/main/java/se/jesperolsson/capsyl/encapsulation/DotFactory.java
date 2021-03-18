@@ -4,6 +4,8 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotEncapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateesMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.DotMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 
@@ -23,5 +25,10 @@ public final class DotFactory implements MediaFactory {
     @Override
     public se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee() {
         return new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium();
+    }
+
+    @Override
+    public EncapsulateesMedium encapsulatees() {
+        return new DotEncapsulatees();
     }
 }

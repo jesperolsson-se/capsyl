@@ -13,11 +13,11 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
  * @since 0.1
  */
 @EqualsAndHashCode
-public final class NullEncapsulationsMedium implements EncapsulateesMedium {
+public final class NullEncapsulateesMedium implements EncapsulateesMedium {
 
     @Override
     public EncapsulateesMedium withMembers(final Collection<Encapsulatee> collective) {
-        return new NullEncapsulationsMedium();
+        return new NullEncapsulateesMedium();
     }
 
     @Override

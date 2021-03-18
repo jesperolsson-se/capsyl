@@ -8,6 +8,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
+import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
@@ -44,6 +45,7 @@ public class EncapsulateeTreeMediumTest {
         final String name = "";
         final Depth depth = new NullDepth();
         final Encapsulatees children = new SimpleEncapsulatees(
+            new NullFactory(),
             new NullEncapsulatee()
         );
         MatcherAssert.assertThat(

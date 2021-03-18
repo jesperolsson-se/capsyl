@@ -8,6 +8,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.encapsulation.DotFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
@@ -63,8 +64,8 @@ public class DotMediumTest {
             }
 
             @Override
-            public EncapsulateesMedium represent(final EncapsulateesMedium medium) {
-                return new NullEncapsulationsMedium();
+            public EncapsulateesMedium represent() {
+                return new NullEncapsulateesMedium();
             }
         };
         MatcherAssert.assertThat(
@@ -119,6 +120,7 @@ public class DotMediumTest {
             new DotMedium(
                 parent,
                 new SimpleEncapsulatees(
+                    new DotFactory(),
                     Arrays.asList(
                         () -> new DotMedium().representName(child)
                     )
@@ -149,6 +151,7 @@ public class DotMediumTest {
             new DotMedium(
                 parent,
                 new SimpleEncapsulatees(
+                    new DotFactory(),
                     Arrays.asList(
                         () -> new DotMedium().representName(twin),
                         () -> new DotMedium().representName(twin)
@@ -198,4 +201,9 @@ public class DotMediumTest {
     private String identifierRegex() {
         return "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}";
     }
+
+    /* TODO: This commit will not pass Qulice (ClassDataAbstractionCouplingCheck).
+       However, I consider this to be fine, as the entire point of the current branch is to
+       reduce the dependencies.
+     */
 }

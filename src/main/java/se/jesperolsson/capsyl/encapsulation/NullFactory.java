@@ -4,6 +4,8 @@
 package se.jesperolsson.capsyl.encapsulation;
 
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateesMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullEncapsulateesMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
 
@@ -23,5 +25,10 @@ public final class NullFactory implements MediaFactory {
     @Override
     public se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee() {
         return new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium();
+    }
+
+    @Override
+    public EncapsulateesMedium encapsulatees() {
+        return new NullEncapsulateesMedium();
     }
 }

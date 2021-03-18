@@ -7,8 +7,6 @@ import java.util.Arrays;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 
@@ -27,12 +25,11 @@ public class TreeEncapsulateesTest {
      */
     @Test
     public void streamMembers() {
-        final Depth depth = new NullDepth();
         final Encapsulatee member = new NullEncapsulatee();
         MatcherAssert.assertThat(
-            new TreeEncapsulatees(depth, Arrays.asList(member)),
+            new TreeEncapsulatees(Arrays.asList(member)),
             CoreMatchers.equalTo(
-                new TreeEncapsulatees(depth, member)
+                new TreeEncapsulatees(member)
             )
         );
     }

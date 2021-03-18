@@ -3,6 +3,7 @@
  */
 package se.jesperolsson.capsyl.encapsulation;
 
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateesMedium;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
 
 /**
@@ -25,4 +26,11 @@ public interface MediaFactory {
      * @return A medium in which an encapsulatee can represent itself.
      */
     se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium encapsulatee();
+
+    /**
+     * Asks the object to create a medium for encapsulatees.
+     *
+     * @return A medium in which encapsulatees can represent themselves.
+     */
+    EncapsulateesMedium encapsulatees();
 }

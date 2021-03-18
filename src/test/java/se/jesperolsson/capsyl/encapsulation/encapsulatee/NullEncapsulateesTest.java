@@ -6,7 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullEncapsulationsMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullEncapsulateesMedium;
 
 /**
  * Tests for {@link NullEncapsulatees}.
@@ -58,8 +58,8 @@ public class NullEncapsulateesTest {
     @Test
     public void disregardRepresentation() {
         MatcherAssert.assertThat(
-            new NullEncapsulationsMedium(),
-            CoreMatchers.equalTo(new NullEncapsulatees().represent(new NullEncapsulationsMedium()))
+            new NullEncapsulateesMedium(),
+            CoreMatchers.equalTo(new NullEncapsulatees().represent())
         );
     }
 }
