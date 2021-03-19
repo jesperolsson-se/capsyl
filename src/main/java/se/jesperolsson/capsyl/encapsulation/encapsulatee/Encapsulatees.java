@@ -19,9 +19,8 @@ public interface Encapsulatees {
     boolean isEmpty();
 
     /**
-     * Asks the entity to represent itself in the given medium.
-     * @param medium The medium in which to represent the entity.
-     * @return A copy of the medium, also containing a representation of the entity.
+     * Asks the entity to represent itself.
+     * @return A representation of the entity.
      */
-    EncapsulateesMedium represent(EncapsulateesMedium medium);
+    EncapsulateesMedium represent();
 }

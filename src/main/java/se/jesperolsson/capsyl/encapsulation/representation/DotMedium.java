@@ -67,11 +67,8 @@ public final class DotMedium implements Medium {
             .append("label=\"")
             .append(this.name)
             .append("\" ")
-            .append(
-                this.encapsulatee.represent(
-                    new se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.DotMedium()
-                ).print()
-            ).append(" }")
+            .append(this.encapsulatee.represent().print())
+            .append(" }")
             .toString();
     }
 }

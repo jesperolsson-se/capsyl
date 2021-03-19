@@ -7,7 +7,6 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.encapsulation.representation.NullMedium;
 
 /**
  * Tests for {@link Encapsulation}.
@@ -26,12 +25,12 @@ public class EncapsulationTest {
         MatcherAssert.assertThat(
             new Encapsulation(
                 new ObjectCreationExpr(),
-                new NullMedium()
+                new NullFactory()
             ),
             CoreMatchers.equalTo(
                 new Encapsulation(
                     new ObjectCreationExpr(),
-                    new NullMedium(),
+                    new NullFactory(),
                     "Var"
                 )
             )

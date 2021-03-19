@@ -65,12 +65,8 @@ public final class DotEncapsulatees implements EncapsulateesMedium {
 
     @Override
     public String print() {
-        final StringBuilder result = new StringBuilder();
-        this.members.stream().forEach(
-            member -> result
-                .append(' ')
-                .append(member.represent(new DotMedium("")).print())
-        );
-        return result.toString();
+        return this.members.stream()
+            .map(member -> member.represent().print())
+            .collect(Collectors.joining(" "));
     }
 }

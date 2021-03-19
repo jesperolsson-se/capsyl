@@ -5,7 +5,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee;
 
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateesMedium;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullEncapsulationsMedium;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullEncapsulateesMedium;
 
 /**
  * Null object for a collective of encapsulatees.
@@ -21,7 +21,7 @@ public final class NullEncapsulatees implements Encapsulatees {
     }
 
     @Override
-    public EncapsulateesMedium represent(final EncapsulateesMedium medium) {
-        return new NullEncapsulationsMedium();
+    public EncapsulateesMedium represent() {
+        return new NullEncapsulateesMedium();
     }
 }

@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import lombok.EqualsAndHashCode;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.EncapsulateesMedium;
 
 /**
@@ -19,23 +20,32 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Encapsul
 public final class SimpleEncapsulatees implements Encapsulatees {
 
     /**
+     * The factory for creating media.
+     */
+    private final MediaFactory factory;
+
+    /**
      * The members of the collective.
      */
     private final Collection<Encapsulatee> members;
 
     /**
      * Constructs an empty collective.
+     *
+     * @param factory The factory to use when creating media.
      */
-    public SimpleEncapsulatees() {
-        this(Collections.EMPTY_LIST);
+    public SimpleEncapsulatees(final MediaFactory factory) {
+        this(factory, Collections.EMPTY_LIST);
     }
 
     /**
      * Constructs a collective from the given encapsulatees.
+     * @param factory The factory to use when creating media.
      * @param members Objects that want to form a collective.
      */
-    public SimpleEncapsulatees(final Encapsulatee... members) {
+    public SimpleEncapsulatees(final MediaFactory factory, final Encapsulatee... members) {
         this(
+            factory,
             Arrays.stream(
                 members
             ).collect(
@@ -46,9 +56,11 @@ public final class SimpleEncapsulatees implements Encapsulatees {
 
     /**
      * Constructs a collective from the given group.
+     * @param factory The factory to use when creating media.
      * @param members A group of objects that want to form a collective.
      */
-    public SimpleEncapsulatees(final Collection<Encapsulatee> members) {
+    public SimpleEncapsulatees(final MediaFactory factory, final Collection<Encapsulatee> members) {
+        this.factory = factory;
         this.members = members;
     }
 
@@ -58,7 +70,7 @@ public final class SimpleEncapsulatees implements Encapsulatees {
     }
 
     @Override
-    public EncapsulateesMedium represent(final EncapsulateesMedium medium) {
-        return medium.withMembers(this.members);
+    public EncapsulateesMedium represent() {
+        return this.factory.encapsulatees().withMembers(this.members);
     }
 }

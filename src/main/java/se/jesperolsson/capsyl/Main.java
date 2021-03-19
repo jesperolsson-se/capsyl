@@ -6,8 +6,7 @@ package se.jesperolsson.capsyl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import se.jesperolsson.capsyl.encapsulation.Encapsulations;
-import se.jesperolsson.capsyl.encapsulation.representation.DescriptionMediumFactory;
-import se.jesperolsson.capsyl.encapsulation.representation.MediumFactory;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 
 /**
  * Main entry point to Capsyl. Exemplifies usage.
@@ -28,7 +27,7 @@ public final class Main {
      * @throws FileNotFoundException If the path is invalid.
      */
     public Main(final String path, final String description) throws FileNotFoundException {
-        this(new File(path), new DescriptionMediumFactory(description));
+        this(new File(path), new DescriptionFormatFactory(description).create());
     }
 
     /**
@@ -37,7 +36,7 @@ public final class Main {
      * @param factory The factory to create media from.
      * @throws FileNotFoundException If the file cannot be accessed.
      */
-    public Main(final File file, final MediumFactory factory) throws FileNotFoundException {
+    public Main(final File file, final MediaFactory factory) throws FileNotFoundException {
         this(new Encapsulations(file, factory));
     }
 

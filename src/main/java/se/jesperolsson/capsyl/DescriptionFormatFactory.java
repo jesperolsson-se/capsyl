@@ -1,16 +1,20 @@
 /*
  * Capsyl is licenced under GPL-3.0. More info is found in ${basedir}/LICENCE.
  */
-package se.jesperolsson.capsyl.encapsulation.representation;
+package se.jesperolsson.capsyl;
 
 import java.util.Locale;
+import se.jesperolsson.capsyl.encapsulation.DotFactory;
+import se.jesperolsson.capsyl.encapsulation.MediaFactory;
+import se.jesperolsson.capsyl.encapsulation.NullFactory;
+import se.jesperolsson.capsyl.encapsulation.TreeFactory;
 
 /**
  * Realizes a factory that will determine the media based on the provided description.
  *
  * @since 0.1
  */
-public final class DescriptionMediumFactory implements MediumFactory {
+public final class DescriptionFormatFactory implements FormatFactory {
 
     /**
      * A string representing a description of an output format.
@@ -20,7 +24,7 @@ public final class DescriptionMediumFactory implements MediumFactory {
     /**
      * Constructs a factory with a default description.
      */
-    public DescriptionMediumFactory() {
+    public DescriptionFormatFactory() {
         this("DOT");
     }
 
@@ -28,22 +32,22 @@ public final class DescriptionMediumFactory implements MediumFactory {
      * Constructs a factory with a particular description.
      * @param description A specification of the preferred output format.
      */
-    public DescriptionMediumFactory(final String description) {
+    public DescriptionFormatFactory(final String description) {
         this.description = description;
     }
 
     @Override
-    public Medium create() {
-        final Medium result;
+    public MediaFactory create() {
+        final MediaFactory result;
         switch (this.description.toLowerCase(Locale.ROOT)) {
             case "dot":
-                result = new DotMedium();
+                result = new DotFactory();
                 break;
             case "tree":
-                result = new TreeMedium();
+                result = new TreeFactory();
                 break;
             default:
-                result = new NullMedium();
+                result = new NullFactory();
                 break;
         }
         return result;

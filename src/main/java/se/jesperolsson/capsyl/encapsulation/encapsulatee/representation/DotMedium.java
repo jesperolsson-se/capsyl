@@ -5,8 +5,10 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
+import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.identification.Identity;
 import se.jesperolsson.capsyl.identification.Uuid;
 
 /**
@@ -28,6 +30,12 @@ public final class DotMedium implements Medium {
     private final Encapsulatees children;
 
     /**
+     * The entity's identifier.
+     */
+    @EqualsAndHashCode.Exclude
+    private final Identity id;
+
+    /**
      * Constructs a default DotMedium.
      */
     public DotMedium() {
@@ -40,7 +48,7 @@ public final class DotMedium implements Medium {
      * @param name The preferred name of the encapsulatee.
      */
     public DotMedium(final String name) {
-        this(name, new SimpleEncapsulatees());
+        this(name, new SimpleEncapsulatees(new NullFactory()));
     }
 
     /**
@@ -50,8 +58,20 @@ public final class DotMedium implements Medium {
      * @param children The objects that are encapsulated.
      */
     public DotMedium(final String name, final Encapsulatees children) {
+        this(name, children, new Uuid());
+    }
+
+    /**
+     * Constructs a DotMedium that can represent a name at the specified depth.
+     *
+     * @param name The preferred name of the encapsulatee.
+     * @param children The objects that are encapsulated.
+     * @param id The identifier of the encapsulatee.
+     */
+    public DotMedium(final String name, final Encapsulatees children, final Identity id) {
         this.name = name;
         this.children = children;
+        this.id = id;
     }
 
     @Override
@@ -61,58 +81,38 @@ public final class DotMedium implements Medium {
 
     @Override
     public Medium representChildren(final Encapsulatees encapsulatees) {
-        return new DotMedium(this.name, encapsulatees);
+        return new DotMedium(this.name, encapsulatees, this.id);
     }
 
     @Override
     public Medium representName(final String preference) {
-        return new DotMedium(preference, this.children);
+        return new DotMedium(preference, this.children, this.id);
     }
 
     @Override
     public String print() {
-        final String result;
+        final StringBuilder result;
         if (this.children.isEmpty()) {
             result = new StringBuilder()
                 .append('"')
-                .append(new Uuid().print())
+                .append(this.id.print())
                 .append('"')
                 .append("[label=\"")
                 .append(this.name)
-                .append("\"]")
-                .toString();
+                .append("\"]");
         } else {
-            result = this.printCluster();
+            result = new StringBuilder()
+                .append("subgraph \"cluster ")
+                .append(this.id.print())
+                .append("\" { ")
+                .append("label=\"")
+                .append(this.name)
+                .append('\"')
+                .append(' ')
+                .append(this.children.represent().print())
+                .append(' ')
+                .append("}");
         }
-        return result;
-    }
-
-    /**
-     * Asks the medium to print itself as a subgraph (cluster).
-     * @return A cluster representation of the DOT medium.
-     */
-    private String printCluster() {
-        return new StringBuilder()
-            .append("subgraph \"cluster ")
-            .append(new Uuid().print())
-            .append("\" { ")
-            .append(this.printFamily())
-            .append(" ")
-            .append("}")
-            .toString();
-    }
-
-    /**
-     * Asks the medium to print itself and its children.
-     * @return A string containing the medium and its children.
-     */
-    private String printFamily() {
-        final StringBuilder family = new StringBuilder();
-        family
-            .append("label=\"")
-            .append(this.name)
-            .append('\"')
-            .append(this.children.represent(new DotEncapsulatees()).print());
-        return family.toString();
+        return result.toString();
     }
 }

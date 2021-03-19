@@ -17,8 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import se.jesperolsson.capsyl.encapsulation.representation.DescriptionMediumFactory;
-import se.jesperolsson.capsyl.encapsulation.representation.MediumFactory;
 
 /**
  * Represents all encapsulations contained in a snippet of Java source code.
@@ -35,7 +33,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
     /**
      * The factory for creating media.
      */
-    private final MediumFactory factory;
+    private final MediaFactory factory;
 
     /**
      * Constructs encapsulations from source code stored in a file.
@@ -43,7 +41,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
      * @throws FileNotFoundException If the file is inaccessible.
      */
     public Encapsulations(final File source) throws FileNotFoundException {
-        this(StaticJavaParser.parse(source), new DescriptionMediumFactory());
+        this(StaticJavaParser.parse(source), new DotFactory());
     }
 
     /**
@@ -52,7 +50,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
      * @param factory The factory to use when creating media.
      * @throws FileNotFoundException If the file is inaccessible.
      */
-    public Encapsulations(final File source, final MediumFactory factory)
+    public Encapsulations(final File source, final MediaFactory factory)
         throws FileNotFoundException {
         this(StaticJavaParser.parse(source), factory);
     }
@@ -62,7 +60,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
      * @param code The AST of a piece of Java code.
      * @param factory The factory to use when creating media.
      */
-    public Encapsulations(final CompilationUnit code, final MediumFactory factory) {
+    public Encapsulations(final CompilationUnit code, final MediaFactory factory) {
         this.code = code;
         this.factory = factory;
     }
@@ -97,7 +95,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
                 final ObjectCreationExpr constructor = (ObjectCreationExpr) child;
                 final Encapsulation encap = new Encapsulation(
                     constructor,
-                    this.factory.create(),
+                    this.factory,
                     declaration.getName().asString()
                 );
                 encaps.add(encap);
@@ -113,7 +111,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
             final ObjectCreationExpr constructor = value.asObjectCreationExpr();
             final Encapsulation encap = new Encapsulation(
                 constructor,
-                this.factory.create(),
+                this.factory,
                 assignment.getTarget().asNameExpr().getName().asString()
             );
             encaps.add(encap);

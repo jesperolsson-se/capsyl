@@ -9,11 +9,11 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 /**
- * Tests for {@link NullEncapsulationsMedium}.
+ * Tests for {@link NullEncapsulateesMedium}.
  *
  * @since 0.1
  */
-public class NullEncapsulationsMediumTest {
+public class NullEncapsulateesMediumTest {
 
     /**
      * When the object is asked to print itself,
@@ -34,8 +34,8 @@ public class NullEncapsulationsMediumTest {
     @Test
     public void disregardCollective() {
         MatcherAssert.assertThat(
-            new NullEncapsulationsMedium().withMembers(Collections.EMPTY_LIST),
-            CoreMatchers.equalTo(new NullEncapsulationsMedium())
+            new NullEncapsulateesMedium().withMembers(Collections.EMPTY_LIST),
+            CoreMatchers.equalTo(new NullEncapsulateesMedium())
         );
     }
 }

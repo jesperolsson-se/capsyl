@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
-import se.jesperolsson.capsyl.encapsulation.representation.TreeMedium;
 
 /**
  * Tests for {@link Encapsulations}.
@@ -33,7 +32,7 @@ public class EncapsulationsTest {
             new File(
                 "src/test/java/se/jesperolsson/capsyl/encapsulation/VariableDeclaration.txt"
             ),
-            () -> new TreeMedium()
+            new TreeFactory()
         );
         MatcherAssert.assertThat(
             new StringBuilder()
@@ -56,7 +55,7 @@ public class EncapsulationsTest {
             new File(
                 "src/test/java/se/jesperolsson/capsyl/encapsulation/AssignmentExpression.txt"
             ),
-            () -> new TreeMedium()
+            new TreeFactory()
         );
         MatcherAssert.assertThat(
             new StringBuilder()

@@ -10,7 +10,6 @@ import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.NullMedium;
 
 /**
  * Tests for {@link TreeMedium}.
@@ -43,7 +42,7 @@ public class TreeMediumTest {
         final NullEncapsulatee encapsulatee = new NullEncapsulatee();
         final Medium sut = new TreeMedium(depth, encapsulatee);
         MatcherAssert.assertThat(
-            depth.print() + encapsulatee.represent(new NullMedium()).print(),
+            depth.print() + encapsulatee.represent().print(),
             CoreMatchers.equalTo(sut.print())
         );
     }
