@@ -32,6 +32,7 @@ public final class DotMedium implements Medium {
     /**
      * The entity's identifier.
      */
+    @EqualsAndHashCode.Exclude
     private final Identity id;
 
     /**
@@ -107,8 +108,9 @@ public final class DotMedium implements Medium {
                 .append("label=\"")
                 .append(this.name)
                 .append('\"')
+                .append(' ')
                 .append(this.children.represent().print())
-                .append(" ")
+                .append(' ')
                 .append("}");
         }
         return result.toString();
