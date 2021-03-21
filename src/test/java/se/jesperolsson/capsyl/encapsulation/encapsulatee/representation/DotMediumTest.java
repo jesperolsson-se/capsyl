@@ -5,6 +5,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import se.jesperolsson.capsyl.depth.NullDepth;
@@ -52,6 +53,22 @@ public class DotMediumTest {
         MatcherAssert.assertThat(
             new DotMedium().representName(""),
             CoreMatchers.equalTo(new DotMedium(""))
+        );
+    }
+
+    /**
+     * Given a name that contains quotation marks,
+     * When the object is asked to print itself,
+     * Then the response should have escaped the quotation marks.
+     */
+    @Test
+    @Ignore
+    public void escapeQuotationMarks() {
+        final String name = "\"Apa\"";
+        final Identity id = () -> "";
+        MatcherAssert.assertThat(
+            new DotMedium(name, new NullEncapsulatees(), id).print(),
+            CoreMatchers.equalTo("\"\"[label=\"\\\"Apa\\\"\"]")
         );
     }
 
