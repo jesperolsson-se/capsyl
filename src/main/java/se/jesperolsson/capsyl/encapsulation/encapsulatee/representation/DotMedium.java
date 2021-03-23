@@ -98,7 +98,7 @@ public final class DotMedium implements Medium {
                 .append(this.id.print())
                 .append('"')
                 .append("[label=\"")
-                .append(this.name)
+                .append(this.name.replace("\"", "\\\""))
                 .append("\"]");
         } else {
             result = new StringBuilder()

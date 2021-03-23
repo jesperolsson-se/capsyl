@@ -5,7 +5,6 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import se.jesperolsson.capsyl.depth.NullDepth;
@@ -62,7 +61,6 @@ public class DotMediumTest {
      * Then the response should have escaped the quotation marks.
      */
     @Test
-    @Ignore
     public void escapeQuotationMarks() {
         final String name = "\"Apa\"";
         final Identity id = () -> "";
