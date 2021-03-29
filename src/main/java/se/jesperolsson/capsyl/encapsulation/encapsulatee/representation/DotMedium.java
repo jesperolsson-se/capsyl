@@ -10,6 +10,8 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
 import se.jesperolsson.capsyl.identification.Identity;
 import se.jesperolsson.capsyl.identification.Uuid;
+import se.jesperolsson.capsyl.name.Name;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Realizes the graphviz representation of an encapsulatee as a simple tree.
@@ -22,7 +24,7 @@ public final class DotMedium implements Medium {
     /**
      * The name to represent.
      */
-    private final String name;
+    private final Name name;
 
     /**
      * The subobjects to represent.
@@ -39,7 +41,7 @@ public final class DotMedium implements Medium {
      * Constructs a default DotMedium.
      */
     public DotMedium() {
-        this("");
+        this(new NullName());
     }
 
     /**
@@ -47,7 +49,7 @@ public final class DotMedium implements Medium {
      *
      * @param name The preferred name of the encapsulatee.
      */
-    public DotMedium(final String name) {
+    public DotMedium(final Name name) {
         this(name, new SimpleEncapsulatees(new NullFactory()));
     }
 
@@ -57,7 +59,7 @@ public final class DotMedium implements Medium {
      * @param name The preferred name of the encapsulatee.
      * @param children The objects that are encapsulated.
      */
-    public DotMedium(final String name, final Encapsulatees children) {
+    public DotMedium(final Name name, final Encapsulatees children) {
         this(name, children, new Uuid());
     }
 
@@ -68,7 +70,7 @@ public final class DotMedium implements Medium {
      * @param children The objects that are encapsulated.
      * @param id The identifier of the encapsulatee.
      */
-    public DotMedium(final String name, final Encapsulatees children, final Identity id) {
+    public DotMedium(final Name name, final Encapsulatees children, final Identity id) {
         this.name = name;
         this.children = children;
         this.id = id;
@@ -85,7 +87,7 @@ public final class DotMedium implements Medium {
     }
 
     @Override
-    public Medium representName(final String preference) {
+    public Medium representName(final Name preference) {
         return new DotMedium(preference, this.children, this.id);
     }
 
@@ -98,7 +100,7 @@ public final class DotMedium implements Medium {
                 .append(this.id.print())
                 .append('"')
                 .append("[label=\"")
-                .append(this.name.replace("\"", "\\\""))
+                .append(this.name.print().replace("\"", "\\\""))
                 .append("\"]");
         } else {
             result = new StringBuilder()
@@ -106,7 +108,7 @@ public final class DotMedium implements Medium {
                 .append(this.id.print())
                 .append("\" { ")
                 .append("label=\"")
-                .append(this.name)
+                .append(this.name.print())
                 .append('\"')
                 .append(' ')
                 .append(this.children.represent().print())

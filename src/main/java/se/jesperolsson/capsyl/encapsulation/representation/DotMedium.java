@@ -6,6 +6,8 @@ package se.jesperolsson.capsyl.encapsulation.representation;
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.name.Mononym;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Realizes the textual representation of an encapsulation in DOT language.
@@ -23,7 +25,7 @@ public final class DotMedium implements Medium {
     /**
      * The name of the encapsulation.
      */
-    private final String name;
+    private final Name name;
 
     /**
      * Constructs a default DotMedium.
@@ -46,6 +48,15 @@ public final class DotMedium implements Medium {
      * @param name The name of the medium.
      */
     public DotMedium(final Encapsulatee encapsulatee, final String name) {
+        this(encapsulatee, new Mononym(name));
+    }
+
+    /**
+     * Constructs a DotMedium that can represent an encapsulation at the specified depth.
+     * @param encapsulatee The object that is encapsulated.
+     * @param name The name of the medium.
+     */
+    public DotMedium(final Encapsulatee encapsulatee, final Name name) {
         this.encapsulatee = encapsulatee;
         this.name = name;
     }
@@ -56,7 +67,7 @@ public final class DotMedium implements Medium {
     }
 
     @Override
-    public Medium representName(final String preference) {
+    public Medium representName(final Name preference) {
         return new DotMedium(this.encapsulatee, preference);
     }
 
@@ -65,7 +76,7 @@ public final class DotMedium implements Medium {
         return new StringBuilder()
             .append("graph { ")
             .append("label=\"")
-            .append(this.name)
+            .append(this.name.print())
             .append("\" ")
             .append(this.encapsulatee.represent().print())
             .append(" }")

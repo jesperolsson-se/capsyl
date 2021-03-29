@@ -11,6 +11,8 @@ import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatees;
 import se.jesperolsson.capsyl.identification.Identity;
+import se.jesperolsson.capsyl.name.Name;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Tests for {@link DotMedium}.
@@ -39,7 +41,7 @@ public class DotMediumTest {
     public void representEncapsulatees() {
         MatcherAssert.assertThat(
             new DotMedium().representChildren(new NullEncapsulatees()),
-            CoreMatchers.equalTo(new DotMedium("", new NullEncapsulatees()))
+            CoreMatchers.equalTo(new DotMedium(new NullName(), new NullEncapsulatees()))
         );
     }
 
@@ -49,9 +51,10 @@ public class DotMediumTest {
      */
     @Test
     public void representName() {
+        final Name name = new NullName();
         MatcherAssert.assertThat(
-            new DotMedium().representName(""),
-            CoreMatchers.equalTo(new DotMedium(""))
+            new DotMedium().representName(name),
+            CoreMatchers.equalTo(new DotMedium(name))
         );
     }
 
@@ -62,7 +65,7 @@ public class DotMediumTest {
      */
     @Test
     public void escapeQuotationMarks() {
-        final String name = "\"Apa\"";
+        final Name name = () -> "\"Apa\"";
         final Identity id = () -> "";
         MatcherAssert.assertThat(
             new DotMedium(name, new NullEncapsulatees(), id).print(),
@@ -77,7 +80,7 @@ public class DotMediumTest {
      */
     @Test
     public void printChildfree() {
-        final String name = "NAME";
+        final Name name = () -> "NAME";
         final Identity id = () -> "ID";
         MatcherAssert.assertThat(
             new DotMedium(name, new NullEncapsulatees(), id).print(),
@@ -92,7 +95,7 @@ public class DotMediumTest {
      */
     @Test
     public void printCluster() {
-        final String name = "Foo";
+        final Name name = () -> "Foo";
         final EncapsulateesMedium medium = Mockito.mock(EncapsulateesMedium.class);
         Mockito.when(medium.print()).thenReturn("CHILDREN");
         final Encapsulatees encaps = new Encapsulatees() {

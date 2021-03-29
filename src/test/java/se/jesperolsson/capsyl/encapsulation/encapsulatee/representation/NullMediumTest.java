@@ -10,6 +10,7 @@ import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Tests for {@link NullMedium}.
@@ -27,7 +28,7 @@ public class NullMediumTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representName("")
+                new NullMedium().representName(new NullName())
             )
         );
     }

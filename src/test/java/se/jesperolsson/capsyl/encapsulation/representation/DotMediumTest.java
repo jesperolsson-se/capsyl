@@ -8,6 +8,8 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.name.Name;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Tests for {@link DotMedium}.
@@ -17,30 +19,16 @@ import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 public class DotMediumTest {
 
     /**
-     * When the object is constructed without a name,
-     * Then it default to calling itself "Var".
-     */
-    @Test
-    public void offerADefaultName() {
-        MatcherAssert.assertThat(
-            new DotMedium(),
-            CoreMatchers.equalTo(
-                new DotMedium(new NullEncapsulatee(), "Var")
-            )
-        );
-    }
-
-    /**
      * When the object is asked to represent a name,
      * Then it should return a copy of itself that contains that name.
      */
     @Test
     public void representName() {
-        final String name = "Foo";
+        final Name name = new NullName();
         MatcherAssert.assertThat(
-            new DotMedium(new NullEncapsulatee(), name),
+            new DotMedium().representName(name),
             CoreMatchers.equalTo(
-                new DotMedium().representName(name)
+                new DotMedium(new NullEncapsulatee(), name)
             )
         );
     }

@@ -8,6 +8,7 @@ import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Realizes the textual representation of an encapsulation as a simple tree.
@@ -62,7 +63,7 @@ public final class TreeMedium implements Medium {
 
     @Override
     // Trees exclude names.
-    public Medium representName(final String name) {
+    public Medium representName(final Name name) {
         return new TreeMedium(this.depth, this.encapsulatee);
     }
 

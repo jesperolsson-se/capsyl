@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.representation.Medium;
+import se.jesperolsson.capsyl.name.Mononym;
 
 /**
  * Encapsulatee adapter for a JavaParser constructor expression.
@@ -53,7 +54,7 @@ public final class JpConstructor implements Encapsulatee {
     @Override
     public Medium represent() {
         return this.factory.encapsulatee()
-            .representName(this.constructor.getTypeAsString())
+            .representName(new Mononym(this.constructor.getTypeAsString()))
             .representChildren(this.children())
             .withDepth(this.depth);
     }

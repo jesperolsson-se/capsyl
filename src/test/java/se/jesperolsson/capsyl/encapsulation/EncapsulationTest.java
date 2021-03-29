@@ -7,6 +7,7 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
+import se.jesperolsson.capsyl.name.Mononym;
 
 /**
  * Tests for {@link Encapsulation}.
@@ -31,7 +32,7 @@ public class EncapsulationTest {
                 new Encapsulation(
                     new ObjectCreationExpr(),
                     new NullFactory(),
-                    "Var"
+                    new Mononym("Var")
                 )
             )
         );

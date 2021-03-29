@@ -3,11 +3,14 @@
  */
 package se.jesperolsson.capsyl.name;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Represents a name that consists of only one part.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class Mononym implements Name {
 
     /**

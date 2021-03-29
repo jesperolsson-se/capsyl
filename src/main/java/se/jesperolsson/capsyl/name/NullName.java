@@ -3,11 +3,14 @@
  */
 package se.jesperolsson.capsyl.name;
 
+import lombok.EqualsAndHashCode;
+
 /**
  * Null object for name representation.
  *
  * @since 0.1
  */
+@EqualsAndHashCode
 public final class NullName implements Name {
 
     @Override

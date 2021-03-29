@@ -7,6 +7,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Tests for {@link NullMedium}.
@@ -24,7 +25,7 @@ public class NullMediumTest {
         MatcherAssert.assertThat(
             new NullMedium(),
             CoreMatchers.equalTo(
-                new NullMedium().representName("Foo")
+                new NullMedium().representName(new NullName())
             )
         );
     }
