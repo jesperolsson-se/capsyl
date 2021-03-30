@@ -5,13 +5,13 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
-import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
-import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatees;
 import se.jesperolsson.capsyl.identification.Identity;
 import se.jesperolsson.capsyl.identification.Uuid;
 import se.jesperolsson.capsyl.name.Name;
 import se.jesperolsson.capsyl.name.NullName;
+import se.jesperolsson.capsyl.name.QuotationEscapedName;
 
 /**
  * Realizes the graphviz representation of an encapsulatee as a simple tree.
@@ -41,39 +41,30 @@ public final class DotMedium implements Medium {
      * Constructs a default DotMedium.
      */
     public DotMedium() {
-        this(new NullName());
+        this(new Uuid());
     }
 
     /**
-     * Constructs a DotMedium that can represent a name.
+     * Constructs a DotMedium with a specific identity.
      *
-     * @param name The preferred name of the encapsulatee.
-     */
-    public DotMedium(final Name name) {
-        this(name, new SimpleEncapsulatees(new NullFactory()));
-    }
-
-    /**
-     * Constructs a DotMedium that can represent a name at the specified depth.
-     *
-     * @param name The preferred name of the encapsulatee.
-     * @param children The objects that are encapsulated.
-     */
-    public DotMedium(final Name name, final Encapsulatees children) {
-        this(name, children, new Uuid());
-    }
-
-    /**
-     * Constructs a DotMedium that can represent a name at the specified depth.
-     *
-     * @param name The preferred name of the encapsulatee.
-     * @param children The objects that are encapsulated.
      * @param id The identifier of the encapsulatee.
      */
-    public DotMedium(final Name name, final Encapsulatees children, final Identity id) {
+    public DotMedium(final Identity id) {
+        this(id, new NullName(), new NullEncapsulatees());
+    }
+
+    /**
+     * Constructs a DotMedium that can represent a name at the specified depth.
+     *
+     * @param id The identifier of the encapsulatee.
+     * @param name The preferred name of the encapsulatee.
+     *  May not contain unescaped quotation marks.
+     * @param children The objects that are encapsulated.
+     */
+    public DotMedium(final Identity id, final Name name, final Encapsulatees children) {
+        this.id = id;
         this.name = name;
         this.children = children;
-        this.id = id;
     }
 
     @Override
@@ -83,12 +74,12 @@ public final class DotMedium implements Medium {
 
     @Override
     public Medium representChildren(final Encapsulatees encapsulatees) {
-        return new DotMedium(this.name, encapsulatees, this.id);
+        return new DotMedium(this.id, this.name, encapsulatees);
     }
 
     @Override
     public Medium representName(final Name preference) {
-        return new DotMedium(preference, this.children, this.id);
+        return new DotMedium(this.id, new QuotationEscapedName(preference), this.children);
     }
 
     @Override
@@ -100,7 +91,7 @@ public final class DotMedium implements Medium {
                 .append(this.id.print())
                 .append('"')
                 .append("[label=\"")
-                .append(this.name.print().replace("\"", "\\\""))
+                .append(this.name.print())
                 .append("\"]");
         } else {
             result = new StringBuilder()
