@@ -12,6 +12,8 @@ import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.name.Name;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Tests for {@link EncapsulateeTreeMedium}.
@@ -27,7 +29,7 @@ public class EncapsulateeTreeMediumTest {
      */
     @Test
     public void disregardName() {
-        final String name = "Foo";
+        final Name name = new NullName();
         MatcherAssert.assertThat(
             new EncapsulateeTreeMedium(name),
             CoreMatchers.equalTo(
@@ -42,7 +44,7 @@ public class EncapsulateeTreeMediumTest {
      */
     @Test
     public void representChild() {
-        final String name = "";
+        final Name name = new NullName();
         final Depth depth = new NullDepth();
         final Encapsulatees children = new SimpleEncapsulatees(
             new NullFactory(),

@@ -5,6 +5,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Abstracts the textual representation of an encapsulatee.
@@ -32,7 +33,7 @@ public interface Medium {
      * @param name The name.
      * @return A copy of the medium, that also contains the name.
      */
-    Medium representName(String name);
+    Medium representName(Name name);
 
     /**
      * Asks the medium to provide its representation as text.

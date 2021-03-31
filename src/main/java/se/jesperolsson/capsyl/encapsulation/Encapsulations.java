@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import se.jesperolsson.capsyl.name.Mononym;
 
 /**
  * Represents all encapsulations contained in a snippet of Java source code.
@@ -96,7 +97,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
                 final Encapsulation encap = new Encapsulation(
                     constructor,
                     this.factory,
-                    declaration.getName().asString()
+                    new Mononym(declaration.getName().asString())
                 );
                 encaps.add(encap);
             }
@@ -112,7 +113,7 @@ public final class Encapsulations extends VoidVisitorAdapter<List<Encapsulation>
             final Encapsulation encap = new Encapsulation(
                 constructor,
                 this.factory,
-                assignment.getTarget().asNameExpr().getName().asString()
+                new Mononym(assignment.getTarget().asNameExpr().getName().asString())
             );
             encaps.add(encap);
         }

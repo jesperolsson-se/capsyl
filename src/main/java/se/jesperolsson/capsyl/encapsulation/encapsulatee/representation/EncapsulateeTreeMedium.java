@@ -9,6 +9,8 @@ import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.NullFactory;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.SimpleEncapsulatees;
+import se.jesperolsson.capsyl.name.Name;
+import se.jesperolsson.capsyl.name.NullName;
 
 /**
  * Realizes the textual representation of an encapsulatee as a simple tree.
@@ -21,7 +23,7 @@ public final class EncapsulateeTreeMedium implements Medium {
     /**
      * The name to represent.
      */
-    private final String name;
+    private final Name name;
 
     /**
      * The depth to represent.
@@ -37,14 +39,14 @@ public final class EncapsulateeTreeMedium implements Medium {
      * Constructs a default TreeMedium.
      */
     public EncapsulateeTreeMedium() {
-        this("");
+        this(new NullName());
     }
 
     /**
      * Constructs a TreeMedium that can represent a name.
      * @param name The preferred name of the encapsulatee.
      */
-    public EncapsulateeTreeMedium(final String name) {
+    public EncapsulateeTreeMedium(final Name name) {
         this(name, new SpaceIndentation());
     }
 
@@ -53,7 +55,7 @@ public final class EncapsulateeTreeMedium implements Medium {
      * @param name The preferred name of the encapsulatee.
      * @param depth The tree's depth in the hierarchy.
      */
-    public EncapsulateeTreeMedium(final String name, final Depth depth) {
+    public EncapsulateeTreeMedium(final Name name, final Depth depth) {
         this(name, depth, new SimpleEncapsulatees(new NullFactory()));
     }
 
@@ -65,7 +67,7 @@ public final class EncapsulateeTreeMedium implements Medium {
      * @param children The tree's subtrees.
      */
     public EncapsulateeTreeMedium(
-        final String name,
+        final Name name,
         final Depth depth,
         final Encapsulatees children) {
         this.name = name;
@@ -84,12 +86,12 @@ public final class EncapsulateeTreeMedium implements Medium {
     }
 
     @Override
-    public Medium representName(final String preference) {
+    public Medium representName(final Name preference) {
         return new EncapsulateeTreeMedium(preference, this.depth, this.children);
     }
 
     @Override
     public String print() {
-        return this.depth.print() + this.name + this.children.represent().print();
+        return this.depth.print() + this.name.print() + this.children.represent().print();
     }
 }

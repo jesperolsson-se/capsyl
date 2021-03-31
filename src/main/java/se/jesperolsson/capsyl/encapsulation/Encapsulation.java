@@ -9,6 +9,8 @@ import se.jesperolsson.capsyl.depth.SpaceIndentation;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.JpConstructor;
 import se.jesperolsson.capsyl.encapsulation.representation.Medium;
+import se.jesperolsson.capsyl.name.Mononym;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Represents an encapsulation. That is, something that is being encapsulated plus metadata.
@@ -31,7 +33,7 @@ public final class Encapsulation {
     /**
      * The name given to the encapsulation.
      */
-    private final String name;
+    private final Name name;
 
     /**
      * Constructs an encapsulation from a construction statement.
@@ -39,7 +41,7 @@ public final class Encapsulation {
      * @param factory The factory to use when creating media.
      */
     public Encapsulation(final ObjectCreationExpr node, final MediaFactory factory) {
-        this(node, factory, "Var");
+        this(node, factory, new Mononym("Var"));
     }
 
     /**
@@ -51,7 +53,7 @@ public final class Encapsulation {
     public Encapsulation(
         final ObjectCreationExpr node,
         final MediaFactory factory,
-        final String name) {
+        final Name name) {
         this(new JpConstructor(node, factory, new SpaceIndentation()), factory, name);
     }
 
@@ -64,7 +66,7 @@ public final class Encapsulation {
     public Encapsulation(
         final Encapsulatee encapsulatee,
         final MediaFactory factory,
-        final String name) {
+        final Name name) {
         this.node = encapsulatee;
         this.factory = factory;
         this.name = name;

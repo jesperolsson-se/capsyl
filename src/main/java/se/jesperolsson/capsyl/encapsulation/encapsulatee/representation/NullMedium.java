@@ -6,6 +6,7 @@ package se.jesperolsson.capsyl.encapsulation.encapsulatee.representation;
 import lombok.EqualsAndHashCode;
 import se.jesperolsson.capsyl.depth.Depth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Null object for a medium.
@@ -26,7 +27,7 @@ public final class NullMedium implements Medium {
     }
 
     @Override
-    public Medium representName(final String name) {
+    public Medium representName(final Name name) {
         return new NullMedium();
     }
 

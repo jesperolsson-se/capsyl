@@ -4,6 +4,7 @@
 package se.jesperolsson.capsyl.encapsulation.representation;
 
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatee;
+import se.jesperolsson.capsyl.name.Name;
 
 /**
  * Abstracts the textual representation of an encapsulation.
@@ -24,7 +25,7 @@ public interface Medium {
      * @param name The name to refer to the encapsulation by.
      * @return A copy of the medium, that also contains the name.
      */
-    Medium representName(String name);
+    Medium representName(Name name);
 
     /**
      * Asks the medium to provide its representation as text.
