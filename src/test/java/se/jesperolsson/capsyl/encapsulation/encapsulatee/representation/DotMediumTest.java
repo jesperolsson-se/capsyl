@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import se.jesperolsson.capsyl.depth.NullDepth;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.Encapsulatees;
 import se.jesperolsson.capsyl.encapsulation.encapsulatee.NullEncapsulatees;
+import se.jesperolsson.capsyl.identification.Identity;
+import se.jesperolsson.capsyl.identification.NullIdentity;
 import se.jesperolsson.capsyl.name.Name;
 import se.jesperolsson.capsyl.name.NullName;
 import se.jesperolsson.capsyl.name.QuotationEscapedName;
@@ -41,7 +43,9 @@ public class DotMediumTest {
     public void representEncapsulatees() {
         MatcherAssert.assertThat(
             new DotMedium().representChildren(new NullEncapsulatees()),
-            CoreMatchers.equalTo(new DotMedium(() -> "", new NullName(), new NullEncapsulatees()))
+            CoreMatchers.equalTo(
+                new DotMedium(new NullIdentity(), new NullName(), new NullEncapsulatees())
+            )
         );
     }
 
@@ -54,10 +58,10 @@ public class DotMediumTest {
     public void representName() {
         final Name name = new NullName();
         MatcherAssert.assertThat(
-            new DotMedium(() -> "").representName(name),
+            new DotMedium().representName(name),
             CoreMatchers.equalTo(
                 new DotMedium(
-                    () -> "",
+                    new NullIdentity(),
                     new QuotationEscapedName(name),
                     new NullEncapsulatees()
                 )
@@ -72,11 +76,12 @@ public class DotMediumTest {
      */
     @Test
     public void escapeQuotationMarks() {
+        final Identity id = new NullIdentity();
         MatcherAssert.assertThat(
-            new DotMedium(() -> "", new NullName(), new NullEncapsulatees())
+            new DotMedium(id, new NullName(), new NullEncapsulatees())
                 .representName(() -> "\"Apa\"")
                 .print(),
-            CoreMatchers.equalTo("\"\"[label=\"\\\"Apa\\\"\"]")
+            CoreMatchers.equalTo(String.format("\"%s\"[label=\"\\\"Apa\\\"\"]", id.print()))
         );
     }
 
@@ -87,9 +92,11 @@ public class DotMediumTest {
      */
     @Test
     public void printChildfree() {
+        final Identity id = new NullIdentity();
+        final Name name = new NullName();
         MatcherAssert.assertThat(
-            new DotMedium(() -> "ID", () -> "NAME", new NullEncapsulatees()).print(),
-            CoreMatchers.equalTo("\"ID\"[label=\"NAME\"]")
+            new DotMedium(id, name, new NullEncapsulatees()).print(),
+            CoreMatchers.equalTo(String.format("\"%s\"[label=\"%s\"]", id.print(), name.print()))
         );
     }
 
@@ -100,6 +107,8 @@ public class DotMediumTest {
      */
     @Test
     public void printCluster() {
+        final Identity id = new NullIdentity();
+        final Name name = new NullName();
         final EncapsulateesMedium medium = Mockito.mock(EncapsulateesMedium.class);
         Mockito.when(medium.print()).thenReturn("CHILDREN");
         final Encapsulatees encaps = new Encapsulatees() {
@@ -114,8 +123,12 @@ public class DotMediumTest {
             }
         };
         MatcherAssert.assertThat(
-            new DotMedium(() -> "123", () -> "Foo", encaps).print(),
-            CoreMatchers.equalTo("subgraph \"cluster 123\" { label=\"Foo\" CHILDREN }")
+            new DotMedium(id, name, encaps).print(),
+            CoreMatchers.equalTo(
+                String.format(
+                    "subgraph \"cluster %s\" { label=\"%s\" CHILDREN }", id.print(), name.print()
+                )
+            )
         );
     }
 }
