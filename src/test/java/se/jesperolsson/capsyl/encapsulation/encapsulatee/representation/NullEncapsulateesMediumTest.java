@@ -34,7 +34,7 @@ public class NullEncapsulateesMediumTest {
     @Test
     public void disregardCollective() {
         MatcherAssert.assertThat(
-            new NullEncapsulateesMedium().withMembers(Collections.EMPTY_LIST),
+            new NullEncapsulateesMedium().withMembers(Collections.emptyList()),
             CoreMatchers.equalTo(new NullEncapsulateesMedium())
         );
     }
