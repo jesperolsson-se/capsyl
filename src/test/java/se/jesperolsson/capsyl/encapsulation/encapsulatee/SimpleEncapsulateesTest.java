@@ -27,7 +27,7 @@ public class SimpleEncapsulateesTest {
         MatcherAssert.assertThat(
             true,
             CoreMatchers.is(
-                new SimpleEncapsulatees(new NullFactory(), Collections.EMPTY_LIST).isEmpty()
+                new SimpleEncapsulatees(new NullFactory(), Collections.emptyList()).isEmpty()
             )
         );
     }

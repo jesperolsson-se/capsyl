@@ -31,7 +31,7 @@ public final class DotEncapsulatees implements EncapsulateesMedium {
      * Constructs an empty collective.
      */
     public DotEncapsulatees() {
-        this(Collections.EMPTY_LIST);
+        this(Collections.emptyList());
     }
 
     /**

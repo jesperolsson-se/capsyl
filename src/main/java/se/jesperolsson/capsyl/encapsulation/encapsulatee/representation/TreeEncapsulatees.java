@@ -31,7 +31,7 @@ public final class TreeEncapsulatees implements EncapsulateesMedium {
      * Constructs an empty collective.
      */
     public TreeEncapsulatees() {
-        this(Collections.EMPTY_LIST);
+        this(Collections.emptyList());
     }
 
     /**

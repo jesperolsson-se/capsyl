@@ -29,7 +29,7 @@ public class DotEncapsulateesTest {
         MatcherAssert.assertThat(
             new DotEncapsulatees(),
             CoreMatchers.equalTo(
-                new DotEncapsulatees().withMembers(Collections.EMPTY_LIST)
+                new DotEncapsulatees().withMembers(Collections.emptyList())
             )
         );
     }

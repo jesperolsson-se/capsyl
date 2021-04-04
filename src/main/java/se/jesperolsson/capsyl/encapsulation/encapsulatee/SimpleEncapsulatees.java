@@ -35,7 +35,7 @@ public final class SimpleEncapsulatees implements Encapsulatees {
      * @param factory The factory to use when creating media.
      */
     public SimpleEncapsulatees(final MediaFactory factory) {
-        this(factory, Collections.EMPTY_LIST);
+        this(factory, Collections.emptyList());
     }
 
     /**
