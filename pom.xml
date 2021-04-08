@@ -121,7 +121,7 @@
               <excludedClass>se.jesperolsson.capsyl.Main</excludedClass>
               <!--Rationale: External library requires calls to superclass' methods,
                   which can't be mocked.-->
-              <excludedClass>se.jesperolsson.capsyl.encapsulation.Encapsulations</excludedClass>
+              <excludedClass>se.jesperolsson.capsyl.JavacodeFile</excludedClass>
             </excludedClasses>
             <excludedMethods>
               <!--Rationale: Lombok should be used for hash codes-->

@@ -5,7 +5,6 @@ package se.jesperolsson.capsyl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import se.jesperolsson.capsyl.encapsulation.Encapsulations;
 import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 
 /**
@@ -18,7 +17,7 @@ public final class Main {
     /**
      * The encapsulations that should be visualized.
      */
-    private final Encapsulations encaps;
+    private final Javacode encaps;
 
     /**
      * Constructs a Capsyl program for the specified file.
@@ -37,14 +36,14 @@ public final class Main {
      * @throws FileNotFoundException If the file cannot be accessed.
      */
     public Main(final File file, final MediaFactory factory) throws FileNotFoundException {
-        this(new Encapsulations(file, factory));
+        this(new JavacodeFile(file, factory));
     }
 
     /**
      * Constructs a Capsyl program for the specified encapsulations.
      * @param encaps The encapsulations.
      */
-    public Main(final Encapsulations encaps) {
+    public Main(final Javacode encaps) {
         this.encaps = encaps;
     }
 
@@ -72,6 +71,6 @@ public final class Main {
      * @return A textual representation of the encapsulations.
      */
     public String execute() {
-        return this.encaps.asText();
+        return this.encaps.encapsulations().asText();
     }
 }
