@@ -12,7 +12,7 @@ import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import se.jesperolsson.capsyl.encapsulation.DotFactory;
@@ -30,9 +30,9 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
     Javacode {
 
     /**
-     * The Java syntax tree.
+     * The Java file.
      */
-    private final CompilationUnit code;
+    private final File file;
 
     /**
      * The factory for creating media.
@@ -42,9 +42,8 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
     /**
      * Constructs Java code from a path.
      * @param path The path to a file containing Java source code.
-     * @throws FileNotFoundException If the path is inaccessible.
      */
-    public JavacodeFile(final String path) throws FileNotFoundException {
+    public JavacodeFile(final String path) {
         this(new File(path), new DotFactory());
     }
 
@@ -52,26 +51,17 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
      * Constructs Java code from the contents of a file.
      * @param file A file containing Java source code.
      * @param factory The factory to use when creating media.
-     * @throws FileNotFoundException If the file is inaccessible.
      */
-    public JavacodeFile(final File file, final MediaFactory factory) throws FileNotFoundException {
-        this(StaticJavaParser.parse(file), factory);
-    }
-
-    /**
-     * Constructs Java code from an abstract syntax tree (AST).
-     * @param code The AST of a piece of Java code.
-     * @param factory The factory to use when creating media.
-     */
-    public JavacodeFile(final CompilationUnit code, final MediaFactory factory) {
-        this.code = code;
+    public JavacodeFile(final File file, final MediaFactory factory) {
+        this.file = file;
         this.factory = factory;
     }
 
     @Override
-    public Encapsulations encapsulations() {
+    public Encapsulations encapsulations() throws IOException {
         final List<Encapsulation> encaps = new LinkedList<>();
-        this.visit(this.code, encaps);
+        final CompilationUnit code = StaticJavaParser.parse(this.file);
+        this.visit(code, encaps);
         return new Encapsulations(encaps);
     }
 

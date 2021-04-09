@@ -4,6 +4,7 @@
 package se.jesperolsson.capsyl;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class MainTest {
      * @throws FileNotFoundException Should never occur.
      */
     @Test
-    public void outputSimpleTree() throws FileNotFoundException {
+    public void outputSimpleTree() throws IOException {
         final Main sut = new Main("src/main/java/se/jesperolsson/capsyl/App.txt", "tree");
         MatcherAssert.assertThat(
             new StringBuilder()

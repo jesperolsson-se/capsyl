@@ -5,6 +5,7 @@ package se.jesperolsson.capsyl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class JavacodeFileTest {
      * @throws FileNotFoundException Should never occur.
      */
     @Test
-    public void interpretVariableDeclaration() throws FileNotFoundException {
+    public void interpretVariableDeclaration() throws IOException {
         final Javacode sut = new JavacodeFile(
             new File(
                 "src/test/java/se/jesperolsson/capsyl/encapsulation/VariableDeclaration.txt"
@@ -51,7 +52,7 @@ public class JavacodeFileTest {
      * @throws FileNotFoundException Should never occur.
      */
     @Test
-    public void interpretAssignmentExpressions() throws FileNotFoundException {
+    public void interpretAssignmentExpressions() throws IOException {
         final Javacode sut = new JavacodeFile(
             new File(
                 "src/test/java/se/jesperolsson/capsyl/encapsulation/AssignmentExpression.txt"

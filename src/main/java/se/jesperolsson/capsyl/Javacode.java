@@ -3,6 +3,7 @@
  */
 package se.jesperolsson.capsyl;
 
+import java.io.IOException;
 import se.jesperolsson.capsyl.encapsulation.Encapsulations;
 
 /**
@@ -15,6 +16,7 @@ public interface Javacode {
     /**
      * Returns a collective of encapsulations present in the code.
      * @return Encapsulations that can be found in the Java source code snippet.
+     * @throws IOException If the snippet is not valid.
      */
-    Encapsulations encapsulations();
+    Encapsulations encapsulations() throws IOException;
 }
