@@ -19,6 +19,7 @@ import se.jesperolsson.capsyl.encapsulation.DotFactory;
 import se.jesperolsson.capsyl.encapsulation.Encapsulation;
 import se.jesperolsson.capsyl.encapsulation.Encapsulations;
 import se.jesperolsson.capsyl.encapsulation.MediaFactory;
+import se.jesperolsson.capsyl.encapsulation.SimpleEncapsulations;
 import se.jesperolsson.capsyl.name.Mononym;
 
 /**
@@ -62,7 +63,7 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
         final List<Encapsulation> encaps = new LinkedList<>();
         final CompilationUnit code = StaticJavaParser.parse(this.file);
         this.visit(code, encaps);
-        return new Encapsulations(encaps);
+        return new SimpleEncapsulations(encaps);
     }
 
     @Override
