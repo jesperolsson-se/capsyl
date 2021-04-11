@@ -19,6 +19,7 @@ import se.jesperolsson.capsyl.encapsulation.DotFactory;
 import se.jesperolsson.capsyl.encapsulation.Encapsulation;
 import se.jesperolsson.capsyl.encapsulation.Encapsulations;
 import se.jesperolsson.capsyl.encapsulation.MediaFactory;
+import se.jesperolsson.capsyl.encapsulation.NamedEncapsulation;
 import se.jesperolsson.capsyl.encapsulation.SimpleEncapsulations;
 import se.jesperolsson.capsyl.name.Mononym;
 
@@ -73,7 +74,7 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
         for (final Node child: children) {
             if (child instanceof ObjectCreationExpr) {
                 final ObjectCreationExpr constructor = (ObjectCreationExpr) child;
-                final Encapsulation encap = new Encapsulation(
+                final NamedEncapsulation encap = new NamedEncapsulation(
                     constructor,
                     this.factory,
                     new Mononym(declaration.getName().asString())
@@ -89,7 +90,7 @@ public final class JavacodeFile extends VoidVisitorAdapter<List<Encapsulation>> 
         final Expression value = assignment.getValue();
         if (value.isObjectCreationExpr()) {
             final ObjectCreationExpr constructor = value.asObjectCreationExpr();
-            final Encapsulation encap = new Encapsulation(
+            final NamedEncapsulation encap = new NamedEncapsulation(
                 constructor,
                 this.factory,
                 new Mononym(assignment.getTarget().asNameExpr().getName().asString())
