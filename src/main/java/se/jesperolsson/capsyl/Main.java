@@ -4,8 +4,7 @@
 package se.jesperolsson.capsyl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import se.jesperolsson.capsyl.encapsulation.Encapsulations;
+import java.io.IOException;
 import se.jesperolsson.capsyl.encapsulation.MediaFactory;
 
 /**
@@ -18,15 +17,14 @@ public final class Main {
     /**
      * The encapsulations that should be visualized.
      */
-    private final Encapsulations encaps;
+    private final Javacode encaps;
 
     /**
      * Constructs a Capsyl program for the specified file.
      * @param path A path to a file containing Java source code.
      * @param description The description of the preferred output format.
-     * @throws FileNotFoundException If the path is invalid.
      */
-    public Main(final String path, final String description) throws FileNotFoundException {
+    public Main(final String path, final String description) {
         this(new File(path), new DescriptionFormatFactory(description).create());
     }
 
@@ -34,17 +32,16 @@ public final class Main {
      * Constructs a Capsyl program for the specified file.
      * @param file A file containing Java source code.
      * @param factory The factory to create media from.
-     * @throws FileNotFoundException If the file cannot be accessed.
      */
-    public Main(final File file, final MediaFactory factory) throws FileNotFoundException {
-        this(new Encapsulations(file, factory));
+    public Main(final File file, final MediaFactory factory) {
+        this(new JavacodeFile(file, factory));
     }
 
     /**
      * Constructs a Capsyl program for the specified encapsulations.
      * @param encaps The encapsulations.
      */
-    public Main(final Encapsulations encaps) {
+    public Main(final Javacode encaps) {
         this.encaps = encaps;
     }
 
@@ -70,8 +67,9 @@ public final class Main {
     /**
      * Asks Capsyl to execute its instructions.
      * @return A textual representation of the encapsulations.
+     * @throws IOException If the user-supplied path is inaccessible.
      */
-    public String execute() {
-        return this.encaps.asText();
+    public String execute() throws IOException {
+        return this.encaps.encapsulations().asText();
     }
 }

@@ -10,11 +10,11 @@ import org.junit.Test;
 import se.jesperolsson.capsyl.name.Mononym;
 
 /**
- * Tests for {@link Encapsulation}.
+ * Tests for {@link NamedEncapsulation}.
  *
  * @since 0.1
  */
-public class EncapsulationTest {
+public class NamedEncapsulationTest {
 
     /**
      * Given that no name is provided,
@@ -24,12 +24,12 @@ public class EncapsulationTest {
     @Test
     public void suggestDefaultName() {
         MatcherAssert.assertThat(
-            new Encapsulation(
+            new NamedEncapsulation(
                 new ObjectCreationExpr(),
                 new NullFactory()
             ),
             CoreMatchers.equalTo(
-                new Encapsulation(
+                new NamedEncapsulation(
                     new ObjectCreationExpr(),
                     new NullFactory(),
                     new Mononym("Var")
