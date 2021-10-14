@@ -158,7 +158,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- @todo: qulice activation deferred until https://github.com/teamed/qulice/issues/782 fix
       <plugin>
         <groupId>com.qulice</groupId>
         <artifactId>qulice-maven-plugin</artifactId>
@@ -169,6 +168,7 @@
             <exclude>pmd:/src/main/java/se/jesperolsson/capsyl/App\.txt</exclude>
             <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/AssignmentExpression.txt</exclude>
             <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/VariableDeclaration.txt</exclude>
+            <exclude>dependencies:.*</exclude>
           </excludes>
         </configuration>
         <executions>
@@ -179,7 +179,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>-->
+      </plugin>
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
