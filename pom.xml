@@ -176,6 +176,30 @@
     <profile>
       <id>dev</id>
       <build>
+        <plugins>
+          <plugin>
+            <groupId>com.qulice</groupId>
+            <artifactId>qulice-maven-plugin</artifactId>
+            <version>0.18.19</version>
+            <configuration>
+              <license>file:${basedir}/tldr-licence</license>
+              <excludes>
+                <exclude>pmd:/src/main/java/se/jesperolsson/capsyl/App\.txt</exclude>
+                <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/AssignmentExpression.txt</exclude>
+                <exclude>pmd:/src/test/java/se/jesperolsson/capsyl/encapsulation/VariableDeclaration.txt</exclude>
+                <exclude>dependencies:.*</exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>validate</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
       </build>
     </profile>
   </profiles>
