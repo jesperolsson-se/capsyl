@@ -12,6 +12,31 @@ code is written on [this line](https://github.com/jesperolsson-se/FizzBuzz-OCP-C
 
 ## Usage
 
+Build the Docker image.
+
+```
+docker build -t capsyl .
+```
+
+Then, run the container.
+
+```
+docker run -v $(pwd)/IO:/IO capsyl
+```
+
+That's it! If you want to change the input, simply replace `IO/input` or choose
+a different locatation as volume.
+
+Alternatively, build the program with `mvn package` and execute the JAR with
+`java -jar target/capsyl-0.-SNAPSHOT.jar`.
+
+or
+
+`java -jar target/capsyl-0.1-SNAPSHOT.jar path/to/javafile FORMAT`
+
+where `FORMAT`=`dot`|`tree`.
+
+
 The current version of Capsyl can visualize the encapsulations of objects,
 provided that they are on the form of, e.g.,
 
@@ -27,13 +52,3 @@ foo = new Cepa(new Depa(), new Epa());
 Currently, Capsyl can visualize these on stdout, either as a [DOT](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29)
 graphs or a simple hierarchy. 
 
-Capsyl accepts files that contain java source code. Simply build the
-program with `mvn package` and then execute the jar file with
-
-`java -jar target/capsyl-0.1-SNAPSHOT.jar`
-
-or
-
-`java -jar target/capsyl-0.1-SNAPSHOT.jar path/to/javafile FORMAT`
-
-where `FORMAT`=`dot`|`tree`.
