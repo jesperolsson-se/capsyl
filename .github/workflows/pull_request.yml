@@ -1,0 +1,14 @@
+name: Static analysis
+on: [pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Dev build
+        run: mvn --batch-mode --update-snapshots -Pdev clean verify
