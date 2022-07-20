@@ -12,10 +12,10 @@ code is written on [this line](https://github.com/jesperolsson-se/FizzBuzz-OCP-C
 
 ## Usage
 
-Build the Docker image.
+Pull the latest image from Docker Hub.
 
 ```
-docker build -t capsyl .
+docker pull jesperolssonse/capsyl:latest
 ```
 
 Then, run the container.
