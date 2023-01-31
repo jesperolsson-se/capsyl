@@ -1,6 +1,5 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 
-# capsyl
 Capsyl aims to be an aid for comprehending object-oriented programs.
 Specifically, it's a tool for visualizing Java objects' encapsulations.
 
