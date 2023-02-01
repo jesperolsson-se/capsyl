@@ -1,7 +1,7 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 
-Capsyl aims to be an aid for comprehending object-oriented programs.
-Specifically, it's a tool for visualizing Java objects' encapsulations.
+**Capsyl** visualizes encapsulation hierarchies in Java, simplifying the
+comprehension of object-oriented programs.
 
 ```Java
 Rule fizzBuzz = new Priority(
