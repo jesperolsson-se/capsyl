@@ -1,5 +1,9 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 
+[![CI](https://github.com/jesperolsson-se/capsyl/actions/workflows/pull_request.yml/badge.svg)](https://github.com/jesperolsson-se/capsyl/actions/workflows/pull_request.yml)
+[![CD](https://github.com/jesperolsson-se/capsyl/actions/workflows/main.yml/badge.svg)](https://github.com/jesperolsson-se/capsyl/actions/workflows/main.yml)
+[![Docker](https://img.shields.io/docker/v/jesperolssonse/capsyl/latest)](https://hub.docker.com/repository/docker/jesperolssonse/capsyl)
+
 **Capsyl** visualizes encapsulation hierarchies in Java, simplifying the
 comprehension of object-oriented programs.
 
