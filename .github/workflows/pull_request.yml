@@ -2,6 +2,8 @@ name: Static analysis
 on: [pull_request]
 jobs:
   build:
+    env:
+      STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
