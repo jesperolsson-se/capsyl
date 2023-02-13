@@ -116,6 +116,13 @@
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
           <version>1.5.2</version>
+          <dependencies>
+            <dependency>
+              <groupId>it.mulders.stryker</groupId>
+              <artifactId>pit-dashboard-reporter</artifactId>
+              <version>0.1.2</version>
+            </dependency>
+          </dependencies>
           <configuration>
             <mutationThreshold>100</mutationThreshold>
             <coverageThreshold>100</coverageThreshold>
@@ -132,6 +139,9 @@
               <!--Rationale: Lombok should be used for equality-->
               <excludedMethod>*equals</excludedMethod>
             </excludedMethods>
+            <outputFormats>
+              <format>stryker-dashboard</format>
+            </outputFormats>
           </configuration>
         </plugin>
       </plugins>
