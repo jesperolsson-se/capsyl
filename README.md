@@ -1,5 +1,6 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fjesperolsson-se%2Fcapsyl%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/jesperolsson-se/capsyl/main)
 [![CI](https://github.com/jesperolsson-se/capsyl/actions/workflows/pull_request.yml/badge.svg)](https://github.com/jesperolsson-se/capsyl/actions/workflows/pull_request.yml)
 [![CD](https://github.com/jesperolsson-se/capsyl/actions/workflows/main.yml/badge.svg)](https://github.com/jesperolsson-se/capsyl/actions/workflows/main.yml)
 [![Docker](https://img.shields.io/docker/v/jesperolssonse/capsyl/latest)](https://hub.docker.com/repository/docker/jesperolssonse/capsyl)
